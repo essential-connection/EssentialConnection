@@ -7,6 +7,6 @@ namespace EssentialConnection.Models
 {
     public class Curriculo
     {
-        S
+        public int id;
     }
 }
