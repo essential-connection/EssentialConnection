@@ -1,8 +1,8 @@
-﻿namespace EssentialConnection.Controllers
+﻿namespace EssentialConnection.Models
 {
     public class Vagas
     {
-        public int VagasID { get; set; }
+        public int VagaID { get; set; }
         public string Nome { get; set; }
         public string Descricao { get; set; }
         public int Quantidade { get; set; }
