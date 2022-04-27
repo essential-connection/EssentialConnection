@@ -8,5 +8,6 @@
         public string Telefone { get; set; }
         public string NomeResponsavel { get; set; }
         public string Descricao { get; set; }
+        public ICollection<Vagas> Vagas { get; set; } 
     }
 }
