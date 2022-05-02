@@ -10,7 +10,7 @@
         public string Telefone { get; set; }
         public int Matricula { get; set; }
 
-        public ICollection<Vaga> Vagas { get; set; }
+        public ICollection<Vaga> Vaga { get; set; }
 
         public Curriculo  Curriculo { get; set; }
 

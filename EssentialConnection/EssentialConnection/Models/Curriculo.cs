@@ -9,6 +9,7 @@
 
         public ICollection<ItensCurriculo> ItensCurriculo { get; set; }
 
+        public Aluno Aluno { get; set; }
 
     }
 }

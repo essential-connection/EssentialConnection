@@ -2,7 +2,7 @@
 {
     public class Vaga
     {
-        public int VagaID { get; set; } 
+        public int? VagaID { get; set; } 
         public string Nome { get; set; }
         public string Descricao { get; set; }
         public int Quantidade { get; set; }
@@ -14,6 +14,6 @@
 
         public Curso Curso { get; set; }
 
-        public ICollection<Aluno> Alunos { get; set; }
+        public ICollection<Aluno>? Alunos { get; set; }
     }
 }
