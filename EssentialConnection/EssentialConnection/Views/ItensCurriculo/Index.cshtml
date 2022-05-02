@@ -19,9 +19,6 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.ItensCurriculoID)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Nome)
             </th>
             <th>
@@ -37,7 +34,7 @@
                 @Html.DisplayNameFor(model => model.Instituicao)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CurriculoId)
+                @Html.DisplayNameFor(model => model.Curriculo)
             </th>
             <th></th>
         </tr>
@@ -45,9 +42,6 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ItensCurriculoID)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Nome)
             </td>
@@ -64,12 +58,12 @@
                 @Html.DisplayFor(modelItem => item.Instituicao)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CurriculoId)
+                @Html.DisplayFor(modelItem => item.Curriculo.CurriculoID)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                <a asp-action="Edit" asp-route-id="@item.ItensCurriculoID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ItensCurriculoID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ItensCurriculoID">Delete</a>
             </td>
         </tr>
 }
