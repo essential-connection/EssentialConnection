@@ -9,6 +9,8 @@
         public DateTime DataNascimento { get; set; }
         public string Telefone { get; set; }
         public int Matricula { get; set; }
+        public int CurriculoId { get; set; }
+        public int CursoId { get; set; }
 
         public ICollection<Vaga> Vagas { get; set; }
 
