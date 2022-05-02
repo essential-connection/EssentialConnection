@@ -6,12 +6,15 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+// Add-Migrations Initial-criacao -Context Context
+// Update-database -Context Context
+
 //StringDeConexãoGustavo : Favor, não excluir
-builder.Services.AddDbContext<Context>
-(options => options.UseSqlServer("Data Source=GUSTAVO-LAPTOP;Initial Catalog=EssentialConnection;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"));
-//builder.Services.AddDbContext<Context>(
-//    options => options.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=EssentialConnectionBD;Integrated Security=True;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False")
-//);
+//builder.Services.AddDbContext<Context>
+//(options => options.UseSqlServer("Data Source=GUSTAVO-LAPTOP;Initial Catalog=EssentialConnection;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"));
+builder.Services.AddDbContext<Context>(
+    options => options.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=EssentialConnectionBD;Integrated Security=True;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False")
+);
 //Fim string de conexão Gustavo : Favor nao excluir
 
 var app = builder.Build();

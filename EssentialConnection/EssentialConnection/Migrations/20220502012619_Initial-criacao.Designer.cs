@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EssentialConnection.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20220501234939_Inicial-criacao")]
-    partial class Inicialcriacao
+    [Migration("20220502012619_Initial-criacao")]
+    partial class Initialcriacao
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,12 +29,12 @@ namespace EssentialConnection.Migrations
                     b.Property<int>("AlunosAlunoID")
                         .HasColumnType("int");
 
-                    b.Property<int>("VagaID")
+                    b.Property<int>("VagasVagaID")
                         .HasColumnType("int");
 
-                    b.HasKey("AlunosAlunoID", "VagaID");
+                    b.HasKey("AlunosAlunoID", "VagasVagaID");
 
-                    b.HasIndex("VagaID");
+                    b.HasIndex("VagasVagaID");
 
                     b.ToTable("AlunoVaga");
                 });
@@ -260,7 +260,7 @@ namespace EssentialConnection.Migrations
 
                     b.HasOne("EssentialConnection.Models.Vaga", null)
                         .WithMany()
-                        .HasForeignKey("VagaID")
+                        .HasForeignKey("VagasVagaID")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });

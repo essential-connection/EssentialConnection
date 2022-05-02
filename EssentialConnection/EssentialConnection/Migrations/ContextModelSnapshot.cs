@@ -27,12 +27,12 @@ namespace EssentialConnection.Migrations
                     b.Property<int>("AlunosAlunoID")
                         .HasColumnType("int");
 
-                    b.Property<int>("VagaID")
+                    b.Property<int>("VagasVagaID")
                         .HasColumnType("int");
 
-                    b.HasKey("AlunosAlunoID", "VagaID");
+                    b.HasKey("AlunosAlunoID", "VagasVagaID");
 
-                    b.HasIndex("VagaID");
+                    b.HasIndex("VagasVagaID");
 
                     b.ToTable("AlunoVaga");
                 });
@@ -258,7 +258,7 @@ namespace EssentialConnection.Migrations
 
                     b.HasOne("EssentialConnection.Models.Vaga", null)
                         .WithMany()
-                        .HasForeignKey("VagaID")
+                        .HasForeignKey("VagasVagaID")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
                 });

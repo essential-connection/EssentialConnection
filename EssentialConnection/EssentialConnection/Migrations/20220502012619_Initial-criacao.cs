@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EssentialConnection.Migrations
 {
-    public partial class Inicialcriacao : Migration
+    public partial class Initialcriacao : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -120,11 +120,11 @@ namespace EssentialConnection.Migrations
                 columns: table => new
                 {
                     AlunosAlunoID = table.Column<int>(type: "int", nullable: false),
-                    VagaID = table.Column<int>(type: "int", nullable: false)
+                    VagasVagaID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AlunoVaga", x => new { x.AlunosAlunoID, x.VagaID });
+                    table.PrimaryKey("PK_AlunoVaga", x => new { x.AlunosAlunoID, x.VagasVagaID });
                     table.ForeignKey(
                         name: "FK_AlunoVaga_Aluno_AlunosAlunoID",
                         column: x => x.AlunosAlunoID,
@@ -132,8 +132,8 @@ namespace EssentialConnection.Migrations
                         principalColumn: "AlunoID",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_AlunoVaga_Vaga_VagaID",
-                        column: x => x.VagaID,
+                        name: "FK_AlunoVaga_Vaga_VagasVagaID",
+                        column: x => x.VagasVagaID,
                         principalTable: "Vaga",
                         principalColumn: "VagaID",
                         onDelete: ReferentialAction.Restrict);
@@ -189,9 +189,9 @@ namespace EssentialConnection.Migrations
                 column: "CursoID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_AlunoVaga_VagaID",
+                name: "IX_AlunoVaga_VagasVagaID",
                 table: "AlunoVaga",
-                column: "VagaID");
+                column: "VagasVagaID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Compentencia_CurriculoID",
