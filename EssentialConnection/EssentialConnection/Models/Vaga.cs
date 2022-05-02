@@ -11,8 +11,9 @@
         public string Responsavel { get; set; }
 
         public Empresa Empresa { get; set; }
-
+        public int EmpresaId { get; set; }
         public Curso Curso { get; set; }
+        public int CursoId { get; set; }
 
         public ICollection<Aluno>? Alunos { get; set; }
     }
