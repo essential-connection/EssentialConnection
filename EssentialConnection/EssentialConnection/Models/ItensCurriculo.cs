@@ -9,7 +9,8 @@
         public DateTime DataInicio { get; set; }
         public DateTime DataFim { get; set; }
         public string Instituicao { get; set; }
-
+        public int CurriculoId { get; set; }
+        public Curriculo Curriculo { get; set; }
 
     }
 }
