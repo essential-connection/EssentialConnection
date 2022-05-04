@@ -1,0 +1,47 @@
+﻿@model IEnumerable<EssentialConnection.Models.Curriculo>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DescricaoPessoal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AlunoId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Aluno)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DescricaoPessoal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AlunoId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Aluno.AlunoID)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.CurriculoID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.CurriculoID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.CurriculoID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
