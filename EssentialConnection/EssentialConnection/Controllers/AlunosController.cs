@@ -10,22 +10,23 @@ using EssentialConnection.Models;
 
 namespace EssentialConnection.Controllers
 {
-    public class EmpresasController : Controller
+    public class AlunosController : Controller
     {
         private readonly Context _context;
 
-        public EmpresasController(Context context)
+        public AlunosController(Context context)
         {
             _context = context;
         }
 
-        // GET: Empresas
+        // GET: Alunos
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Empresa.ToListAsync());
+            var context = _context.Aluno.Include(a => a.Curso);
+            return View(await context.ToListAsync());
         }
 
-        // GET: Empresas/Details/5
+        // GET: Alunos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,36 +34,39 @@ namespace EssentialConnection.Controllers
                 return NotFound();
             }
 
-            var empresa = await _context.Empresa
-                .FirstOrDefaultAsync(m => m.EmpresaID == id);
-            if (empresa == null)
+            var aluno = await _context.Aluno
+                .Include(a => a.Curso)
+                .FirstOrDefaultAsync(m => m.AlunoID == id);
+            if (aluno == null)
             {
                 return NotFound();
             }
 
-            return View(empresa);
+            return View(aluno);
         }
 
-        // GET: Empresas/Create
+        // GET: Alunos/Create
         public IActionResult Create()
         {
+            ViewData["CursoId"] = new SelectList(_context.Curso, "CursoID", "CursoID");
             return View();
         }
 
-        // POST: Empresas/Create
+        // POST: Alunos/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("EmpresaID,Nome,CNPJ,Telefone,NomeResponsavel,Descricao,Login,Senha")] Empresa empresa)
+        public async Task<IActionResult> Create([Bind("AlunoID,Nome,Endereco,Email,DataNascimento,Telefone,Matricula,CursoId,CurriculoId,Login,Senha")] Aluno aluno)
         {
-                _context.Add(empresa);
+                _context.Add(aluno);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            return View(empresa);
+            ViewData["CursoId"] = new SelectList(_context.Curso, "CursoID", "CursoID", aluno.CursoId);
+            return View(aluno);
         }
 
-        // GET: Empresas/Edit/5
+        // GET: Alunos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -70,34 +74,35 @@ namespace EssentialConnection.Controllers
                 return NotFound();
             }
 
-            var empresa = await _context.Empresa.FindAsync(id);
-            if (empresa == null)
+            var aluno = await _context.Aluno.FindAsync(id);
+            if (aluno == null)
             {
                 return NotFound();
             }
-            return View(empresa);
+            ViewData["CursoId"] = new SelectList(_context.Curso, "CursoID", "CursoID", aluno.CursoId);
+            return View(aluno);
         }
 
-        // POST: Empresas/Edit/5
+        // POST: Alunos/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("EmpresaID,Nome,CNPJ,Telefone,NomeResponsavel,Descricao,Login,Senha")] Empresa empresa)
+        public async Task<IActionResult> Edit(int id, [Bind("AlunoID,Nome,Endereco,Email,DataNascimento,Telefone,Matricula,CursoId,CurriculoId,Login,Senha")] Aluno aluno)
         {
-            if (id != empresa.EmpresaID)
+            if (id != aluno.AlunoID)
             {
                 return NotFound();
             }
 
                 try
                 {
-                    _context.Update(empresa);
+                    _context.Update(aluno);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!EmpresaExists(empresa.EmpresaID))
+                    if (!AlunoExists(aluno.AlunoID))
                     {
                         return NotFound();
                     }
@@ -106,10 +111,11 @@ namespace EssentialConnection.Controllers
                         throw;
                     }
                 }
-            return View(empresa);
+            ViewData["CursoId"] = new SelectList(_context.Curso, "CursoID", "CursoID", aluno.CursoId);
+            return View(aluno);
         }
 
-        // GET: Empresas/Delete/5
+        // GET: Alunos/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -117,30 +123,31 @@ namespace EssentialConnection.Controllers
                 return NotFound();
             }
 
-            var empresa = await _context.Empresa
-                .FirstOrDefaultAsync(m => m.EmpresaID == id);
-            if (empresa == null)
+            var aluno = await _context.Aluno
+                .Include(a => a.Curso)
+                .FirstOrDefaultAsync(m => m.AlunoID == id);
+            if (aluno == null)
             {
                 return NotFound();
             }
 
-            return View(empresa);
+            return View(aluno);
         }
 
-        // POST: Empresas/Delete/5
+        // POST: Alunos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var empresa = await _context.Empresa.FindAsync(id);
-            _context.Empresa.Remove(empresa);
+            var aluno = await _context.Aluno.FindAsync(id);
+            _context.Aluno.Remove(aluno);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool EmpresaExists(int id)
+        private bool AlunoExists(int id)
         {
-            return _context.Empresa.Any(e => e.EmpresaID == id);
+            return _context.Aluno.Any(e => e.AlunoID == id);
         }
     }
 }

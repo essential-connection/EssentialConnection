@@ -10,23 +10,23 @@ using EssentialConnection.Models;
 
 namespace EssentialConnection.Controllers
 {
-    public class CurriculoController : Controller
+    public class CurriculosController : Controller
     {
         private readonly Context _context;
 
-        public CurriculoController(Context context)
+        public CurriculosController(Context context)
         {
             _context = context;
         }
 
-        // GET: Curriculo
+        // GET: Curriculos
         public async Task<IActionResult> Index()
         {
             var context = _context.Curriculo.Include(c => c.Aluno);
             return View(await context.ToListAsync());
         }
 
-        // GET: Curriculo/Details/5
+        // GET: Curriculos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -45,28 +45,28 @@ namespace EssentialConnection.Controllers
             return View(curriculo);
         }
 
-        // GET: Curriculo/Create
+        // GET: Curriculos/Create
         public IActionResult Create()
         {
-            ViewData["CurriculoID"] = new SelectList(_context.Aluno, "AlunoID", "AlunoID");
+            ViewData["AlunoId"] = new SelectList(_context.Aluno, "AlunoID", "AlunoID");
             return View();
         }
 
-        // POST: Curriculo/Create
+        // POST: Curriculos/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("CurriculoID,DescricaoPessoal,AlunoId")] Curriculo curriculo)
         {
-            _context.Add(curriculo);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-            ViewData["CurriculoID"] = new SelectList(_context.Aluno, "AlunoID", "AlunoID", curriculo.CurriculoID);
+                _context.Add(curriculo);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            ViewData["AlunoId"] = new SelectList(_context.Aluno, "AlunoID", "AlunoID", curriculo.AlunoId);
             return View(curriculo);
         }
 
-        // GET: Curriculo/Edit/5
+        // GET: Curriculos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -79,11 +79,11 @@ namespace EssentialConnection.Controllers
             {
                 return NotFound();
             }
-            ViewData["CurriculoID"] = new SelectList(_context.Aluno, "AlunoID", "AlunoID", curriculo.CurriculoID);
+            ViewData["AlunoId"] = new SelectList(_context.Aluno, "AlunoID", "AlunoID", curriculo.AlunoId);
             return View(curriculo);
         }
 
-        // POST: Curriculo/Edit/5
+        // POST: Curriculos/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -95,28 +95,28 @@ namespace EssentialConnection.Controllers
                 return NotFound();
             }
 
-            try
-            {
-                _context.Update(curriculo);
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CurriculoExists(curriculo.CurriculoID))
+                try
                 {
-                    return NotFound();
+                    _context.Update(curriculo);
+                    await _context.SaveChangesAsync();
                 }
-                else
+                catch (DbUpdateConcurrencyException)
                 {
-                    throw;
+                    if (!CurriculoExists(curriculo.CurriculoID))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
                 }
-            }
-            return RedirectToAction(nameof(Index));
-            ViewData["CurriculoID"] = new SelectList(_context.Aluno, "AlunoID", "AlunoID", curriculo.CurriculoID);
+                return RedirectToAction(nameof(Index));
+            ViewData["AlunoId"] = new SelectList(_context.Aluno, "AlunoID", "AlunoID", curriculo.AlunoId);
             return View(curriculo);
         }
 
-        // GET: Curriculo/Delete/5
+        // GET: Curriculos/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -135,7 +135,7 @@ namespace EssentialConnection.Controllers
             return View(curriculo);
         }
 
-        // POST: Curriculo/Delete/5
+        // POST: Curriculos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)

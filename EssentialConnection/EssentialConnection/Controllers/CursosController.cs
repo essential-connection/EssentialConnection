@@ -10,22 +10,22 @@ using EssentialConnection.Models;
 
 namespace EssentialConnection.Controllers
 {
-    public class EmpresasController : Controller
+    public class CursosController : Controller
     {
         private readonly Context _context;
 
-        public EmpresasController(Context context)
+        public CursosController(Context context)
         {
             _context = context;
         }
 
-        // GET: Empresas
+        // GET: Cursos
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Empresa.ToListAsync());
+            return View(await _context.Curso.ToListAsync());
         }
 
-        // GET: Empresas/Details/5
+        // GET: Cursos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,36 +33,36 @@ namespace EssentialConnection.Controllers
                 return NotFound();
             }
 
-            var empresa = await _context.Empresa
-                .FirstOrDefaultAsync(m => m.EmpresaID == id);
-            if (empresa == null)
+            var curso = await _context.Curso
+                .FirstOrDefaultAsync(m => m.CursoID == id);
+            if (curso == null)
             {
                 return NotFound();
             }
 
-            return View(empresa);
+            return View(curso);
         }
 
-        // GET: Empresas/Create
+        // GET: Cursos/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Empresas/Create
+        // POST: Cursos/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("EmpresaID,Nome,CNPJ,Telefone,NomeResponsavel,Descricao,Login,Senha")] Empresa empresa)
+        public async Task<IActionResult> Create([Bind("CursoID,Nome,Telefone,Login,Senha")] Curso curso)
         {
-                _context.Add(empresa);
+                _context.Add(curso);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            return View(empresa);
+            return View(curso);
         }
 
-        // GET: Empresas/Edit/5
+        // GET: Cursos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -70,34 +70,34 @@ namespace EssentialConnection.Controllers
                 return NotFound();
             }
 
-            var empresa = await _context.Empresa.FindAsync(id);
-            if (empresa == null)
+            var curso = await _context.Curso.FindAsync(id);
+            if (curso == null)
             {
                 return NotFound();
             }
-            return View(empresa);
+            return View(curso);
         }
 
-        // POST: Empresas/Edit/5
+        // POST: Cursos/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("EmpresaID,Nome,CNPJ,Telefone,NomeResponsavel,Descricao,Login,Senha")] Empresa empresa)
+        public async Task<IActionResult> Edit(int id, [Bind("CursoID,Nome,Telefone,Login,Senha")] Curso curso)
         {
-            if (id != empresa.EmpresaID)
+            if (id != curso.CursoID)
             {
                 return NotFound();
             }
 
                 try
                 {
-                    _context.Update(empresa);
+                    _context.Update(curso);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!EmpresaExists(empresa.EmpresaID))
+                    if (!CursoExists(curso.CursoID))
                     {
                         return NotFound();
                     }
@@ -105,11 +105,12 @@ namespace EssentialConnection.Controllers
                     {
                         throw;
                     }
-                }
-            return View(empresa);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(curso);
         }
 
-        // GET: Empresas/Delete/5
+        // GET: Cursos/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -117,30 +118,30 @@ namespace EssentialConnection.Controllers
                 return NotFound();
             }
 
-            var empresa = await _context.Empresa
-                .FirstOrDefaultAsync(m => m.EmpresaID == id);
-            if (empresa == null)
+            var curso = await _context.Curso
+                .FirstOrDefaultAsync(m => m.CursoID == id);
+            if (curso == null)
             {
                 return NotFound();
             }
 
-            return View(empresa);
+            return View(curso);
         }
 
-        // POST: Empresas/Delete/5
+        // POST: Cursos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var empresa = await _context.Empresa.FindAsync(id);
-            _context.Empresa.Remove(empresa);
+            var curso = await _context.Curso.FindAsync(id);
+            _context.Curso.Remove(curso);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool EmpresaExists(int id)
+        private bool CursoExists(int id)
         {
-            return _context.Empresa.Any(e => e.EmpresaID == id);
+            return _context.Curso.Any(e => e.CursoID == id);
         }
     }
 }

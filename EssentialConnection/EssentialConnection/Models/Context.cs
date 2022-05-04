@@ -15,7 +15,7 @@ namespace EssentialConnection.Models
             modelBuilder.Entity<Aluno>()
             .HasOne(a => a.Curriculo)
             .WithOne(a => a.Aluno)
-            .HasForeignKey<Curriculo>(c => c.CurriculoID);
+            .HasForeignKey<Curriculo>(c => c.AlunoId);
 
             //Corrigi o erro de N para M de alunos e vagas || Retirar Cascata || Se alguem achar outra solução, mudar
             foreach (var relationship in modelBuilder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))

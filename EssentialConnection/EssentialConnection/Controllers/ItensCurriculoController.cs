@@ -10,23 +10,23 @@ using EssentialConnection.Models;
 
 namespace EssentialConnection.Controllers
 {
-    public class CompentenciasController : Controller
+    public class ItensCurriculoController : Controller
     {
         private readonly Context _context;
 
-        public CompentenciasController(Context context)
+        public ItensCurriculoController(Context context)
         {
             _context = context;
         }
 
-        // GET: Compentencias
+        // GET: ItensCurriculo
         public async Task<IActionResult> Index()
         {
-            var context = _context.Compentencia.Include(c => c.Curriculo);
+            var context = _context.ItensCurriculo.Include(i => i.Curriculo);
             return View(await context.ToListAsync());
         }
 
-        // GET: Compentencias/Details/5
+        // GET: ItensCurriculo/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,39 +34,39 @@ namespace EssentialConnection.Controllers
                 return NotFound();
             }
 
-            var compentencias = await _context.Compentencia
-                .Include(c => c.Curriculo)
-                .FirstOrDefaultAsync(m => m.CompentenciasID == id);
-            if (compentencias == null)
+            var itensCurriculo = await _context.ItensCurriculo
+                .Include(i => i.Curriculo)
+                .FirstOrDefaultAsync(m => m.ItensCurriculoID == id);
+            if (itensCurriculo == null)
             {
                 return NotFound();
             }
 
-            return View(compentencias);
+            return View(itensCurriculo);
         }
 
-        // GET: Compentencias/Create
+        // GET: ItensCurriculo/Create
         public IActionResult Create()
         {
             ViewData["CurriculoId"] = new SelectList(_context.Curriculo, "CurriculoID", "CurriculoID");
             return View();
         }
 
-        // POST: Compentencias/Create
+        // POST: ItensCurriculo/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CompentenciasID,Descricao,CurriculoId")] Compentencias compentencias)
+        public async Task<IActionResult> Create([Bind("ItensCurriculoID,Nome,Descricao,DataInicio,DataFim,Instituicao,CurriculoId")] ItensCurriculo itensCurriculo)
         {
-                _context.Add(compentencias);
+                _context.Add(itensCurriculo);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            ViewData["CurriculoId"] = new SelectList(_context.Curriculo, "CurriculoID", "CurriculoID", compentencias.CurriculoId);
-            return View(compentencias);
+            ViewData["CurriculoId"] = new SelectList(_context.Curriculo, "CurriculoID", "CurriculoID", itensCurriculo.CurriculoId);
+            return View(itensCurriculo);
         }
 
-        // GET: Compentencias/Edit/5
+        // GET: ItensCurriculo/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -74,35 +74,35 @@ namespace EssentialConnection.Controllers
                 return NotFound();
             }
 
-            var compentencias = await _context.Compentencia.FindAsync(id);
-            if (compentencias == null)
+            var itensCurriculo = await _context.ItensCurriculo.FindAsync(id);
+            if (itensCurriculo == null)
             {
                 return NotFound();
             }
-            ViewData["CurriculoId"] = new SelectList(_context.Curriculo, "CurriculoID", "CurriculoID", compentencias.CurriculoId);
-            return View(compentencias);
+            ViewData["CurriculoId"] = new SelectList(_context.Curriculo, "CurriculoID", "CurriculoID", itensCurriculo.CurriculoId);
+            return View(itensCurriculo);
         }
 
-        // POST: Compentencias/Edit/5
+        // POST: ItensCurriculo/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CompentenciasID,Descricao,CurriculoId")] Compentencias compentencias)
+        public async Task<IActionResult> Edit(int id, [Bind("ItensCurriculoID,Nome,Descricao,DataInicio,DataFim,Instituicao,CurriculoId")] ItensCurriculo itensCurriculo)
         {
-            if (id != compentencias.CompentenciasID)
+            if (id != itensCurriculo.ItensCurriculoID)
             {
                 return NotFound();
             }
 
                 try
                 {
-                    _context.Update(compentencias);
+                    _context.Update(itensCurriculo);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CompentenciasExists(compentencias.CompentenciasID))
+                    if (!ItensCurriculoExists(itensCurriculo.ItensCurriculoID))
                     {
                         return NotFound();
                     }
@@ -111,11 +111,11 @@ namespace EssentialConnection.Controllers
                         throw;
                     }
                 }
-            ViewData["CurriculoId"] = new SelectList(_context.Curriculo, "CurriculoID", "CurriculoID", compentencias.CurriculoId);
-            return View(compentencias);
+            ViewData["CurriculoId"] = new SelectList(_context.Curriculo, "CurriculoID", "CurriculoID", itensCurriculo.CurriculoId);
+            return View(itensCurriculo);
         }
 
-        // GET: Compentencias/Delete/5
+        // GET: ItensCurriculo/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -123,31 +123,31 @@ namespace EssentialConnection.Controllers
                 return NotFound();
             }
 
-            var compentencias = await _context.Compentencia
-                .Include(c => c.Curriculo)
-                .FirstOrDefaultAsync(m => m.CompentenciasID == id);
-            if (compentencias == null)
+            var itensCurriculo = await _context.ItensCurriculo
+                .Include(i => i.Curriculo)
+                .FirstOrDefaultAsync(m => m.ItensCurriculoID == id);
+            if (itensCurriculo == null)
             {
                 return NotFound();
             }
 
-            return View(compentencias);
+            return View(itensCurriculo);
         }
 
-        // POST: Compentencias/Delete/5
+        // POST: ItensCurriculo/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var compentencias = await _context.Compentencia.FindAsync(id);
-            _context.Compentencia.Remove(compentencias);
+            var itensCurriculo = await _context.ItensCurriculo.FindAsync(id);
+            _context.ItensCurriculo.Remove(itensCurriculo);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CompentenciasExists(int id)
+        private bool ItensCurriculoExists(int id)
         {
-            return _context.Compentencia.Any(e => e.CompentenciasID == id);
+            return _context.ItensCurriculo.Any(e => e.ItensCurriculoID == id);
         }
     }
 }
