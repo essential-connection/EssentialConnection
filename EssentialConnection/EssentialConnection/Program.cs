@@ -13,7 +13,7 @@ builder.Services.AddControllersWithViews();
 //builder.Services.AddDbContext<Context>
 //(options => options.UseSqlServer("Data Source=GUSTAVO-LAPTOP;Initial Catalog=EssentialConnection;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"));
 builder.Services.AddDbContext<Context>(
-    options => options.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=EssentialConnectionBD;Integrated Security=True;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False")
+    options => options.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=StrongFitGymDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False")
 );
 //Fim string de conexão Gustavo : Favor nao excluir
 
@@ -36,7 +36,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Empresas}/{action=Index}/{id?}");
 
 
 app.Run();
