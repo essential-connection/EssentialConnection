@@ -45,7 +45,10 @@ namespace EssentialConnection.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AlunoID"), 1L, 1);
 
-                    b.Property<int>("CursoID")
+                    b.Property<int?>("CurriculoId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CursoId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DataNascimento")
@@ -59,10 +62,18 @@ namespace EssentialConnection.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Login")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Matricula")
                         .HasColumnType("int");
 
                     b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Senha")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -72,7 +83,7 @@ namespace EssentialConnection.Migrations
 
                     b.HasKey("AlunoID");
 
-                    b.HasIndex("CursoID");
+                    b.HasIndex("CursoId");
 
                     b.ToTable("Aluno");
                 });
@@ -85,7 +96,7 @@ namespace EssentialConnection.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CompentenciasID"), 1L, 1);
 
-                    b.Property<int>("CurriculoID")
+                    b.Property<int?>("CurriculoId")
                         .HasColumnType("int");
 
                     b.Property<string>("Descricao")
@@ -94,7 +105,7 @@ namespace EssentialConnection.Migrations
 
                     b.HasKey("CompentenciasID");
 
-                    b.HasIndex("CurriculoID");
+                    b.HasIndex("CurriculoId");
 
                     b.ToTable("Compentencia");
                 });
@@ -102,6 +113,12 @@ namespace EssentialConnection.Migrations
             modelBuilder.Entity("EssentialConnection.Models.Curriculo", b =>
                 {
                     b.Property<int>("CurriculoID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CurriculoID"), 1L, 1);
+
+                    b.Property<int?>("AlunoId")
                         .HasColumnType("int");
 
                     b.Property<string>("DescricaoPessoal")
@@ -109,6 +126,10 @@ namespace EssentialConnection.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CurriculoID");
+
+                    b.HasIndex("AlunoId")
+                        .IsUnique()
+                        .HasFilter("[AlunoId] IS NOT NULL");
 
                     b.ToTable("Curriculo");
                 });
@@ -121,7 +142,15 @@ namespace EssentialConnection.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CursoID"), 1L, 1);
 
+                    b.Property<string>("Login")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Senha")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -150,11 +179,19 @@ namespace EssentialConnection.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Login")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("NomeResponsavel")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Senha")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -175,7 +212,7 @@ namespace EssentialConnection.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ItensCurriculoID"), 1L, 1);
 
-                    b.Property<int>("CurriculoID")
+                    b.Property<int?>("CurriculoId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DataFim")
@@ -198,20 +235,20 @@ namespace EssentialConnection.Migrations
 
                     b.HasKey("ItensCurriculoID");
 
-                    b.HasIndex("CurriculoID");
+                    b.HasIndex("CurriculoId");
 
                     b.ToTable("ItensCurriculo");
                 });
 
             modelBuilder.Entity("EssentialConnection.Models.Vaga", b =>
                 {
-                    b.Property<int?>("VagaID")
+                    b.Property<int>("VagaID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int?>("VagaID"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("VagaID"), 1L, 1);
 
-                    b.Property<int>("CursoID")
+                    b.Property<int>("CursoId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DataExpiracao")
@@ -221,7 +258,7 @@ namespace EssentialConnection.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("EmpresaID")
+                    b.Property<int?>("EmpresaId")
                         .HasColumnType("int");
 
                     b.Property<string>("Nome")
@@ -241,9 +278,9 @@ namespace EssentialConnection.Migrations
 
                     b.HasKey("VagaID");
 
-                    b.HasIndex("CursoID");
+                    b.HasIndex("CursoId");
 
-                    b.HasIndex("EmpresaID");
+                    b.HasIndex("EmpresaId");
 
                     b.ToTable("Vaga");
                 });
@@ -267,9 +304,8 @@ namespace EssentialConnection.Migrations
                 {
                     b.HasOne("EssentialConnection.Models.Curso", "Curso")
                         .WithMany("Alunos")
-                        .HasForeignKey("CursoID")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("CursoId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Curso");
                 });
@@ -278,9 +314,8 @@ namespace EssentialConnection.Migrations
                 {
                     b.HasOne("EssentialConnection.Models.Curriculo", "Curriculo")
                         .WithMany("Compentencias")
-                        .HasForeignKey("CurriculoID")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("CurriculoId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Curriculo");
                 });
@@ -289,9 +324,8 @@ namespace EssentialConnection.Migrations
                 {
                     b.HasOne("EssentialConnection.Models.Aluno", "Aluno")
                         .WithOne("Curriculo")
-                        .HasForeignKey("EssentialConnection.Models.Curriculo", "CurriculoID")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("EssentialConnection.Models.Curriculo", "AlunoId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Aluno");
                 });
@@ -300,9 +334,8 @@ namespace EssentialConnection.Migrations
                 {
                     b.HasOne("EssentialConnection.Models.Curriculo", "Curriculo")
                         .WithMany("ItensCurriculo")
-                        .HasForeignKey("CurriculoID")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("CurriculoId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Curriculo");
                 });
@@ -311,15 +344,14 @@ namespace EssentialConnection.Migrations
                 {
                     b.HasOne("EssentialConnection.Models.Curso", "Curso")
                         .WithMany("Vagas")
-                        .HasForeignKey("CursoID")
+                        .HasForeignKey("CursoId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("EssentialConnection.Models.Empresa", "Empresa")
                         .WithMany("Vagas")
-                        .HasForeignKey("EmpresaID")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .HasForeignKey("EmpresaId")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("Curso");
 

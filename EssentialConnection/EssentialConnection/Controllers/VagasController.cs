@@ -10,23 +10,23 @@ using EssentialConnection.Models;
 
 namespace EssentialConnection.Controllers
 {
-    public class CompentenciasController : Controller
+    public class VagasController : Controller
     {
         private readonly Context _context;
 
-        public CompentenciasController(Context context)
+        public VagasController(Context context)
         {
             _context = context;
         }
 
-        // GET: Compentencias
+        // GET: Vagas
         public async Task<IActionResult> Index()
         {
-            var context = _context.Compentencia.Include(c => c.Curriculo);
+            var context = _context.Vaga.Include(v => v.Curso).Include(v => v.Empresa);
             return View(await context.ToListAsync());
         }
 
-        // GET: Compentencias/Details/5
+        // GET: Vagas/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -34,39 +34,42 @@ namespace EssentialConnection.Controllers
                 return NotFound();
             }
 
-            var compentencias = await _context.Compentencia
-                .Include(c => c.Curriculo)
-                .FirstOrDefaultAsync(m => m.CompentenciasID == id);
-            if (compentencias == null)
+            var vaga = await _context.Vaga
+                .Include(v => v.Curso)
+                .Include(v => v.Empresa)
+                .FirstOrDefaultAsync(m => m.VagaID == id);
+            if (vaga == null)
             {
                 return NotFound();
             }
 
-            return View(compentencias);
+            return View(vaga);
         }
 
-        // GET: Compentencias/Create
+        // GET: Vagas/Create
         public IActionResult Create()
         {
-            ViewData["CurriculoId"] = new SelectList(_context.Curriculo, "CurriculoID", "CurriculoID");
+            ViewData["CursoId"] = new SelectList(_context.Curso, "CursoID", "CursoID");
+            ViewData["EmpresaId"] = new SelectList(_context.Empresa, "EmpresaID", "EmpresaID");
             return View();
         }
 
-        // POST: Compentencias/Create
+        // POST: Vagas/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CompentenciasID,Descricao,CurriculoId")] Compentencias compentencias)
+        public async Task<IActionResult> Create([Bind("VagaID,Nome,Descricao,Quantidade,DataExpiracao,Status,Responsavel,EmpresaId,CursoId")] Vaga vaga)
         {
-                _context.Add(compentencias);
+                _context.Add(vaga);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
-            ViewData["CurriculoId"] = new SelectList(_context.Curriculo, "CurriculoID", "CurriculoID", compentencias.CurriculoId);
-            return View(compentencias);
+            ViewData["CursoId"] = new SelectList(_context.Curso, "CursoID", "CursoID", vaga.CursoId);
+            ViewData["EmpresaId"] = new SelectList(_context.Empresa, "EmpresaID", "EmpresaID", vaga.EmpresaId);
+            return View(vaga);
         }
 
-        // GET: Compentencias/Edit/5
+        // GET: Vagas/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -74,35 +77,35 @@ namespace EssentialConnection.Controllers
                 return NotFound();
             }
 
-            var compentencias = await _context.Compentencia.FindAsync(id);
-            if (compentencias == null)
+            var vaga = await _context.Vaga.FindAsync(id);
+            if (vaga == null)
             {
                 return NotFound();
             }
-            ViewData["CurriculoId"] = new SelectList(_context.Curriculo, "CurriculoID", "CurriculoID", compentencias.CurriculoId);
-            return View(compentencias);
+            ViewData["CursoId"] = new SelectList(_context.Curso, "CursoID", "CursoID", vaga.CursoId);
+            ViewData["EmpresaId"] = new SelectList(_context.Empresa, "EmpresaID", "EmpresaID", vaga.EmpresaId);
+            return View(vaga);
         }
 
-        // POST: Compentencias/Edit/5
+        // POST: Vagas/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CompentenciasID,Descricao,CurriculoId")] Compentencias compentencias)
+        public async Task<IActionResult> Edit(int id, [Bind("VagaID,Nome,Descricao,Quantidade,DataExpiracao,Status,Responsavel,EmpresaId,CursoId")] Vaga vaga)
         {
-            if (id != compentencias.CompentenciasID)
+            if (id != vaga.VagaID)
             {
                 return NotFound();
             }
-
                 try
                 {
-                    _context.Update(compentencias);
+                    _context.Update(vaga);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CompentenciasExists(compentencias.CompentenciasID))
+                    if (!VagaExists(vaga.VagaID))
                     {
                         return NotFound();
                     }
@@ -111,11 +114,13 @@ namespace EssentialConnection.Controllers
                         throw;
                     }
                 }
-            ViewData["CurriculoId"] = new SelectList(_context.Curriculo, "CurriculoID", "CurriculoID", compentencias.CurriculoId);
-            return View(compentencias);
+                return RedirectToAction(nameof(Index));
+            ViewData["CursoId"] = new SelectList(_context.Curso, "CursoID", "CursoID", vaga.CursoId);
+            ViewData["EmpresaId"] = new SelectList(_context.Empresa, "EmpresaID", "EmpresaID", vaga.EmpresaId);
+            return View(vaga);
         }
 
-        // GET: Compentencias/Delete/5
+        // GET: Vagas/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -123,31 +128,32 @@ namespace EssentialConnection.Controllers
                 return NotFound();
             }
 
-            var compentencias = await _context.Compentencia
-                .Include(c => c.Curriculo)
-                .FirstOrDefaultAsync(m => m.CompentenciasID == id);
-            if (compentencias == null)
+            var vaga = await _context.Vaga
+                .Include(v => v.Curso)
+                .Include(v => v.Empresa)
+                .FirstOrDefaultAsync(m => m.VagaID == id);
+            if (vaga == null)
             {
                 return NotFound();
             }
 
-            return View(compentencias);
+            return View(vaga);
         }
 
-        // POST: Compentencias/Delete/5
+        // POST: Vagas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var compentencias = await _context.Compentencia.FindAsync(id);
-            _context.Compentencia.Remove(compentencias);
+            var vaga = await _context.Vaga.FindAsync(id);
+            _context.Vaga.Remove(vaga);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CompentenciasExists(int id)
+        private bool VagaExists(int id)
         {
-            return _context.Compentencia.Any(e => e.CompentenciasID == id);
+            return _context.Vaga.Any(e => e.VagaID == id);
         }
     }
 }

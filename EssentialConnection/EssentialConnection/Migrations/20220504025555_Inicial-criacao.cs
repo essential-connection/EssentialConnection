@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EssentialConnection.Migrations
 {
-    public partial class Initialcriacao : Migration
+    public partial class Inicialcriacao : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -16,7 +16,9 @@ namespace EssentialConnection.Migrations
                     CursoID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Telefone = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Telefone = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Login = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Senha = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -33,7 +35,9 @@ namespace EssentialConnection.Migrations
                     CNPJ = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Telefone = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     NomeResponsavel = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Descricao = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Descricao = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Login = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Senha = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -52,14 +56,17 @@ namespace EssentialConnection.Migrations
                     DataNascimento = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Telefone = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Matricula = table.Column<int>(type: "int", nullable: false),
-                    CursoID = table.Column<int>(type: "int", nullable: false)
+                    CursoId = table.Column<int>(type: "int", nullable: true),
+                    CurriculoId = table.Column<int>(type: "int", nullable: true),
+                    Login = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Senha = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Aluno", x => x.AlunoID);
                     table.ForeignKey(
-                        name: "FK_Aluno_Curso_CursoID",
-                        column: x => x.CursoID,
+                        name: "FK_Aluno_Curso_CursoId",
+                        column: x => x.CursoId,
                         principalTable: "Curso",
                         principalColumn: "CursoID",
                         onDelete: ReferentialAction.Restrict);
@@ -77,21 +84,21 @@ namespace EssentialConnection.Migrations
                     DataExpiracao = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Responsavel = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    EmpresaID = table.Column<int>(type: "int", nullable: false),
-                    CursoID = table.Column<int>(type: "int", nullable: false)
+                    EmpresaId = table.Column<int>(type: "int", nullable: true),
+                    CursoId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Vaga", x => x.VagaID);
                     table.ForeignKey(
-                        name: "FK_Vaga_Curso_CursoID",
-                        column: x => x.CursoID,
+                        name: "FK_Vaga_Curso_CursoId",
+                        column: x => x.CursoId,
                         principalTable: "Curso",
                         principalColumn: "CursoID",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Vaga_Empresa_EmpresaID",
-                        column: x => x.EmpresaID,
+                        name: "FK_Vaga_Empresa_EmpresaId",
+                        column: x => x.EmpresaId,
                         principalTable: "Empresa",
                         principalColumn: "EmpresaID",
                         onDelete: ReferentialAction.Restrict);
@@ -101,15 +108,17 @@ namespace EssentialConnection.Migrations
                 name: "Curriculo",
                 columns: table => new
                 {
-                    CurriculoID = table.Column<int>(type: "int", nullable: false),
-                    DescricaoPessoal = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    CurriculoID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DescricaoPessoal = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AlunoId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Curriculo", x => x.CurriculoID);
                     table.ForeignKey(
-                        name: "FK_Curriculo_Aluno_CurriculoID",
-                        column: x => x.CurriculoID,
+                        name: "FK_Curriculo_Aluno_AlunoId",
+                        column: x => x.AlunoId,
                         principalTable: "Aluno",
                         principalColumn: "AlunoID",
                         onDelete: ReferentialAction.Restrict);
@@ -146,14 +155,14 @@ namespace EssentialConnection.Migrations
                     CompentenciasID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Descricao = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CurriculoID = table.Column<int>(type: "int", nullable: false)
+                    CurriculoId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Compentencia", x => x.CompentenciasID);
                     table.ForeignKey(
-                        name: "FK_Compentencia_Curriculo_CurriculoID",
-                        column: x => x.CurriculoID,
+                        name: "FK_Compentencia_Curriculo_CurriculoId",
+                        column: x => x.CurriculoId,
                         principalTable: "Curriculo",
                         principalColumn: "CurriculoID",
                         onDelete: ReferentialAction.Restrict);
@@ -170,23 +179,23 @@ namespace EssentialConnection.Migrations
                     DataInicio = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DataFim = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Instituicao = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CurriculoID = table.Column<int>(type: "int", nullable: false)
+                    CurriculoId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_ItensCurriculo", x => x.ItensCurriculoID);
                     table.ForeignKey(
-                        name: "FK_ItensCurriculo_Curriculo_CurriculoID",
-                        column: x => x.CurriculoID,
+                        name: "FK_ItensCurriculo_Curriculo_CurriculoId",
+                        column: x => x.CurriculoId,
                         principalTable: "Curriculo",
                         principalColumn: "CurriculoID",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Aluno_CursoID",
+                name: "IX_Aluno_CursoId",
                 table: "Aluno",
-                column: "CursoID");
+                column: "CursoId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AlunoVaga_VagasVagaID",
@@ -194,24 +203,31 @@ namespace EssentialConnection.Migrations
                 column: "VagasVagaID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Compentencia_CurriculoID",
+                name: "IX_Compentencia_CurriculoId",
                 table: "Compentencia",
-                column: "CurriculoID");
+                column: "CurriculoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ItensCurriculo_CurriculoID",
+                name: "IX_Curriculo_AlunoId",
+                table: "Curriculo",
+                column: "AlunoId",
+                unique: true,
+                filter: "[AlunoId] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ItensCurriculo_CurriculoId",
                 table: "ItensCurriculo",
-                column: "CurriculoID");
+                column: "CurriculoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Vaga_CursoID",
+                name: "IX_Vaga_CursoId",
                 table: "Vaga",
-                column: "CursoID");
+                column: "CursoId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Vaga_EmpresaID",
+                name: "IX_Vaga_EmpresaId",
                 table: "Vaga",
-                column: "EmpresaID");
+                column: "EmpresaId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
