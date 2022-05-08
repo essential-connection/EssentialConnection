@@ -71,6 +71,15 @@ namespace EssentialConnection.Areas.Identity.Pages.Account
         /// </summary>
         public class InputModel
         {
+            [Required]
+            [StringLength(255, ErrorMessage = "O primeiro nome deve ter tamanho máximo de 255 caracteres")]
+            [Display(Name = "Primeiro nome")]
+            public string PrimeiroNome { get; set; }
+            [Required]
+            [StringLength(255, ErrorMessage = "O primeiro nome deve ter tamanho máximo de 255 caracteres")]
+            [Display(Name = "Sobrenome")]
+            public string Sobrenome { get; set; }
+
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
@@ -87,7 +96,7 @@ namespace EssentialConnection.Areas.Identity.Pages.Account
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "Password")]
+            [Display(Name = "Senha")]
             public string Password { get; set; }
 
             /// <summary>
@@ -95,7 +104,7 @@ namespace EssentialConnection.Areas.Identity.Pages.Account
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
+            [Display(Name = "Confirme a senha")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
         }
@@ -114,6 +123,9 @@ namespace EssentialConnection.Areas.Identity.Pages.Account
             if (ModelState.IsValid)
             {
                 var user = CreateUser();
+
+                user.PrimeiroNome = Input.PrimeiroNome;
+                user.Sobrenome = Input.Sobrenome;
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);

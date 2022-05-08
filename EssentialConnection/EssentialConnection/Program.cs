@@ -13,7 +13,7 @@ builder.Services.AddDbContext<Context>(
     options => options.UseSqlServer(connectionString)
 );
 
-builder.Services.AddDefaultIdentity<EssentialConnectionUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<EssentialConnectionUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<IdentityContext>();;
 
 // Add services to the container.
