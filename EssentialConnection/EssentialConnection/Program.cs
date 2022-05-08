@@ -1,7 +1,20 @@
 using EssentialConnection.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using EssentialConnection.Areas.Identity.Data;
 
 var builder = WebApplication.CreateBuilder(args);
+var connectionString = builder.Configuration.GetConnectionString("EssentialConnectionDB");;
+
+builder.Services.AddDbContext<IdentityContext>(options =>
+    options.UseSqlServer(connectionString));;
+
+builder.Services.AddDbContext<Context>(
+    options => options.UseSqlServer(connectionString)
+);
+
+builder.Services.AddDefaultIdentity<EssentialConnectionUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddEntityFrameworkStores<IdentityContext>();;
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -9,13 +22,14 @@ builder.Services.AddControllersWithViews();
 // Add-Migration Initcial-criacao -Context Context
 // Update-database -Context Context
 
-//StringDeConexãoGustavo : Favor, não excluir
+//StringDeConexï¿½oGustavo : Favor, nï¿½o excluir
 //builder.Services.AddDbContext<Context>
 //(options => options.UseSqlServer("Data Source=GUSTAVO-LAPTOP;Initial Catalog=EssentialConnection;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False"));
-builder.Services.AddDbContext<Context>(
-    options => options.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=EssentialConnectionBD;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False")
-);
-//Fim string de conexão Gustavo : Favor nao excluir
+
+//builder.Services.AddDbContext<Context>(
+//    options => options.UseSqlServer("Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=EssentialConnectionBD;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False")
+//);
+//Fim string de conexï¿½o Gustavo : Favor nao excluir
 
 var app = builder.Build();
 
@@ -31,12 +45,16 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseAuthentication();;
 
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Empresas}/{action=Index}/{id?}");
+
+
+app.MapRazorPages();
 
 
 app.Run();
