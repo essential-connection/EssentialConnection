@@ -1,0 +1,54 @@
+﻿@using X.PagedList.Mvc.Core
+@model X.PagedList.IPagedList<EssentialConnection.Models.Vaga>
+@{
+    ViewData["Title"] = "Aplique interesse em alguma vaga";
+}
+<h1>Index</h1>
+<div style="text-align:center">
+<h2>Nome</h2>
+@foreach (var item in Model)
+{
+    @Html.DisplayFor(modelItem => item.Nome)
+}
+<h2>Descricao</h2>
+@foreach (var item in Model)
+{
+    @Html.DisplayFor(modelItem => item.Descricao)
+}
+<h2>Quantidade</h2>
+@foreach (var item in Model)
+{
+    @Html.DisplayFor(modelItem => item.Quantidade)
+}
+
+<h2>Responsavel</h2>
+@foreach (var item in Model)
+{
+    @Html.DisplayFor(modelItem => item.Responsavel)
+}
+
+<h2>Tipo de vaga</h2>
+@foreach (var item in Model)
+{
+        
+}
+</div>
+
+
+@foreach (var item in Model) {
+    <h1>
+        NomeVaga
+    </h1>
+    <p>
+        @Html.DisplayFor(modelItem => item.Nome)
+    </p>
+    <h1>
+        Descricao
+    </h1>
+    <p>
+        @Html.DisplayFor(modelItem => item.Descricao)
+    </p>
+}
+<div class="row">
+    @Html.PagedListPager(Model,pagina=>Url.Action("Index", new{pagina}))
+</div>
