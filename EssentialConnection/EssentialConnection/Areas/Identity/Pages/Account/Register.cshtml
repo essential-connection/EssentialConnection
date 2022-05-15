@@ -13,14 +13,9 @@
             <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-floating">
-                <input asp-for="Input.PrimeiroNome" class="form-control" autocomplete="primeironome" aria-required="true" />
-                <label asp-for="Input.PrimeiroNome"></label>
-                <span asp-validation-for="Input.PrimeiroNome" class="text-danger"></span>
-            </div>
-            <div class="form-floating">
-                <input asp-for="Input.Sobrenome" class="form-control" autocomplete="sobrenome" aria-required="true" />
-                <label asp-for="Input.Sobrenome"></label>
-                <span asp-validation-for="Input.Sobrenome" class="text-danger"></span>
+                <input asp-for="Input.NomeCompleto" class="form-control" autocomplete="primeironome" aria-required="true" />
+                <label asp-for="Input.NomeCompleto"></label>
+                <span asp-validation-for="Input.NomeCompleto" class="text-danger"></span>
             </div>
             <div class="form-floating">
                 <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
