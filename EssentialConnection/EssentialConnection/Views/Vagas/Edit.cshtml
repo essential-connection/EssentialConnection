@@ -43,15 +43,25 @@
                 <input asp-for="Responsavel" class="form-control" />
                 <span asp-validation-for="Responsavel" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="EmpresaId" class="control-label"></label>
-                <select asp-for="EmpresaId" class="form-control" asp-items="ViewBag.EmpresaId"></select>
-                <span asp-validation-for="EmpresaId" class="text-danger"></span>
+            <div>
+                <label class="control-label">Tipo de Vaga </label>
+                <select class="form-select" id='selectTipoVaga'>
+                  <option selected>Escolha o tipo de vaga</option>
+                  <option value="1">Empresa</option>
+                  <option value="2">Curso</option>
+                </select>
             </div>
-            <div class="form-group">
-                <label asp-for="CursoId" class="control-label"></label>
-                <select asp-for="CursoId" class="form-control" asp-items="ViewBag.CursoId"></select>
-                <span asp-validation-for="CursoId" class="text-danger"></span>
+            <div id='divVaga'>
+                <div class="form-group" id='divEmpresa'>
+                    <label asp-for="EmpresaId" class="control-label"></label>
+                    <select asp-for="EmpresaId" class="form-control" asp-items="ViewBag.EmpresaId"></select>
+                    <span asp-validation-for="EmpresaId" class="text-danger"></span>
+                </div>
+                <div class="form-group" id='divCurso'>
+                    <label asp-for="CursoId" class="control-label"></label>
+                    <select asp-for="CursoId" class="form-control" asp-items="ViewBag.CursoId"></select>
+                    <span asp-validation-for="CursoId" class="text-danger"></span>
+                </div>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
@@ -66,4 +76,23 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+     $('#selectTipoVaga').on('change',function(){
+            var valorSelect =$(this).val();
+            alert(valorSelect);
+            $('#divVaga').children('div').hide();
+            if(valorSelect==1){
+                $('#divEmpresa').show();
+                document.getElementById('cursoId').value=null;
+            }
+            else{
+                $('#divCurso').show();
+                document.getElementById('empresaId').value=null;
+            }
+            
+        });
+        $(document).ready(function(){
+            $('#divVaga').children('div').hide();
+        });
+    </script>
 }
