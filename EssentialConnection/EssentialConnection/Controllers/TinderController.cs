@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using X.PagedList;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace EssentialConnection.Controllers
 {
@@ -24,8 +25,29 @@ namespace EssentialConnection.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(int vagaId,string nomeVaga)
         {
-            
-            return View();
+            Tinder tinder = new Tinder();
+            tinder.VagaId = vagaId;
+            tinder.AlunoId = User.Identity.GetUserId();
+            tinder.nomeVaga = nomeVaga;
+            _context.Add(tinder);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> ListarTodos()
+        {
+            var context = _context.Vaga.Include(v => v.Curso).Include(v => v.Empresa);
+            ViewData["CursoId"] = new SelectList(_context.Curso.OrderBy(c => c.Nome), "CursoID", "Nome");
+            ViewData["EmpresaId"] = new SelectList(_context.Empresa.OrderBy(e => e.Nome), "EmpresaID", "Nome");
+            return View(await context.ToListAsync());
+        }
+        [HttpPost]
+        public async Task<IActionResult> ListarTodos(string nomeVaga, int? empresaId, int? cursoId)
+        {
+            ViewData["CursoId"] = new SelectList(_context.Curso.OrderBy(c => c.Nome), "CursoID", "Nome");
+            ViewData["EmpresaId"] = new SelectList(_context.Empresa.OrderBy(e => e.Nome), "EmpresaID", "Nome");
+            var listar = _context.Vaga.Where(s => s.Nome == nomeVaga);
+            return View(await listar.ToListAsync());
         }
     }
 }

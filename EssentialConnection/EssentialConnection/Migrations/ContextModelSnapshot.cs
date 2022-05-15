@@ -17,7 +17,7 @@ namespace EssentialConnection.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.3")
+                .HasAnnotation("ProductVersion", "6.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -240,6 +240,52 @@ namespace EssentialConnection.Migrations
                     b.ToTable("ItensCurriculo");
                 });
 
+            modelBuilder.Entity("EssentialConnection.Models.Tinder", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("AlunoId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("VagaId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("nomeVaga")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Tinders");
+                });
+
+            modelBuilder.Entity("EssentialConnection.Models.TinderEmpresa", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("AlunoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CurriculoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("EmpresaId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TinderEmpresa");
+                });
+
             modelBuilder.Entity("EssentialConnection.Models.Vaga", b =>
                 {
                     b.Property<int>("VagaID")
@@ -248,7 +294,7 @@ namespace EssentialConnection.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("VagaID"), 1L, 1);
 
-                    b.Property<int>("CursoId")
+                    b.Property<int?>("CursoId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DataExpiracao")
@@ -345,8 +391,7 @@ namespace EssentialConnection.Migrations
                     b.HasOne("EssentialConnection.Models.Curso", "Curso")
                         .WithMany("Vagas")
                         .HasForeignKey("CursoId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("EssentialConnection.Models.Empresa", "Empresa")
                         .WithMany("Vagas")

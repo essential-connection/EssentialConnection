@@ -61,9 +61,7 @@ namespace EssentialConnection.Controllers
         {
                 _context.Add(compentencias);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            ViewData["CurriculoId"] = new SelectList(_context.Curriculo, "CurriculoID", "CurriculoID", compentencias.CurriculoId);
-            return View(compentencias);
+                return RedirectToAction(nameof(Create));
         }
 
         // GET: Compentencias/Edit/5
@@ -143,6 +141,16 @@ namespace EssentialConnection.Controllers
             _context.Compentencia.Remove(compentencias);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult VoltarHome()
+        {
+            return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult ItensCurriculo()
+        {
+            return RedirectToAction("Create", "ItensCurriculo");
         }
 
         private bool CompentenciasExists(int id)
