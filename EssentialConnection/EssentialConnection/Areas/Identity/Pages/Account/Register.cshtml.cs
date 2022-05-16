@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using static EssentialConnection.Areas.Identity.Data.EssentialConnectionUser;
 
 namespace EssentialConnection.Areas.Identity.Pages.Account
 {
@@ -72,13 +73,13 @@ namespace EssentialConnection.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            [StringLength(255, ErrorMessage = "O primeiro nome deve ter tamanho máximo de 255 caracteres")]
-            [Display(Name = "Primeiro nome")]
-            public string PrimeiroNome { get; set; }
+            [StringLength(255, ErrorMessage = "O nome deve ter tamanho máximo de 255 caracteres")]
+            [Display(Name = "Nome completo")]
+            public string NomeCompleto { get; set; }
+
             [Required]
-            [StringLength(255, ErrorMessage = "O primeiro nome deve ter tamanho máximo de 255 caracteres")]
-            [Display(Name = "Sobrenome")]
-            public string Sobrenome { get; set; }
+            [Display(Name = "Tipo")]
+            public TipoUsuario Tipo { get; set; }
 
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -124,8 +125,8 @@ namespace EssentialConnection.Areas.Identity.Pages.Account
             {
                 var user = CreateUser();
 
-                user.PrimeiroNome = Input.PrimeiroNome;
-                user.Sobrenome = Input.Sobrenome;
+                user.NomeCompleto = Input.NomeCompleto;
+                user.Tipo = Input.Tipo;
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);

@@ -4,7 +4,8 @@ using Microsoft.AspNetCore.Identity;
 using EssentialConnection.Areas.Identity.Data;
 
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("EssentialConnectionDB");;
+//var connectionString = builder.Configuration.GetConnectionString("EssentialConnectionDB-lucas");
+var connectionString = builder.Configuration.GetConnectionString("EssentialConnectionDB");
 
 builder.Services.AddDbContext<IdentityContext>(options =>
     options.UseSqlServer(connectionString));;
@@ -13,11 +14,14 @@ builder.Services.AddDbContext<Context>(
     options => options.UseSqlServer(connectionString)
 );
 
+
 builder.Services.AddDefaultIdentity<EssentialConnectionUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<IdentityContext>();;
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddRazorPages();
 
 // Add-Migration Initcial-criacao -Context Context
 // Update-database -Context Context
@@ -51,7 +55,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Empresas}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 
 app.MapRazorPages();
