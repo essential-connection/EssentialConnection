@@ -1,8 +1,31 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Pagina Inicial";
 }
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<body class = "bg-telainicial">
+    <h1 class ="textotitle">Essential Connection</h1>
+<div class = "logo">
+    <img src = "~/imagens/Logo.png" alt = "logo"/>
 </div>
+<div>
+    <div class = "container caixaLogin">
+        <br />
+        <p class = "ECSC">Entre com sua conta</p>
+        <div class = "login">        
+            <span  class="e6_158">Email</span>
+            <div class = "col-md-11">
+                <input type="email" class="form-control" placeholder= "Digite seu email" />
+            </div>
+            <br />
+            <span class = "e6_158">Senha</span>
+            <div class = "col-md-11">
+                <input type="password" class="form-control" placeholder= "Digite sua senha" />
+            </div>
+            <button type="submit" class = "btn btn-primary btnEntrar">Entrar</button>
+        </div>
+    </div>
+    <div class = "fundo">
+        <img src = "/imagens/foto de fundo.png" class = "imgFundo" height = "400" width = "700" />
+    </div>
+</div>
+
+</body>
