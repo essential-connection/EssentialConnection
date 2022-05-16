@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="~/css/app.min.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/EssentialConnection.styles.css" asp-append-version="true" />
 </head>
-<<<<<<< Updated upstream
 <body>
     <header class="bg-slate-200 py-1">
         <nav class="flex items-center justify-between mx-8">
@@ -36,17 +35,18 @@
             </ul>
         </nav>
     </header>
-=======
-<body class = "bg-telainicial">
-    
->>>>>>> Stashed changes
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
-        <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2022 - EssentialConnection - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
