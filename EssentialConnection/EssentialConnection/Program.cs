@@ -4,7 +4,8 @@ using Microsoft.AspNetCore.Identity;
 using EssentialConnection.Areas.Identity.Data;
 
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("EssentialConnectionDB");;
+//var connectionString = builder.Configuration.GetConnectionString("EssentialConnectionDB-lucas");
+var connectionString = builder.Configuration.GetConnectionString("EssentialConnectionDB");
 
 builder.Services.AddDbContext<IdentityContext>(options =>
     options.UseSqlServer(connectionString));;

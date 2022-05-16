@@ -78,7 +78,6 @@ namespace EssentialConnection.Areas.Identity.Pages.Account
             public string NomeCompleto { get; set; }
 
             [Required]
-            [StringLength(255, ErrorMessage = "O nome tipo é obrigatório")]
             [Display(Name = "Tipo")]
             public TipoUsuario Tipo { get; set; }
 
