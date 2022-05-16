@@ -1,5 +1,6 @@
 ﻿@page
 @model RegisterModel
+@using static EssentialConnection.Areas.Identity.Data.EssentialConnectionUser
 @{
     ViewData["Title"] = "Register";
 }
@@ -13,10 +14,19 @@
             <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-floating">
-                <input asp-for="Input.NomeCompleto" class="form-control" autocomplete="primeironome" aria-required="true" />
+                <input asp-for="Input.NomeCompleto" class="form-control" autocomplete="nome" aria-required="true" />
                 <label asp-for="Input.NomeCompleto"></label>
                 <span asp-validation-for="Input.NomeCompleto" class="text-danger"></span>
             </div>
+
+            <div class="form-control">
+                <label asp-for="Input.Tipo" class="form-label"></label>
+                <select asp-for="Input.Tipo" class="form-control" asp-items="Html.GetEnumSelectList<TipoUsuario>()">
+                    <option value="">Selecione o tipo de usuário</option>
+                </select>
+                <span asp-validation-for="Input.Tipo" class="text-red"></span>
+            </div>
+
             <div class="form-floating">
                 <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
                 <label asp-for="Input.Email"></label>

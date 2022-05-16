@@ -13,11 +13,14 @@ builder.Services.AddDbContext<Context>(
     options => options.UseSqlServer(connectionString)
 );
 
+
 builder.Services.AddDefaultIdentity<EssentialConnectionUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<IdentityContext>();;
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddRazorPages();
 
 // Add-Migration Initcial-criacao -Context Context
 // Update-database -Context Context
@@ -51,7 +54,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller}/{action}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 
 app.MapRazorPages();
