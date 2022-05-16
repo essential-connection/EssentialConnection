@@ -28,7 +28,7 @@ public class EssentialConnectionUserConfiguration : IEntityTypeConfiguration<Ess
 {
     public void Configure(EntityTypeBuilder<EssentialConnectionUser> builder)
     {
-        builder.Property(x => x.PrimeiroNome).HasMaxLength(255);
-        builder.Property(x => x.Sobrenome).HasMaxLength(255);
+        builder.Property(x => x.NomeCompleto).HasMaxLength(255);
+        builder.Property(x => x.Tipo).HasMaxLength(255);
     }
 }
