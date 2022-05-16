@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using static EssentialConnection.Areas.Identity.Data.EssentialConnectionUser;
 
 namespace EssentialConnection.Areas.Identity.Pages.Account
 {
@@ -76,6 +77,11 @@ namespace EssentialConnection.Areas.Identity.Pages.Account
             [Display(Name = "Nome completo")]
             public string NomeCompleto { get; set; }
 
+            [Required]
+            [StringLength(255, ErrorMessage = "O nome tipo é obrigatório")]
+            [Display(Name = "Tipo")]
+            public TipoUsuario Tipo { get; set; }
+
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
@@ -121,6 +127,7 @@ namespace EssentialConnection.Areas.Identity.Pages.Account
                 var user = CreateUser();
 
                 user.NomeCompleto = Input.NomeCompleto;
+                user.Tipo = Input.Tipo;
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);

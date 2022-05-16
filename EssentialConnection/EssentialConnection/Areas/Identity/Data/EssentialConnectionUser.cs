@@ -11,5 +11,13 @@ public class EssentialConnectionUser : IdentityUser
 {
     public string NomeCompleto { get; set; }
 
+    public TipoUsuario Tipo { get; set; }
+
+    public enum TipoUsuario
+    {
+        Aluno,
+        Empresa,
+        Professor
+    }
 }
 
