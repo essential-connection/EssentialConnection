@@ -460,6 +460,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .static {
   position: static;
 }
+.sticky {
+  position: -webkit-sticky;
+  position: sticky;
+}
 .mx-8 {
   margin-left: 2rem;
   margin-right: 2rem;
@@ -469,6 +473,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .table {
   display: table;
+}
+.grid {
+  display: grid;
 }
 .hidden {
   display: none;
@@ -482,6 +489,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .grow {
   flex-grow: 1;
 }
+.cursor-text {
+  cursor: text;
+}
 .items-center {
   align-items: center;
 }
@@ -494,6 +504,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .justify-evenly {
   justify-content: space-evenly;
 }
+.border {
+  border-width: 1px;
+}
 .bg-slate-200 {
   --tw-bg-opacity: 1;
   background-color: rgb(226 232 240 / var(--tw-bg-opacity));
@@ -505,8 +518,23 @@ Ensure the default browser behavior of the `hidden` attribute.
 .pb-3 {
   padding-bottom: 0.75rem;
 }
+.text-left {
+  text-align: left;
+}
 .text-center {
   text-align: center;
+}
+.text-right {
+  text-align: right;
+}
+.align-top {
+  vertical-align: top;
+}
+.align-middle {
+  vertical-align: middle;
+}
+.align-bottom {
+  vertical-align: bottom;
 }
 .text-xl {
   font-size: 1.25rem;
@@ -525,6 +553,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-slate-800 {
   --tw-text-opacity: 1;
   color: rgb(30 41 59 / var(--tw-text-opacity));
+}
+.filter {
+  filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
 }
 @media (min-width: 768px) {
 
