@@ -11,6 +11,10 @@
 	</Target>
 
 	<ItemGroup>
+	  <None Include="wwwroot\css\Home.css" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.5" />
 		<PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.5" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.5" />
@@ -21,6 +25,10 @@
 		</PackageReference>
 		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.4" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Areas\Home\HomeStyle\" />
 	</ItemGroup>
 
 </Project>
