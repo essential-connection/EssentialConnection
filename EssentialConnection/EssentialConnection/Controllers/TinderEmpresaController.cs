@@ -1,5 +1,4 @@
 ﻿using EssentialConnection.Models;
-using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -16,7 +15,7 @@ namespace EssentialConnection.Controllers
         }
         public async Task<IActionResult> Index(int pagina = 1)
         {
-            var context = _context.Curriculo.Include(i => i.ItensCurriculo).Include(c => c.Compentencias.Select(x=>x.Descricao));
+            var context = _context.Curriculo.Include(i => i.ItensCurriculo).Include(c => c.Compentencias);
             return View((await context.ToListAsync()).ToPagedList(pagina, 1));
         }
 
@@ -26,7 +25,7 @@ namespace EssentialConnection.Controllers
             TinderEmpresa tinderEmpresa = new TinderEmpresa();
             tinderEmpresa.CurriculoId = curriculoId;
             tinderEmpresa.nomeAluno = nomeAluno;
-            tinderEmpresa.EmpresaId = User.Identity.GetUserId();
+            //tinderEmpresa.EmpresaId = User.Identity.GetUserId();
             _context.Add(tinderEmpresa);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
