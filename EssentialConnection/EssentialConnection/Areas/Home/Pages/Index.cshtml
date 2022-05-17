@@ -1,0 +1,47 @@
+﻿@page
+@model EssentialConnection.Areas.Home.Pages.IndexModel
+@{
+}
+
+@{
+    ViewData["Title"] = "Pagina Inicial";
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/EssentialConnection.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Home.css" asp-append-version="true" />
+
+</head>
+<body class = "bg-telainicial">
+    <h1 class ="textotitle">Essential Connection</h1>
+<div class = "logo">
+    <img src = "~/imagens/Logo.png" alt = "logo"/>
+</div>
+<div>
+    <div class = "container caixaLogin">
+        <br />
+        <p class = "ECSC">Entre com sua conta</p>
+        <div class = "login">        
+            <span  class="e6_158">Email</span>
+            <div class = "col-md-11">
+                <input type="email" class="form-control" placeholder= "Digite seu email" />
+            </div>
+            <br />
+            <span class = "e6_158">Senha</span>
+            <div class = "col-md-11">
+                <input type="password" class="form-control" placeholder= "Digite sua senha" />
+            </div>
+            <button type="submit" class = "btn btn-primary btnEntrar">Entrar</button>
+        </div>
+    </div>
+    <div class = "fundo">
+        <img src = "/imagens/foto de fundo.png" class = "imgFundo" height = "400" width = "700" />
+    </div>
+</div>
+
+</body>
