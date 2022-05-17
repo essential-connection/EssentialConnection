@@ -1,0 +1,19 @@
+﻿@model X.PagedList.IPagedList<EssentialConnection.Models.Curriculo>
+@using X.PagedList.Mvc.Core
+
+@{
+    ViewData["Title"] = "Interesse em curriculo";
+}
+
+<h1>Index</h1>
+
+@foreach (var item in Model) {
+    <h1>Nome do aluno</h1>
+    <p> @Html.DisplayFor(modelItem=>item.AlunoId)</p>
+    
+    <h1>Descrição aluno</h1>
+    <p> @Html.DisplayFor(modelItem=>item.DescricaoPessoal)</p>
+
+    <h1>Competencias</h1>
+    <p> @Html.DisplayFor(modelItem=>item.Compentencias)</p>
+}

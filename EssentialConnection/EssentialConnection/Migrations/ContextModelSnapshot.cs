@@ -272,14 +272,16 @@ namespace EssentialConnection.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("AlunoId")
-                        .HasColumnType("int");
-
                     b.Property<int>("CurriculoId")
                         .HasColumnType("int");
 
-                    b.Property<int>("EmpresaId")
-                        .HasColumnType("int");
+                    b.Property<string>("EmpresaId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("nomeAluno")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
