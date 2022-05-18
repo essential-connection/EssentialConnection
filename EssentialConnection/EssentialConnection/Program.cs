@@ -14,6 +14,11 @@ builder.Services.AddDbContext<Context>(
     options => options.UseSqlServer(connectionString)
 );
 
+builder.Services.AddRazorPages().AddRazorPagesOptions(options =>
+{
+    options.RootDirectory = "/Homepage";
+});
+
 
 builder.Services.AddDefaultIdentity<EssentialConnectionUser>(options => options.SignIn.RequireConfirmedAccount = false)
     .AddEntityFrameworkStores<IdentityContext>();;
@@ -55,7 +60,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller}/{action}/{id?}");
 
 
 app.MapRazorPages();

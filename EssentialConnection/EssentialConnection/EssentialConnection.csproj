@@ -11,6 +11,13 @@
 	</Target>
 
 	<ItemGroup>
+	  <Compile Remove="Areas\Home\HomeStyle\**" />
+	  <Content Remove="Areas\Home\HomeStyle\**" />
+	  <EmbeddedResource Remove="Areas\Home\HomeStyle\**" />
+	  <None Remove="Areas\Home\HomeStyle\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <None Include="wwwroot\css\Home.css" />
 	</ItemGroup>
 
@@ -25,10 +32,6 @@
 		</PackageReference>
 		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.4" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.1" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Areas\Home\HomeStyle\" />
 	</ItemGroup>
 
 </Project>
