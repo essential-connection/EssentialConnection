@@ -49,8 +49,8 @@ namespace EssentialConnection.Controllers
         // GET: Vagas/Create
         public IActionResult Create()
         {
-            ViewData["CursoId"] = new SelectList(_context.Curso, "CursoID", "CursoID");
-            ViewData["EmpresaId"] = new SelectList(_context.Empresa, "EmpresaID", "EmpresaID");
+            ViewData["CursoId"] = new SelectList(_context.Curso.OrderBy(c=>c.Nome), "CursoID", "Nome");
+            ViewData["EmpresaId"] = new SelectList(_context.Empresa.OrderBy(e=>e.Nome), "EmpresaID", "Nome");
             return View();
         }
 
@@ -82,8 +82,8 @@ namespace EssentialConnection.Controllers
             {
                 return NotFound();
             }
-            ViewData["CursoId"] = new SelectList(_context.Curso, "CursoID", "CursoID", vaga.CursoId);
-            ViewData["EmpresaId"] = new SelectList(_context.Empresa, "EmpresaID", "EmpresaID", vaga.EmpresaId);
+            ViewData["CursoId"] = new SelectList(_context.Curso.OrderBy(c => c.Nome), "CursoID", "Nome");
+            ViewData["EmpresaId"] = new SelectList(_context.Empresa.OrderBy(e => e.Nome), "EmpresaID", "Nome");
             return View(vaga);
         }
 

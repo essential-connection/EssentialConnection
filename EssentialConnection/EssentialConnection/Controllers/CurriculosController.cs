@@ -61,9 +61,8 @@ namespace EssentialConnection.Controllers
         {
                 _context.Add(curriculo);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            ViewData["AlunoId"] = new SelectList(_context.Aluno, "AlunoID", "AlunoID", curriculo.AlunoId);
-            return View(curriculo);
+                return RedirectToAction("Create", "Compentencias");
+
         }
 
         // GET: Curriculos/Edit/5

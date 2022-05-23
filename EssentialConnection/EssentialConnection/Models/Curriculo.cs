@@ -7,7 +7,6 @@
         public int? AlunoId { get; set; }
         public Aluno Aluno { get; set; }
         public ICollection<Compentencias> Compentencias { get; set; }
-
         public ICollection<ItensCurriculo> ItensCurriculo { get; set; }
 
     }
