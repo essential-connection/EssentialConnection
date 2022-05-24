@@ -15,6 +15,7 @@ namespace EssentialConnection.Controllers
 
         public IActionResult Index()
         {
+            Response.Redirect("Homepage/");
             return View();
         }
 

@@ -11,6 +11,13 @@
 	</Target>
 
 	<ItemGroup>
+	  <Compile Remove="Areas\Home\HomeStyle\**" />
+	  <Content Remove="Areas\Home\HomeStyle\**" />
+	  <EmbeddedResource Remove="Areas\Home\HomeStyle\**" />
+	  <None Remove="Areas\Home\HomeStyle\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <None Include="wwwroot\css\Home.css" />
 	</ItemGroup>
 
@@ -27,10 +34,6 @@
 		<PackageReference Include="X.PagedList" Version="8.4.0" />
 		<PackageReference Include="X.PagedList.Mvc.Core" Version="8.4.0" />
 		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.1" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Areas\Home\HomeStyle\" />
 	</ItemGroup>
 
 </Project>
