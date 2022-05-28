@@ -1,5 +1,4 @@
-﻿#nullable disable
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -29,7 +28,7 @@ namespace EssentialConnection.Controllers
         // GET: Alunos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
+            if (id == null || _context.Aluno == null)
             {
                 return NotFound();
             }
@@ -57,11 +56,20 @@ namespace EssentialConnection.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("AlunoID,Nome,Endereco,Email,DataNascimento,Telefone,Matricula,CursoId,CurriculoId,Login,Senha")] Aluno aluno)
+        public async Task<IActionResult> Create(string nome,string email, string telefone, int cursoId, string userId)
         {
+            Aluno aluno = new Aluno();
+            aluno.NomeCompleto = nome;
+            aluno.email = email;
+            aluno.Telefone = telefone;
+            aluno.CursoId = cursoId;
+            aluno.UserId = userId;
+            if (ModelState.IsValid)
+            {
                 _context.Add(aluno);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
+            }
             ViewData["CursoId"] = new SelectList(_context.Curso, "CursoID", "CursoID", aluno.CursoId);
             return View(aluno);
         }
@@ -69,7 +77,7 @@ namespace EssentialConnection.Controllers
         // GET: Alunos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            if (id == null || _context.Aluno == null)
             {
                 return NotFound();
             }
@@ -88,13 +96,15 @@ namespace EssentialConnection.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("AlunoID,Nome,Endereco,Email,DataNascimento,Telefone,Matricula,CursoId,CurriculoId,Login,Senha")] Aluno aluno)
+        public async Task<IActionResult> Edit(int id, [Bind("AlunoID,NomeCompleto,UserId,Telefone,CursoId,CurriculoId")] Aluno aluno)
         {
             if (id != aluno.AlunoID)
             {
                 return NotFound();
             }
 
+            if (ModelState.IsValid)
+            {
                 try
                 {
                     _context.Update(aluno);
@@ -111,6 +121,8 @@ namespace EssentialConnection.Controllers
                         throw;
                     }
                 }
+                return RedirectToAction(nameof(Index));
+            }
             ViewData["CursoId"] = new SelectList(_context.Curso, "CursoID", "CursoID", aluno.CursoId);
             return View(aluno);
         }
@@ -118,7 +130,7 @@ namespace EssentialConnection.Controllers
         // GET: Alunos/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            if (id == null || _context.Aluno == null)
             {
                 return NotFound();
             }
@@ -139,15 +151,23 @@ namespace EssentialConnection.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            if (_context.Aluno == null)
+            {
+                return Problem("Entity set 'Context.Aluno'  is null.");
+            }
             var aluno = await _context.Aluno.FindAsync(id);
-            _context.Aluno.Remove(aluno);
+            if (aluno != null)
+            {
+                _context.Aluno.Remove(aluno);
+            }
+            
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool AlunoExists(int id)
         {
-            return _context.Aluno.Any(e => e.AlunoID == id);
+          return (_context.Aluno?.Any(e => e.AlunoID == id)).GetValueOrDefault();
         }
     }
 }

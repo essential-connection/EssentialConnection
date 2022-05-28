@@ -21,7 +21,7 @@
 
             <div class="form-control">
                 <label asp-for="Input.Tipo" class="form-label"></label>
-                <select asp-for="Input.Tipo" class="form-control" asp-items="Html.GetEnumSelectList<TipoUsuario>()">
+                <select asp-for="Input.Tipo" class="form-control" asp-items="Html.GetEnumSelectList<TipoUsuario>()" id='selectTipo'>
                     <option value="">Selecione o tipo de usuário</option>
                 </select>
                 <span asp-validation-for="Input.Tipo" class="text-red"></span>
@@ -41,6 +41,25 @@
                 <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" />
                 <label asp-for="Input.ConfirmPassword"></label>
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div
+            <div class="form-floating">
+                <input asp-for="Input.Telefone" class="form-control" autocomplete="new-password" aria-required="true" />
+                <label asp-for="Input.Telefone"></label>
+                <span asp-validation-for="Input.Telefone" class="text-danger"></span>
+            </div>
+            <div id='tipoPerfil'>
+                <div id='divAluno'>@*aluno*@
+                    <div class="form-group" id='divCurso'>
+                    <label asp-for="Input.CursoId" class="control-label"></label>
+                    <select asp-for="Input.CursoId" class ="form-control" asp-items="ViewBag.CursoId"></select>
+                </div>
+                </div>
+                <div id='divCurso'>@*curso*@
+                    <p>Professor</p>
+                </div>
+                <div id='divEmpresa'>@*empresa*@
+                    <p>Empresa</p>
+                </div>
             </div>
             <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
         </form>
@@ -79,4 +98,20 @@
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script>
+        $('#selectTipo').on('change',function(){
+            var valorSelect =$(this).val();
+            $('#tipoPerfil').children('div').hide();
+            if(valorSelect==0)
+                $('#divAluno').show();
+            if(valorSelect==1)
+                $('#divEmpresa').show();
+            if(valorSelect==2)
+                $('#divCurso').show();
+        });
+        $(document).ready(function(){
+            $('#tipoPerfil').children('div').hide();
+        });
+    </script>
+
 }
