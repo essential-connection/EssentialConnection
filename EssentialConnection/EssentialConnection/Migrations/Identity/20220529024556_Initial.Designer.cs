@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EssentialConnection.Migrations.Identity
 {
     [DbContext(typeof(IdentityContext))]
-    [Migration("20220516044731_addedUserType")]
-    partial class addedUserType
+    [Migration("20220529024556_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

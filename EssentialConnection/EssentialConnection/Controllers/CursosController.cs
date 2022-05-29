@@ -1,5 +1,4 @@
-﻿#nullable disable
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,13 +21,15 @@ namespace EssentialConnection.Controllers
         // GET: Cursos
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Curso.ToListAsync());
+              return _context.Curso != null ? 
+                          View(await _context.Curso.ToListAsync()) :
+                          Problem("Entity set 'Context.Curso'  is null.");
         }
 
         // GET: Cursos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
+            if (id == null || _context.Curso == null)
             {
                 return NotFound();
             }
@@ -54,18 +55,26 @@ namespace EssentialConnection.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CursoID,Nome,Telefone,Login,Senha")] Curso curso)
+        public async Task<IActionResult> Create(string userId, string email, string nome, string telefone)
         {
+            Curso curso = new Curso();
+            curso.UserId=userId;
+            curso.Email=email;
+            curso.Nome=nome;
+            curso.Telefone=telefone;
+            if (ModelState.IsValid)
+            {
                 _context.Add(curso);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
+            }
             return View(curso);
         }
 
         // GET: Cursos/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            if (id == null || _context.Curso == null)
             {
                 return NotFound();
             }
@@ -83,13 +92,15 @@ namespace EssentialConnection.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CursoID,Nome,Telefone,Login,Senha")] Curso curso)
+        public async Task<IActionResult> Edit(int id, [Bind("CursoID,UserId,Email,Nome,Telefone")] Curso curso)
         {
             if (id != curso.CursoID)
             {
                 return NotFound();
             }
 
+            if (ModelState.IsValid)
+            {
                 try
                 {
                     _context.Update(curso);
@@ -105,6 +116,7 @@ namespace EssentialConnection.Controllers
                     {
                         throw;
                     }
+                }
                 return RedirectToAction(nameof(Index));
             }
             return View(curso);
@@ -113,7 +125,7 @@ namespace EssentialConnection.Controllers
         // GET: Cursos/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            if (id == null || _context.Curso == null)
             {
                 return NotFound();
             }
@@ -133,15 +145,23 @@ namespace EssentialConnection.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            if (_context.Curso == null)
+            {
+                return Problem("Entity set 'Context.Curso'  is null.");
+            }
             var curso = await _context.Curso.FindAsync(id);
-            _context.Curso.Remove(curso);
+            if (curso != null)
+            {
+                _context.Curso.Remove(curso);
+            }
+            
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool CursoExists(int id)
         {
-            return _context.Curso.Any(e => e.CursoID == id);
+          return (_context.Curso?.Any(e => e.CursoID == id)).GetValueOrDefault();
         }
     }
 }
