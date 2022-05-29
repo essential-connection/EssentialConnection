@@ -176,8 +176,16 @@ namespace EssentialConnection.Areas.Identity.Pages.Account
                     else
                     {
                         await _signInManager.SignInAsync(user, isPersistent: false);
-                        AlunosController x = new AlunosController(_context);
-                        await x.Create(user.NomeCompleto, user.Email, telefone, cursoId, userId);
+                        if (user.Tipo == TipoUsuario.Aluno)
+                        {
+                            AlunosController aluno = new AlunosController(_context);
+                            await aluno.Create(user.NomeCompleto, user.Email, telefone, cursoId, userId);
+                        }
+                        else if (user.Tipo == TipoUsuario.Professor)
+                        {
+                            CursosController curso = new CursosController(_context);
+                            await curso.Create(userId,user.Email,user.NomeCompleto, telefone);
+                        }
                         
                     }
                 }
