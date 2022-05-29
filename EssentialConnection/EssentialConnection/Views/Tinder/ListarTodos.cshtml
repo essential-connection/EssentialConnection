@@ -108,10 +108,10 @@
                 @Html.DisplayFor(modelItem => item.Responsavel)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Empresa.EmpresaID)
+                @Html.DisplayFor(modelItem => item.Empresa.Nome)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Curso.CursoID)
+                @Html.DisplayFor(modelItem => item.Curso.Nome)
             </td>
             <td>
                 <a asp-action="Details" asp-route-id="@item.VagaID">Details</a> |

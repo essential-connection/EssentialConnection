@@ -32,12 +32,12 @@
         @{
             if(item.CursoId==null){
                 <p>Vaga de Empresa</p>
-                @Html.DisplayFor(modelItem => item.EmpresaId)
+                @Html.DisplayFor(modelItem => item.Empresa.Nome)
             }
             else{
                 <p>Vaga de Curso</p>
-                    @Html.DisplayFor(modelItem => item.CursoId)
-                }
+                @Html.DisplayFor(modelitem=>item.Curso.Nome)
+            }
             }
         </p>
         <form action="/Tinder/Index" method="post">
@@ -54,3 +54,8 @@
 <div class="row">
     @Html.PagedListPager(Model,pagina=>Url.Action("Index", new{pagina}))
 </div>
+<section>
+    <script>
+        
+    </script>
+</section>

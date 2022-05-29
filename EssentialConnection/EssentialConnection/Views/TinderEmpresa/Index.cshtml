@@ -9,7 +9,7 @@
 
 @foreach (var item in Model) {
     <h1>Nome do aluno</h1>
-    <p> @Html.DisplayFor(modelItem=>item.AlunoId))</p>
+    <p> @Html.DisplayFor(modelItem=>item.Aluno.NomeCompleto)</p>
     
     <h1>Descrição aluno</h1>
     <p> @Html.DisplayFor(modelItem=>item.DescricaoPessoal)</p>

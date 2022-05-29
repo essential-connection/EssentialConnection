@@ -4,15 +4,19 @@ using Microsoft.EntityFrameworkCore;
 using X.PagedList;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using EssentialConnection.Areas.Identity.Data;
+using Microsoft.AspNet.Identity;
 
 namespace EssentialConnection.Controllers
 {
     public class TinderController : Controller
     {
         private readonly Context _context;
-        public TinderController(Context context)
+        private readonly IdentityContext _identityContext;
+        public TinderController(Context context, IdentityContext identityContext)
         {
             _context = context;
+            _identityContext = identityContext;
         }
         public async Task<IActionResult> Index(int pagina = 1)
         {
@@ -23,10 +27,12 @@ namespace EssentialConnection.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(int vagaId,string nomeVaga)
         {
+            var alunoLogado = _context.Aluno.FirstOrDefault(x => x.UserId == User.Identity.GetUserId());
             Tinder tinder = new Tinder();
             tinder.VagaId = vagaId;
-           // tinder.AlunoId = User.Identity.GetUserId();
             tinder.nomeVaga = nomeVaga;
+            tinder.AlunoId = alunoLogado.AlunoID;
+            
             _context.Add(tinder);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
