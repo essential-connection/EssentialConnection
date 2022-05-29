@@ -15,7 +15,8 @@ namespace EssentialConnection.Controllers
         }
         public async Task<IActionResult> Index(int pagina = 1)
         {
-            var context = _context.Curriculo.Include(i => i.ItensCurriculo).Include(c => c.Compentencias);
+            
+            var context = _context.Curriculo.Include(i => i.ItensCurriculo).Include(c => c.Compentencias).Include(a=>a.Aluno);
             return View((await context.ToListAsync()).ToPagedList(pagina, 1));
         }
 

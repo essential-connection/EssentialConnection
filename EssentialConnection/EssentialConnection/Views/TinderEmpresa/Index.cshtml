@@ -9,14 +9,24 @@
 
 @foreach (var item in Model) {
     <h1>Nome do aluno</h1>
-    <p> @Html.DisplayFor(modelItem=>item.Aluno.NomeCompleto)</p>
-    
+    @Html.DisplayFor(modelItem=>item.Aluno.NomeCompleto)
     <h1>Descrição aluno</h1>
     <p> @Html.DisplayFor(modelItem=>item.DescricaoPessoal)</p>
+    foreach (var itensInCompetencias in item.Compentencias)
+    {
+        <p>@itensInCompetencias.Descricao</p>
+    }
 
-    <h1>Competencias</h1>
-    <p> @Html.DisplayFor(modelItem=>item.Compentencias)</p>
+    foreach (var itensCurriculo in item.ItensCurriculo)
+    {
+        <p>@itensCurriculo.Nome</p>
+        <p>@itensCurriculo.DataInicio</p>
+        <p>@itensCurriculo.DataFim</p>
+        <p>@itensCurriculo.Descricao</p>
+        <p>@itensCurriculo.Instituicao</p>
 
-    <h2>Itens Curriculos</h2>
-    <p> @Html.DisplayFor(modelItem=>item.ItensCurriculo)</p>
+    }
 }
+<div class="row">
+    @Html.PagedListPager(Model,pagina=>Url.Action("Index", new{pagina}))
+</div>
