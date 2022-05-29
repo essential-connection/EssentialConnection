@@ -1,5 +1,4 @@
-﻿#nullable disable
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,13 +21,15 @@ namespace EssentialConnection.Controllers
         // GET: Empresas
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Empresa.ToListAsync());
+              return _context.Empresa != null ? 
+                          View(await _context.Empresa.ToListAsync()) :
+                          Problem("Entity set 'Context.Empresa'  is null.");
         }
 
         // GET: Empresas/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
+            if (id == null || _context.Empresa == null)
             {
                 return NotFound();
             }
@@ -54,18 +55,28 @@ namespace EssentialConnection.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("EmpresaID,Nome,CNPJ,Telefone,NomeResponsavel,Descricao,Login,Senha")] Empresa empresa)
+        public async Task<IActionResult> Create(string userId, string email, string nome, string telefone, string cnpj, string descricao)
         {
+            Empresa empresa = new Empresa();
+            empresa.UserId = userId;
+            empresa.Email = email;
+            empresa.Nome = nome;
+            empresa.Telefone = telefone;
+            empresa.CNPJ = cnpj;
+            empresa.Descricao =  descricao;
+            if (ModelState.IsValid)
+            {
                 _context.Add(empresa);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
+            }
             return View(empresa);
         }
 
         // GET: Empresas/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
+            if (id == null || _context.Empresa == null)
             {
                 return NotFound();
             }
@@ -83,13 +94,15 @@ namespace EssentialConnection.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("EmpresaID,Nome,CNPJ,Telefone,NomeResponsavel,Descricao,Login,Senha")] Empresa empresa)
+        public async Task<IActionResult> Edit(int id, [Bind("EmpresaID,UserId,Email,Nome,CNPJ,Telefone,Descricao")] Empresa empresa)
         {
             if (id != empresa.EmpresaID)
             {
                 return NotFound();
             }
 
+            if (ModelState.IsValid)
+            {
                 try
                 {
                     _context.Update(empresa);
@@ -106,13 +119,15 @@ namespace EssentialConnection.Controllers
                         throw;
                     }
                 }
+                return RedirectToAction(nameof(Index));
+            }
             return View(empresa);
         }
 
         // GET: Empresas/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            if (id == null || _context.Empresa == null)
             {
                 return NotFound();
             }
@@ -132,15 +147,23 @@ namespace EssentialConnection.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
+            if (_context.Empresa == null)
+            {
+                return Problem("Entity set 'Context.Empresa'  is null.");
+            }
             var empresa = await _context.Empresa.FindAsync(id);
-            _context.Empresa.Remove(empresa);
+            if (empresa != null)
+            {
+                _context.Empresa.Remove(empresa);
+            }
+            
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool EmpresaExists(int id)
         {
-            return _context.Empresa.Any(e => e.EmpresaID == id);
+          return (_context.Empresa?.Any(e => e.EmpresaID == id)).GetValueOrDefault();
         }
     }
 }

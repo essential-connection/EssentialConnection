@@ -61,9 +61,9 @@ namespace EssentialConnection.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("VagaID,Nome,Descricao,Quantidade,DataExpiracao,Status,Responsavel,EmpresaId,CursoId")] Vaga vaga)
         {
-                _context.Add(vaga);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+            _context.Add(vaga);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
             ViewData["CursoId"] = new SelectList(_context.Curso, "CursoID", "CursoID", vaga.CursoId);
             ViewData["EmpresaId"] = new SelectList(_context.Empresa, "EmpresaID", "EmpresaID", vaga.EmpresaId);
             return View(vaga);

@@ -124,6 +124,12 @@ namespace EssentialConnection.Areas.Identity.Pages.Account
             [Display(Name = "Curso")]
             public int CursoId { get; set; }
 
+            [Display(Name = "CNPJ")]
+            public string CNPJ { get; set; }
+
+            [StringLength(255, ErrorMessage = "A descrição deve ter tamanho máximo de 255 caracteres")]
+            [Display(Name = "Descrição da empresa.")]
+            public string Descricao { get; set; }
 
         }
 
@@ -148,6 +154,8 @@ namespace EssentialConnection.Areas.Identity.Pages.Account
                 user.Tipo = Input.Tipo;
                 var telefone = Input.Telefone;
                 var cursoId = Input.CursoId;
+                var cnpj = Input.CNPJ;
+                var descricaoEmpresa = Input.Descricao;
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
@@ -186,7 +194,11 @@ namespace EssentialConnection.Areas.Identity.Pages.Account
                             CursosController curso = new CursosController(_context);
                             await curso.Create(userId,user.Email,user.NomeCompleto, telefone);
                         }
-                        
+                        else if (user.Tipo == TipoUsuario.Empresa)
+                        {
+                            EmpresasController empresa = new EmpresasController(_context);
+                            await empresa.Create(userId, user.Email, user.NomeCompleto, telefone, cnpj, descricaoEmpresa);
+                        }
                     }
                 }
                 foreach (var error in result.Errors)

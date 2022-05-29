@@ -13,6 +13,12 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.UserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Nome)
             </th>
             <th>
@@ -22,16 +28,7 @@
                 @Html.DisplayNameFor(model => model.Telefone)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.NomeResponsavel)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Descricao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Login)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Senha)
             </th>
             <th></th>
         </tr>
@@ -39,6 +36,12 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Nome)
             </td>
@@ -49,16 +52,7 @@
                 @Html.DisplayFor(modelItem => item.Telefone)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.NomeResponsavel)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Descricao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Login)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Senha)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.EmpresaID">Edit</a> |

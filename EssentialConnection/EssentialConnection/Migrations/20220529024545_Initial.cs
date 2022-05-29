@@ -31,13 +31,12 @@ namespace EssentialConnection.Migrations
                 {
                     EmpresaID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CNPJ = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Telefone = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NomeResponsavel = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Descricao = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Login = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Senha = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Descricao = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {

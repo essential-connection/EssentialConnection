@@ -54,11 +54,17 @@
                     <select asp-for="Input.CursoId" class ="form-control" asp-items="ViewBag.CursoId"></select>
                 </div>
                 </div>
-                <div id='divCurso'>@*curso*@
-                    <p>Professor</p>
-                </div>
                 <div id='divEmpresa'>@*empresa*@
-                    <p>Empresa</p>
+                    <div class="form-floating">
+                        <input asp-for="Input.Descricao" class="form-control" autocomplete="new-password" aria-required="true" />
+                        <label asp-for="Input.Descricao"></label>
+                        <span asp-validation-for="Input.Descricao" class="text-danger"></span>
+                    </div>
+                    <div class="form-floating">
+                        <input asp-for="Input.CNPJ" class="form-control" autocomplete="new-password" aria-required="true" />
+                        <label asp-for="Input.CNPJ"></label>
+                        <span asp-validation-for="Input.CNPJ" class="text-danger"></span>
+                    </div>
                 </div>
             </div>
             <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
