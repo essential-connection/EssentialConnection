@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EssentialConnection.Models;
+using Microsoft.AspNet.Identity;
 
 namespace EssentialConnection.Controllers
 {
@@ -168,6 +169,14 @@ namespace EssentialConnection.Controllers
         private bool AlunoExists(int id)
         {
           return (_context.Aluno?.Any(e => e.AlunoID == id)).GetValueOrDefault();
+        }
+
+        public void AdicionaCurriculo(int curriculo, int alunoId)
+        {
+            var aluno = _context.Aluno.FirstOrDefault(x => x.AlunoID == alunoId);
+            aluno.CurriculoId = curriculo;
+            _context.Update(aluno);
+            _context.SaveChangesAsync();
         }
     }
 }

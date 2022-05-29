@@ -1,8 +1,11 @@
-﻿namespace EssentialConnection.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace EssentialConnection.Models
 {
     public class Curriculo
     {
         public int CurriculoID { get; set; }
+        [Display(Name = "Descrição do curriculo")]
         public string DescricaoPessoal { get; set; }
         public int? AlunoId { get; set; }
         public Aluno Aluno { get; set; }

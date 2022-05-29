@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EssentialConnection.Models;
+using Microsoft.AspNet.Identity;
 
 namespace EssentialConnection.Controllers
 {
@@ -48,7 +49,6 @@ namespace EssentialConnection.Controllers
         // GET: Compentencias/Create
         public IActionResult Create()
         {
-            ViewData["CurriculoId"] = new SelectList(_context.Curriculo, "CurriculoID", "CurriculoID");
             return View();
         }
 
@@ -57,11 +57,13 @@ namespace EssentialConnection.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CompentenciasID,Descricao,CurriculoId")] Compentencias compentencias)
+        public async Task<IActionResult> Create([Bind("CompentenciasID,Descricao")] Compentencias compentencias)
         {
-                _context.Add(compentencias);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Create));
+            var alunoLogado = _context.Aluno.FirstOrDefault(x => x.UserId == User.Identity.GetUserId());
+            compentencias.CurriculoId = alunoLogado.CurriculoId;
+            _context.Add(compentencias);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Create));
         }
 
         // GET: Compentencias/Edit/5
