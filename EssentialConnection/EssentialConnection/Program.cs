@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Identity;
 using EssentialConnection.Areas.Identity.Data;
 
 var builder = WebApplication.CreateBuilder(args);
-//var connectionString = builder.Configuration.GetConnectionString("EssentialConnectionDB-lucas");
 var connectionString = builder.Configuration.GetConnectionString("EssentialConnectionDB-LocalVS");
 
 builder.Services.AddDbContext<IdentityContext>(options =>
