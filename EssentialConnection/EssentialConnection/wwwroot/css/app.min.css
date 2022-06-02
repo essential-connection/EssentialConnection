@@ -536,3 +536,30 @@ Ensure the default browser behavior of the `hidden` attribute.
     display: none;
   }
 }
+#direction {
+    margin-left: 50px;
+}
+#lado{
+    margin-left:310px;
+    margin-top:-26px;
+}
+#rt {
+    margin-left: 60px;
+}
+.bt {
+    width: 160px;
+    height: 34px;
+    background-color: dodgerblue;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+.bt1 {
+    width: 111px;
+    height: 34px;
+    background-color: dodgerblue;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+#bt{
+    border:1px solid #000;
+}
