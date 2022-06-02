@@ -4,56 +4,69 @@
 @{
     ViewData["Title"] = "Aplique interesse em alguma vaga";
 }
-<h1>Index</h1>
-
-@foreach (var item in Model) {
-    <h1>
-        NomeVaga
-    </h1>
-    <p>
-        @Html.DisplayFor(modelItem => item.Nome)
-    </p>
-    <h1>
-        Descricao
-    </h1>
-    <p>
-        @Html.DisplayFor(modelItem => item.Descricao)
-    </p>
-    <h1>
-        Quantidade
-    </h1>
-    <p>
-         @Html.DisplayFor(modelItem => item.Quantidade)
-    </p>
-    <h1>
-         Tipo de vaga
-    </h1>
-    <p>
-        @{
-            if(item.CursoId==null){
-                <p>Vaga de Empresa</p>
-                @Html.DisplayFor(modelItem => item.Empresa.Nome)
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/EssentialConnection.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Home.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/app.min.css" asp-append-version="true" />
+</head>
+<body class="bg-conic">
+    <div class="flex items-baseline w-48 h-auto">
+        <div class="todosbox w-auto h-auto flex-auto">
+         <a asp-action="ListarTodos">Listar todas vagas.</a>
+         </div>
+    </div>
+    <div class="grid overflow-hidden grid-cols-1 grid-rows-1 w-2/4 h-max mt-6  " style="margin-left: 312px" >
+        <div class="box2 text-center shadow-2xl shadow-inner">
+            @foreach (var item in Model) 
+            {
+                <h1 class="pt-2 text-3xl font-semibold" style="margin-top:15px">
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </h1>
+                <h1 class="text-xl" style="padding-top: 40px">
+                    @Html.DisplayFor(modelItem => item.Descricao)
+                </h1>
+                <h1 class="pt-6 text-xl">
+                     Quantodade de vagas: @Html.DisplayFor(modelItem => item.Quantidade)
+                </h1>
+                <h1 class="pt-6 text-xl">
+                    @{
+                        if(item.CursoId==null){
+                            <p>Vaga de Empresa: </p>
+                            @Html.DisplayFor(modelItem => item.Empresa.Nome)
+                        }
+                        else{
+                            <p>Vaga de Curso</p>
+                            @Html.DisplayFor(modelitem=>item.Curso.Nome)
+                        }
+                    }
+                </h1>
+                    <form action="/Tinder/Index" method="post">
+                    <label class="form-group text-xl pt-20 pb-5 cursor-pointer">
+                        
+                          
+                        <input type="hidden" name="vagaId" value="@item.VagaID">
+                        <input type="hidden" name="nomeVaga"  value="@item.Nome">
+                        <input type="submit" value="" class="" />
+                        <svg class="h-10 w-10 text-green-500 hover:h-15"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                    </label>
+                    </form>
             }
-            else{
-                <p>Vaga de Curso</p>
-                @Html.DisplayFor(modelitem=>item.Curso.Nome)
-            }
-            }
+       </div>
+    </div>
+        <p>
+       
         </p>
-        <form action="/Tinder/Index" method="post">
-        <div class="form-group">
-            <input type="hidden" name="vagaId" value="@item.VagaID">
-            <input type="hidden" name="nomeVaga"  value=@item.Nome>
-            <input type="submit" value="Interesse" class="btn btn-primary" />
-        </div>
-        </form>
-    }
-    <p>
-    <a asp-action="ListarTodos">Listar todas vagas.</a>
-    </p>
-<div class="row">
-    @Html.PagedListPager(Model,pagina=>Url.Action("Index", new{pagina}))
-</div>
+    <div class="row">
+        @Html.PagedListPager(Model,pagina=>Url.Action("Index", new{pagina}), 
+        new X.PagedList.Web.Common.PagedListRenderOptions{LiElementClasses = new string[]{"page-item"},
+        PageClasses = new string[]{"page-link"}})
+    </div>
+</body>
 <section>
     <script>
         

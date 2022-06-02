@@ -1,7 +1,5 @@
 ﻿@page "/Homepage"
 @model EssentialConnection.Areas.Home.Pages.IndexModel
-@{
-    ViewData["Title"] = "Pagina Inicial";
 }
 <!DOCTYPE html>
 <head>
@@ -11,7 +9,7 @@
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/EssentialConnection.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/Home.css" asp-append-version="true" />
-
+  <link rel="stylesheet" href="~/css/app.min.css" asp-append-version="true" />
 </head>
 <body class = "bg-telainicial">
     <h1 class ="textotitle">Essential Connection</h1>
@@ -19,7 +17,7 @@
     <img src = "~/imagens/Logo.png" alt = "logo"/>
 </div>
 <div>
-    <div class = "container caixaLogin">
+    <div class = "caixaLogin">
         <br />
         <p class = "ECSC">Entre com sua conta</p>
         <form class="login" id="account" method="post">        
@@ -34,8 +32,14 @@
                 <input asp-for="Input.Password" autocomplete="current-password" aria-required="true" type="password" class="form-control" placeholder= "Digite sua senha" />
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
-            <button type="submit" class = "btn btn-primary btnEntrar">Log in</button>
+            <br />
+            <br />
+            <div style="text-align:center">
+                <button type="submit" class ="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">Log in</button>
+                <a class="btn btn-primary form-control" id="register" href="/Identity/Account/Register">Register</a>
+            </div>
         </form>
+                       
     </div>
     <div class = "fundo">
         <img src = "/imagens/foto de fundo.png" class = "imgFundo" height = "400" width = "700" />
