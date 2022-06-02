@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EssentialConnection.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20220529024545_Initial")]
+    [Migration("20220601231506_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -232,9 +232,8 @@ namespace EssentialConnection.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("AlunoId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("AlunoId")
+                        .HasColumnType("int");
 
                     b.Property<int>("VagaId")
                         .HasColumnType("int");
