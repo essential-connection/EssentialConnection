@@ -545,6 +545,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 #rt {
     margin-left: 60px;
+    background-color: red;
+    border-radius: 3px;
+    margin-top: 10px;
 }
 .bt {
     width: 160px;
@@ -554,7 +557,7 @@ Ensure the default browser behavior of the `hidden` attribute.
     margin-top: 10px;
 }
 .bt1 {
-    width: 111px;
+    width: 162px;
     height: 34px;
     background-color: dodgerblue;
     border-radius: 10px;
@@ -562,4 +565,8 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 #bt{
     border:1px solid #000;
+}
+#dr {
+    margin-left: 50px;
+    margin-top: 10px;
 }
