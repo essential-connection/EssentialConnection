@@ -584,8 +584,15 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-gradient-from: #c7d2fe;
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(199 210 254 / 0));
 }
+.from-indigo-800 {
+  --tw-gradient-from: #3730a3;
+  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgb(55 48 163 / 0));
+}
 .to-indigo-100 {
   --tw-gradient-to: #e0e7ff;
+}
+.to-indigo-400 {
+  --tw-gradient-to: #818cf8;
 }
 .object-contain {
   -o-object-fit: contain;
