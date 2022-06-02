@@ -1,0 +1,110 @@
+﻿html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+    margin-left: 60px;
+}
+
+.logo {
+    margin-left: 2px;
+    margin-top: 10px
+}
+
+.imgFundo {
+    z-index: -1;
+}
+
+.textotitle {
+    position: absolute;
+    width: 610px;
+    height: 63px;
+    left: 520px;
+    top: 22px;
+    font-family: 'Carter One';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 52px;
+    line-height: 80px;
+    color: #FFFFFF;
+    text-shadow: 4px 3px 3px rgba(0, 0, 0, 0.5);
+}
+
+.bg-telainicial {
+    position: relative;
+    /*width: 1440px;
+    height: 1024px;
+    overflow-x: scroll;*/
+    background: linear-gradient(180deg, #0075FF 0%, rgba(4, 68, 143, 0.9575) 38.02%, rgba(7, 24, 45, 0.92) 100%);
+}
+
+.btnfundo {
+    background-color: transparent;
+    border: 0px;
+}
+
+.btnEntrar {
+    margin-top: 50px;
+    margin-left: 110px;
+    width: 100px;
+}
+
+.ECSC {
+    color: #ffffff;
+    font-family: Cabin;
+    font-weight: Regular;
+    font-size: 28px;
+    opacity: 1;
+    text-align: center;
+}
+
+.caixaLogin {
+    box-shadow: 12px 12px 3px rgba(0, 0, 0, 0.5);
+    background-color: transparent;
+    width: 377px;
+    height: 479px;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+    margin-left: 0px;
+    z-index: 5;
+}
+
+.caixaLogin {
+    border: 3px solid rgba(2.1250001108273864, 0, 0, 1);
+}
+
+.fundo {
+    margin-left: 390px;
+    margin-top: -450px;
+    position: relative;
+    z-index: 1;
+}
+
+.e6_158 {
+    color: rgba(255, 255, 255, 1);
+    width: 83px;
+    height: 43px;
+    font-family: Cabin;
+    text-align: center;
+    font-size: 25px;
+    letter-spacing: 0;
+}
+
+.login {
+    margin-left: 15px;
+    margin-top: 30px;
+}

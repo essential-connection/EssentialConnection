@@ -34,6 +34,8 @@ namespace EssentialConnection.Models
         public DbSet<Empresa> Empresa  { get; set; }
         public DbSet<Vaga> Vaga  { get; set; }
         public DbSet<ItensCurriculo> ItensCurriculo  { get; set; }
+        public DbSet<Tinder> Tinders { get; set; }
+        public DbSet<TinderEmpresa> TinderEmpresa { get; set; }
 
     }
 }

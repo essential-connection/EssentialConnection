@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EssentialConnection.Migrations.Identity
 {
-    public partial class identityEssentialConnectionDB : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,8 +28,8 @@ namespace EssentialConnection.Migrations.Identity
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    PrimeiroNome = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
-                    Sobrenome = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    NomeCompleto = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Tipo = table.Column<int>(type: "int", maxLength: 255, nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),

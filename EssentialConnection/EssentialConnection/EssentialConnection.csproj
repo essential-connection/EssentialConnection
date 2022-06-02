@@ -11,6 +11,18 @@
 	</Target>
 
 	<ItemGroup>
+	  <Compile Remove="Areas\Home\HomeStyle\**" />
+	  <Content Remove="Areas\Home\HomeStyle\**" />
+	  <EmbeddedResource Remove="Areas\Home\HomeStyle\**" />
+	  <None Remove="Areas\Home\HomeStyle\**" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="wwwroot\css\Home.css" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNet.Identity.Core" Version="2.2.3" />
 		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.5" />
 		<PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.5" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.5" />
@@ -19,8 +31,10 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.4" />
-		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.1" />
+		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.5" />
+		<PackageReference Include="X.PagedList" Version="8.4.0" />
+		<PackageReference Include="X.PagedList.Mvc.Core" Version="8.4.0" />
+		<PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
 	</ItemGroup>
 
 </Project>

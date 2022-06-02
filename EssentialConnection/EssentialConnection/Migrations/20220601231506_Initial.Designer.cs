@@ -12,14 +12,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EssentialConnection.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20220504025555_Inicial-criacao")]
-    partial class Inicialcriacao
+    [Migration("20220601231506_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "6.0.3")
+                .HasAnnotation("ProductVersion", "6.0.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
@@ -53,33 +53,19 @@ namespace EssentialConnection.Migrations
                     b.Property<int?>("CursoId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("DataNascimento")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Endereco")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Login")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Matricula")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Nome")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Senha")
+                    b.Property<string>("NomeCompleto")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Telefone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -144,7 +130,7 @@ namespace EssentialConnection.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CursoID"), 1L, 1);
 
-                    b.Property<string>("Login")
+                    b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -152,11 +138,11 @@ namespace EssentialConnection.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Senha")
+                    b.Property<string>("Telefone")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Telefone")
+                    b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -181,7 +167,7 @@ namespace EssentialConnection.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Login")
+                    b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -189,15 +175,11 @@ namespace EssentialConnection.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("NomeResponsavel")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Senha")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Telefone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -242,6 +224,53 @@ namespace EssentialConnection.Migrations
                     b.ToTable("ItensCurriculo");
                 });
 
+            modelBuilder.Entity("EssentialConnection.Models.Tinder", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("AlunoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("VagaId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("nomeVaga")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Tinders");
+                });
+
+            modelBuilder.Entity("EssentialConnection.Models.TinderEmpresa", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int>("CurriculoId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("EmpresaId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("nomeAluno")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TinderEmpresa");
+                });
+
             modelBuilder.Entity("EssentialConnection.Models.Vaga", b =>
                 {
                     b.Property<int>("VagaID")
@@ -250,7 +279,7 @@ namespace EssentialConnection.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("VagaID"), 1L, 1);
 
-                    b.Property<int>("CursoId")
+                    b.Property<int?>("CursoId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("DataExpiracao")
@@ -347,8 +376,7 @@ namespace EssentialConnection.Migrations
                     b.HasOne("EssentialConnection.Models.Curso", "Curso")
                         .WithMany("Vagas")
                         .HasForeignKey("CursoId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("EssentialConnection.Models.Empresa", "Empresa")
                         .WithMany("Vagas")

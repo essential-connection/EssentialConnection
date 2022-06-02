@@ -20,6 +20,9 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using static EssentialConnection.Areas.Identity.Data.EssentialConnectionUser;
+using EssentialConnection.Controllers;
+using EssentialConnection.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace EssentialConnection.Areas.Identity.Pages.Account
 {
@@ -31,13 +34,15 @@ namespace EssentialConnection.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<EssentialConnectionUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly Context _context;
 
         public RegisterModel(
             UserManager<EssentialConnectionUser> userManager,
             IUserStore<EssentialConnectionUser> userStore,
             SignInManager<EssentialConnectionUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            Context context)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -45,6 +50,7 @@ namespace EssentialConnection.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _context = context;
         }
 
         /// <summary>
@@ -108,17 +114,36 @@ namespace EssentialConnection.Areas.Identity.Pages.Account
             [Display(Name = "Confirme a senha")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [Required]
+            [RegularExpression(@"^\([1-9]{2}\) (?:[2-8]|9[1-9])[0-9]{3}\-[0-9]{4}$", ErrorMessage = "Digite o telefone no formato(xx) 9xxxx-xxxx")]
+            [Display(Name = "Telefone")]
+            public string Telefone { get; set; }
+
+            [Required]
+            [Display(Name = "Curso")]
+            public int CursoId { get; set; }
+
+            [Display(Name = "CNPJ")]
+            public string CNPJ { get; set; }
+
+            [StringLength(255, ErrorMessage = "A descrição deve ter tamanho máximo de 255 caracteres")]
+            [Display(Name = "Descrição da empresa.")]
+            public string Descricao { get; set; }
+
         }
 
 
         public async Task OnGetAsync(string returnUrl = null)
         {
             ReturnUrl = returnUrl;
+            ViewData["CursoId"] = new SelectList(_context.Curso.OrderBy(c => c.Nome), "CursoID", "Nome");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
+            
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
@@ -127,6 +152,10 @@ namespace EssentialConnection.Areas.Identity.Pages.Account
 
                 user.NomeCompleto = Input.NomeCompleto;
                 user.Tipo = Input.Tipo;
+                var telefone = Input.Telefone;
+                var cursoId = Input.CursoId;
+                var cnpj = Input.CNPJ;
+                var descricaoEmpresa = Input.Descricao;
 
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
@@ -155,7 +184,21 @@ namespace EssentialConnection.Areas.Identity.Pages.Account
                     else
                     {
                         await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
+                        if (user.Tipo == TipoUsuario.Aluno)
+                        {
+                            AlunosController aluno = new AlunosController(_context);
+                            await aluno.Create(user.NomeCompleto, user.Email, telefone, cursoId, userId);
+                        }
+                        else if (user.Tipo == TipoUsuario.Professor)
+                        {
+                            CursosController curso = new CursosController(_context);
+                            await curso.Create(userId,user.Email,user.NomeCompleto, telefone);
+                        }
+                        else if (user.Tipo == TipoUsuario.Empresa)
+                        {
+                            EmpresasController empresa = new EmpresasController(_context);
+                            await empresa.Create(userId, user.Email, user.NomeCompleto, telefone, cnpj, descricaoEmpresa);
+                        }
                     }
                 }
                 foreach (var error in result.Errors)

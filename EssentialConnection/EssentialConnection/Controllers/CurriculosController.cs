@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EssentialConnection.Models;
+using Microsoft.AspNet.Identity;
 
 namespace EssentialConnection.Controllers
 {
@@ -48,7 +49,6 @@ namespace EssentialConnection.Controllers
         // GET: Curriculos/Create
         public IActionResult Create()
         {
-            ViewData["AlunoId"] = new SelectList(_context.Aluno, "AlunoID", "AlunoID");
             return View();
         }
 
@@ -57,13 +57,15 @@ namespace EssentialConnection.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CurriculoID,DescricaoPessoal,AlunoId")] Curriculo curriculo)
+        public async Task<IActionResult> Create([Bind("CurriculoID,DescricaoPessoal")] Curriculo curriculo)
         {
-                _context.Add(curriculo);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            ViewData["AlunoId"] = new SelectList(_context.Aluno, "AlunoID", "AlunoID", curriculo.AlunoId);
-            return View(curriculo);
+            var alunoLogado = _context.Aluno.FirstOrDefault(x => x.UserId == User.Identity.GetUserId());
+            curriculo.AlunoId = alunoLogado.AlunoID;
+            _context.Add(curriculo);
+            AlunosController aluno = new AlunosController(_context);
+            await _context.SaveChangesAsync();
+            aluno.AdicionaCurriculo(curriculo.CurriculoID, alunoLogado.AlunoID);
+            return RedirectToAction("Create", "Compentencias");
         }
 
         // GET: Curriculos/Edit/5

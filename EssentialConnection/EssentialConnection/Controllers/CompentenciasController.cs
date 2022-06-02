@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EssentialConnection.Models;
+using Microsoft.AspNet.Identity;
 
 namespace EssentialConnection.Controllers
 {
@@ -48,7 +49,6 @@ namespace EssentialConnection.Controllers
         // GET: Compentencias/Create
         public IActionResult Create()
         {
-            ViewData["CurriculoId"] = new SelectList(_context.Curriculo, "CurriculoID", "CurriculoID");
             return View();
         }
 
@@ -57,13 +57,13 @@ namespace EssentialConnection.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CompentenciasID,Descricao,CurriculoId")] Compentencias compentencias)
+        public async Task<IActionResult> Create([Bind("CompentenciasID,Descricao")] Compentencias compentencias)
         {
-                _context.Add(compentencias);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            ViewData["CurriculoId"] = new SelectList(_context.Curriculo, "CurriculoID", "CurriculoID", compentencias.CurriculoId);
-            return View(compentencias);
+            var alunoLogado = _context.Aluno.FirstOrDefault(x => x.UserId == User.Identity.GetUserId());
+            compentencias.CurriculoId = alunoLogado.CurriculoId;
+            _context.Add(compentencias);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Create));
         }
 
         // GET: Compentencias/Edit/5
@@ -143,6 +143,16 @@ namespace EssentialConnection.Controllers
             _context.Compentencia.Remove(compentencias);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult VoltarHome()
+        {
+            return RedirectToAction("Index", "Home");
+        }
+
+        public IActionResult ItensCurriculo()
+        {
+            return RedirectToAction("Create", "ItensCurriculo");
         }
 
         private bool CompentenciasExists(int id)

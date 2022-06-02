@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EssentialConnection.Migrations
 {
-    public partial class Inicialcriacao : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,10 +15,10 @@ namespace EssentialConnection.Migrations
                 {
                     CursoID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Telefone = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Login = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Senha = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Telefone = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -31,17 +31,46 @@ namespace EssentialConnection.Migrations
                 {
                     EmpresaID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CNPJ = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Telefone = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NomeResponsavel = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Descricao = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Login = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Senha = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Descricao = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Empresa", x => x.EmpresaID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TinderEmpresa",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CurriculoId = table.Column<int>(type: "int", nullable: false),
+                    EmpresaId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    nomeAluno = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TinderEmpresa", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Tinders",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    AlunoId = table.Column<int>(type: "int", nullable: false),
+                    VagaId = table.Column<int>(type: "int", nullable: false),
+                    nomeVaga = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tinders", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -50,16 +79,12 @@ namespace EssentialConnection.Migrations
                 {
                     AlunoID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Endereco = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DataNascimento = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    NomeCompleto = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    email = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Telefone = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Matricula = table.Column<int>(type: "int", nullable: false),
                     CursoId = table.Column<int>(type: "int", nullable: true),
-                    CurriculoId = table.Column<int>(type: "int", nullable: true),
-                    Login = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Senha = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    CurriculoId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -85,7 +110,7 @@ namespace EssentialConnection.Migrations
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Responsavel = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     EmpresaId = table.Column<int>(type: "int", nullable: true),
-                    CursoId = table.Column<int>(type: "int", nullable: false)
+                    CursoId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -240,6 +265,12 @@ namespace EssentialConnection.Migrations
 
             migrationBuilder.DropTable(
                 name: "ItensCurriculo");
+
+            migrationBuilder.DropTable(
+                name: "TinderEmpresa");
+
+            migrationBuilder.DropTable(
+                name: "Tinders");
 
             migrationBuilder.DropTable(
                 name: "Vaga");
