@@ -64,7 +64,7 @@ namespace EssentialConnection.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    AlunoId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AlunoId = table.Column<int>(type: "int", nullable: false),
                     VagaId = table.Column<int>(type: "int", nullable: false),
                     nomeVaga = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
