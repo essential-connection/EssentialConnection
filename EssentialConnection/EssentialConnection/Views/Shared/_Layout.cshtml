@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="~/css/app.min.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/EssentialConnection.styles.css" asp-append-version="true" />
 </head>
-<body>
+<body class="bg-conic">
     <header class="bg-slate-100 py-1">
         <nav class="flex items-center justify-between mx-4">
             <a class="text-indigo-700 uppercase text-xl font-semibold w-1/4" asp-area="" asp-controller="Home" asp-action="Index">Essential Connection</a>
@@ -22,15 +22,12 @@
                 </div>
 
                 <ul class="hidden md:flex grow justify-evenly w-1/2">
-                    <li class="nav-item">
+                    <li class="nav-item justify-start">
                         <a class="nav-link text-slate-800" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-slate-800" asp-area="" asp-controller="Competencias" asp-action="Index">Competencias</a>
                     </li>
                 </ul>
             }
-            <ul class="hidden md:flex w-1/4 justify-center">
+            <ul class="hidden md:contents w-1/4 justify-center">
                 <partial name="_LoginPartial" />
             </ul>
         </nav>
@@ -41,7 +38,7 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted" style="position: relative">
         <div class="container">
             &copy; 2022 - EssentialConnection - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
