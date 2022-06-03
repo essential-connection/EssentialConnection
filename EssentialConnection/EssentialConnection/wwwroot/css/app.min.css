@@ -536,3 +536,50 @@ Ensure the default browser behavior of the `hidden` attribute.
     display: none;
   }
 }
+#bd{
+    border:1px solid #000;
+}
+#loc{
+    margin-left:30px;
+    margin-top:6px;
+}
+#l {
+    margin-left: 30px;
+    margin-top: 17px;
+    background: #069cc2;
+    border-radius: 6px;
+    padding: 7px;
+    cursor: pointer;
+    color: #fff;
+    font-size: 17px;
+    width: 133px;
+}
+#l1 {
+    margin-left: 32px;
+    margin-top: 4px;
+    background: #069cc2;
+    border-radius: 6px;
+    padding: 13px;
+    color: #fff;
+    height: -22px;
+}
+#obs {
+    border: 1px solid #000;
+    color: #fff;
+    background-color: red;
+}
+#dist {
+    margin-top: 10px;
+}
+#bd1 {
+    border: 1px solid #000;
+    margin-left:29px;
+}
+#bd2 {
+    border: 1px solid #000;
+    margin-left: 4px;
+}
+#bd3 {
+    border: 1px solid #000;
+    margin-left: 12px;
+}
