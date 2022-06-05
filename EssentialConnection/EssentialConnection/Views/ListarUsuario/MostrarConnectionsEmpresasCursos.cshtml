@@ -1,0 +1,58 @@
+﻿@model IEnumerable<EssentialConnection.Models.TinderEmpresa>
+
+@{
+    ViewData["Title"] = "MostrarConnectionsEmpresasCursos";
+}
+
+<h1>MostrarConnectionsEmpresasCursos</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <h1>Nome da organização</h1>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeAluno)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+            <tr>
+                <td>
+                    @{
+                        if (item.EmpresaId != null)
+                        {
+                            @Html.DisplayFor(modelItem => item.NomeEmpresa)
+                        }
+                        else
+                        {
+                            @Html.DisplayFor(modelItem => item.CursoNome)
+                        }
+                    }
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomeAluno)
+            </td>
+            
+            <td>
+                @{
+                    if(item.EmpresaId!=null)
+                    {
+                            <a asp-action="MostrarPerfilEmpresa" asp-route-id="@item.EmpresaId">Edit</a>
+                    }
+                    else
+                    {
+                             <a asp-action="MostrarPerfilCurso" asp-route-id="@item.CursoId">Edit</a>
+                    }
+                }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

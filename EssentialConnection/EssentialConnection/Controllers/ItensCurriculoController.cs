@@ -65,8 +65,8 @@ namespace EssentialConnection.Controllers
             itensCurriculo.Nome = nome;
             itensCurriculo.Descricao = descricao;
             itensCurriculo.Instituicao= instituicao;
-            itensCurriculo.DataInicio = Convert.ToDateTime(dataInicio);
-            itensCurriculo.DataFim = Convert.ToDateTime(dataFim);
+            itensCurriculo.DataInicio = dataInicio;
+            itensCurriculo.DataFim = dataFim;
             _context.Add(itensCurriculo);
             await _context.SaveChangesAsync();
             return RedirectToAction("Create", "ItensCurriculo");

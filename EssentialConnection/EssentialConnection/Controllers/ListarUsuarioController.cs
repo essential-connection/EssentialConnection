@@ -46,6 +46,13 @@ namespace EssentialConnection.Controllers
             var connections = _context.Tinders.Where(x=>x.AlunoId==id);
             return View(connections.ToList());
         }
+        
+        public IActionResult MostrarConnectionsEmpresasCursos(int id)
+        {
+            var connections = _context.TinderEmpresa.Where(x => x.EmpresaId == id || x.CursoId==id);
+            return View(connections.ToList());
+        }        
+
 
         public IActionResult MostrarPerfilEmpresaCurso(int? idCurso, int? idEmpresa)
         {
