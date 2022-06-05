@@ -65,7 +65,13 @@ namespace EssentialConnection.Controllers
             AlunosController aluno = new AlunosController(_context);
             await _context.SaveChangesAsync();
             aluno.AdicionaCurriculo(curriculo.CurriculoID, alunoLogado.AlunoID);
-            return RedirectToAction("Create", "Compentencias");
+            return RedirectToAction("CompletandoCurriculo", "Curriculos");
+        }
+        
+        [HttpGet]
+        public IActionResult CompletandoCurriculo()
+        {
+            return View();
         }
 
         // GET: Curriculos/Edit/5
@@ -151,6 +157,22 @@ namespace EssentialConnection.Controllers
         private bool CurriculoExists(int id)
         {
             return _context.Curriculo.Any(e => e.CurriculoID == id);
+        }
+
+        public IActionResult AdicionarCompentencia(string compentenciaNome)
+        {
+            CompentenciasController comp = new CompentenciasController(_context);
+            var alunoLogado = _context.Aluno.FirstOrDefault(x => x.UserId == User.Identity.GetUserId());
+            comp.Create(compentenciaNome,alunoLogado.AlunoID);
+            return RedirectToAction("CompletandoCurriculo", "Curriculos");
+        }
+
+        public IActionResult AdicionarItensCurriculo(string nome,string descricao, string instituicao, string dataInicio, string dataFim)
+        {
+            ItensCurriculoController itens = new ItensCurriculoController(_context);
+            var alunoLogado = _context.Aluno.FirstOrDefault(x => x.UserId == User.Identity.GetUserId());
+            itens.Create(nome, descricao, instituicao, dataInicio, dataFim, alunoLogado.AlunoID);
+            return RedirectToAction("CompletandoCurriculo", "Curriculos");
         }
     }
 }

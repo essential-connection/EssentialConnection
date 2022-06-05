@@ -1,0 +1,56 @@
+﻿@model EssentialConnection.Models.Curriculo
+
+@{
+    ViewData["Title"] = "Create";
+}
+<h1>Parabens, voce cadastrou uma descrição no seu curriculo</h1>
+<form action="AdicionarCompentencia" method="post">
+<div class="row">
+    <div class="col-md-4">
+            <div class="form-group">
+                <select class="form-select" name="compentenciaNome">
+                <option selected>Open this select menu</option>
+                <option value="Lindo">Lindo</option>
+                <option value="Gostoso">Gostoso</option>
+                <option value="Perfito">Perfeito</option>
+</select>
+              <input type="submit" value="Interesse" class="btn btn-primary" />
+            </div>
+    </div>
+</div>
+</form>
+
+<form action="AdicionarItensCurriculo" method="post">
+<div class="row">
+    <div class="col-md-4">
+            <div class="form-group">
+                <div>
+                <label class="control-label">Nome</label>
+                <input class="form-control" name="nome"/>
+                </div>
+               <div>
+                <label  class="control-label">Descrição</label>
+                <input  class="form-control" name="descricao"/>
+                </div>
+                <div>
+                <label class="control-label">Instituição</label>
+                <input class="form-control" name="instituicao"/>
+                </div>
+                <div>
+                <select asp-items="Html.GetEnumSelectList<@EssentialConnection.Models.ItensCurriculo.Tipo>()" name="select">
+                        <option value="">Selecione o tipo de formação</option>
+                    </select>
+                </div>
+                <div>
+                <label  class="control-label">Data Inicio</label>
+                <input  class="form-control" name="dataInicio"/>
+                </div>
+                <div>
+                <label  class="control-label">Data Fim</label>
+                <input  class="form-control" name="dataFim"/>
+                </div>
+                <input type="submit" value="Vamo" class="btn btn-primary" />
+            </div>
+    </div>
+</div>
+</form>

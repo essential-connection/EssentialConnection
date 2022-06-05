@@ -1,5 +1,6 @@
 ﻿using EssentialConnection.Areas.Identity.Data;
 using EssentialConnection.Models;
+using Microsoft.AspNet.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using static EssentialConnection.Areas.Identity.Data.EssentialConnectionUser;
@@ -38,6 +39,44 @@ namespace EssentialConnection.Controllers
             var userProcurado = _identityContext.Users.FirstOrDefault(x => x.Id == id);
             var empresa = _context.Empresa.Include(c => c.Vagas).FirstOrDefault(a => a.Email == userProcurado.Email);
             return View(empresa);
+        }
+
+        public IActionResult MostrarConnectionsAlunos(int id)
+        {
+            var connections = _context.Tinders.Where(x=>x.AlunoId==id);
+            return View(connections.ToList());
+        }
+
+        public IActionResult MostrarPerfilEmpresaCurso(int? idCurso, int? idEmpresa)
+        {
+            if (idCurso == null)
+            {
+                var empresa = _context.Empresa.Include(c => c.Vagas).FirstOrDefault(a => a.EmpresaID == idEmpresa);
+                return RedirectToAction("MostrarPerfilEmpresa", "ListarUsuario",idEmpresa);
+            }
+            else
+            {
+                var curso = _context.Curso.Include(c => c.Vagas).FirstOrDefault(a => a.CursoID == idCurso);
+                return RedirectToAction("MostrarPerfilCurso", "ListarUsuario",idCurso);
+            }
+        }
+
+        public IActionResult ListarMeuPerfil()
+        {
+            var userLogado = _identityContext.Users.FirstOrDefault(u => u.Id == User.Identity.GetUserId());
+            if (userLogado.Tipo == EssentialConnectionUser.TipoUsuario.Professor)
+            {
+
+                return RedirectToAction("MostrarPerfilCurso", "ListarUsuario", userLogado.Id);
+            }
+            else if (userLogado.Tipo == EssentialConnectionUser.TipoUsuario.Empresa)
+            {
+                return RedirectToAction("MostrarPerfilEmpresa", "ListarUsuario", userLogado.Id);
+            }
+            else
+            {
+                return RedirectToAction("MostrarPerfilAluno", "ListarUsuario", userLogado.Id);
+            }
         }
     }
 }

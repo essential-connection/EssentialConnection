@@ -1,0 +1,48 @@
+﻿@page
+@model EssentialConnection.Areas.Curriculo.Pages.CurriculoModel
+@using EssentialConnection.Areas.Curriculo.Pages
+<div class="row">
+    <div class="col-md-4">
+            <h2>Crie seu curriculo</h2>
+            <div class="form-floating">
+                <label>Descrição Curriculo</label>
+                <input name="DescricaoCurriculo" />
+            </div>
+
+            <div class="form-floating">
+                <input asp-for="" class="form-control" autocomplete="compentencias" aria-required="true" />
+                <label asp-for="Input.Compentencias"></label>
+                <span asp-validation-for="Input.Compentencias" class="text-danger"></span>
+            </div>
+
+            <div class="form-control">
+                <label asp-for="Input.TipoFormacao" class="form-label"></label>
+                <select asp-for="Input.TipoFormacao" class="form-control" id='selectTipo'>
+                    <option value="">Selecione o tipo de formação</option>
+                </select>
+                <span asp-validation-for="Input.TipoFormacao" class="text-red"></span>
+            </div>
+            <div class="form-floating">
+                <input asp-for="Input.Nome" class="form-control" autocomplete="nome" aria-required="true" />
+                <label asp-for="Input.Nome"></label>
+                <span asp-validation-for="Input.Nome" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <input asp-for="Input.Descricao" class="form-control" autocomplete="Descricao" aria-required="true" />
+                <label asp-for="Input.Descricao"></label>
+                <span asp-validation-for="Input.Descricao" class="text-danger"></span>
+            </div
+            <div class="form-floating">
+                <input asp-for="Input.DataInicio" class="form-control" autocomplete="dateInicio" aria-required="true" />
+                <label asp-for="Input.DataInicio"></label>
+                <span asp-validation-for="Input.DataInicio" class="text-danger"></span>
+            </div>
+            <div class="form-floating">
+                <input asp-for="Input.DataFim" class="form-control" autocomplete="dateFim" aria-required="true" />
+                <label asp-for="Input.DataFim"></label>
+                <span asp-validation-for="Input.DataFim" class="text-danger"></span>
+            </div>
+
+            </div>
+    </div>
+</div>

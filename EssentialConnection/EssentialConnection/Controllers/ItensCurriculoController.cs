@@ -57,10 +57,16 @@ namespace EssentialConnection.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ItensCurriculoID,Nome,Descricao,DataInicio,DataFim,Instituicao")] ItensCurriculo itensCurriculo)
+        public async Task<IActionResult> Create(string nome, string descricao, string instituicao, string dataInicio, string dataFim, int alunoId)
         {
-            var alunoLogado = _context.Aluno.FirstOrDefault(x => x.UserId == User.Identity.GetUserId());
+            var alunoLogado = _context.Aluno.FirstOrDefault(x => x.AlunoID == alunoId);
+            ItensCurriculo itensCurriculo = new ItensCurriculo();
             itensCurriculo.CurriculoId = alunoLogado.CurriculoId;
+            itensCurriculo.Nome = nome;
+            itensCurriculo.Descricao = descricao;
+            itensCurriculo.Instituicao= instituicao;
+            itensCurriculo.DataInicio = Convert.ToDateTime(dataInicio);
+            itensCurriculo.DataFim = Convert.ToDateTime(dataFim);
             _context.Add(itensCurriculo);
             await _context.SaveChangesAsync();
             return RedirectToAction("Create", "ItensCurriculo");
