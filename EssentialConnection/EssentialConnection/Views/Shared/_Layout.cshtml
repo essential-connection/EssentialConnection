@@ -4,29 +4,16 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - EssentialConnection</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet">
     @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />*@
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    @*<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />*@
     <link rel="stylesheet" href="~/css/app.min.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/EssentialConnection.styles.css" asp-append-version="true" />
 </head>
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-<body class="flex flex-col h-screen">
-    <header class="bg-gradient-to-r from-indigo-200 to-indigo-100 py-1">
-        <nav class="flex items-center justify-between mx-8">
-=======
-=======
->>>>>>> parent of d33eba6 (TInder 1.0)
-<body>
+<body class="bg-conic">
     <header class="bg-slate-100 py-1">
         <nav class="flex items-center justify-between mx-4">
->>>>>>> parent of d33eba6 (TInder 1.0)
             <a class="text-indigo-700 uppercase text-xl font-semibold w-1/4" asp-area="" asp-controller="Home" asp-action="Index">Essential Connection</a>
-            @if (true)
+            @if(true)
             {
                 <div class="md:hidden">
                     <button>
@@ -35,40 +22,27 @@
                 </div>
 
                 <ul class="hidden md:flex grow justify-evenly w-1/2">
-                    <li class="nav-item">
+                    <li class="nav-item justify-start">
                         <a class="nav-link text-slate-800" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-slate-800" asp-area="" asp-controller="Competencias" asp-action="Index">Competencias</a>
                     </li>
                 </ul>
             }
-            <ul class="hidden md:flex w-1/4 justify-center">
+            <ul class="hidden md:contents w-1/4 justify-center">
                 <partial name="_LoginPartial" />
             </ul>
         </nav>
     </header>
-    <main role="main" class="flex flex-grow">
-        @RenderBody()
-    </main>
-
-    @*<footer class="border-top footer text-muted">
     <div class="container">
-    &copy; 2022 - EssentialConnection - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
     </div>
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-    </footer>*@
-=======
-=======
->>>>>>> parent of d33eba6 (TInder 1.0)
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted" style="position: relative">
         <div class="container">
             &copy; 2022 - EssentialConnection - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
->>>>>>> parent of d33eba6 (TInder 1.0)
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
