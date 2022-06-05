@@ -14,32 +14,19 @@
     <link rel="stylesheet" href="~/css/app.min.css" asp-append-version="true" />
 </head>
 <body class="bg-conic">
-    @*<div class="flex items-baseline w-48 h-auto">
+    <div class="flex items-baseline w-48 h-auto">
         <div class="todosbox w-auto h-auto flex-auto">
          <a asp-action="ListarTodos">Listar todas vagas.</a>
          </div>
-    </div>*@
-    
-
-    <div class="grid overflow-hidden grid-cols-1 grid-rows-1 w-2/4 h-max mt-6  " style="margin-left: 400px" >
-        <div class="box2 text-center shadow-2xl shadow-inner" style="width: 29rem">
-            <a asp-action="ListarTodos" class="relative inline-flex items-center px-8 py-2 overflow-hidden text-white  rounded group hover:mx-20 hover:bg-gray-400 active:bg-gray-700 focus:outline-none focus:ring">
-            <span class="absolute transition-transform translate-x-full group-hover:translate-x-6 title" style="display:block ruby; margin-left:28px">
-                Todas as Vagas
-            </span>
-
-             <span class="text-sm font-medium transition-all group-hover:mx-20 group-hover:-translate-x-24" >
-                <svg class="h-8 w-8 text-black"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/>
-                </svg>
-            </span>
-            </a>
+    </div>
+    <div class="grid overflow-hidden grid-cols-1 grid-rows-1 w-2/4 h-max mt-6  " style="margin-left: 312px" >
+        <div class="box2 text-center shadow-2xl shadow-inner">
             @foreach (var item in Model) 
             {
-                <h1 class=" text-3xl font-semibold" style="margin-top:24px">
+                <h1 class="pt-2 text-3xl font-semibold" style="margin-top:15px">
                     @Html.DisplayFor(modelItem => item.Nome)
                 </h1>
-                <h1 class="text-xl pt-20">
+                <h1 class="text-xl" style="padding-top: 40px">
                     @Html.DisplayFor(modelItem => item.Descricao)
                 </h1>
                 <h1 class="pt-6 text-xl">
@@ -57,27 +44,28 @@
                         }
                     }
                 </h1>
-                    <form action="/Tinder/Index" method="post" class="pt-14">
-                    <label class="form-group pt-8 inline-flex bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer">
+                    <form action="/Tinder/Index" method="post">
+                    <label class="form-group text-xl pt-20 pb-5 cursor-pointer">
                         
                           
                         <input type="hidden" name="vagaId" value="@item.VagaID">
                         <input type="hidden" name="nomeVaga"  value="@item.Nome">
-                        <input type="submit" value="Tenho interesse" class="" />
+                        <input type="submit" value="" class="" />
                         <svg class="h-10 w-10 text-green-500 hover:h-15"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <polyline points="20 6 9 17 4 12" />
                         </svg>
                     </label>
                     </form>
             }
-            <div class="inline-flex items-center -space-x-px pt-9">
-                <br />
-                @Html.PagedListPager(Model,pagina=>Url.Action("Index", new{pagina}), 
-                new X.PagedList.Web.Common.PagedListRenderOptions{LiElementClasses = new string[]{"page-item"},
-                PageClasses = new string[]{"page-link"}})
-            </div>
-        </div>
+       </div>
     </div>
-    
+        <p>
+       
+        </p>
+    <div class="row">
+        @Html.PagedListPager(Model,pagina=>Url.Action("Index", new{pagina}), 
+        new X.PagedList.Web.Common.PagedListRenderOptions{LiElementClasses = new string[]{"page-item"},
+        PageClasses = new string[]{"page-link"}})
+    </div>
 </body>
 <section>
     <script>

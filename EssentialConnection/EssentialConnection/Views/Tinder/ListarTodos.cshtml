@@ -17,7 +17,7 @@
         <div class="pesqbox w-28 h-28 flex-auto filtro">
             <div class="col-md-12" style="margin-left:10px">
                 <div class="panel panel-default">
-                    <div class="panel-heading"><i class="fa fa-filter text-slate-50"></i>Filtros</div>
+                    <div class="panel-heading"><i class="fa fa-filter"></i>Filtros</div>
                     <div class="panel-body">
                         <div class="row">
                             <div class="col-sm-3">
@@ -37,7 +37,7 @@
                             <div class="col-sm-3">
                                 <div id='divVaga'>
                                     <div class="form-group" id='divEmpresa'>
-                                        <label class="control-label">Empresa</label>
+                                        <label class="control-label"></label>
                                         <select class ="form-control" asp-items="ViewBag.EmpresaId" id='empresaId'></select>
                                     </div>
                                     <div class="form-group" id='divCurso'>
@@ -82,10 +82,10 @@
         <br>
         @if(item.EmpresaId == 0)
         {
-            <p class="text-base"  style="margin-left: 10px">Empresa: @Html.DisplayFor(modelItem => item.Curso.Nome)</p>
+            <p class="text-base"  style="margin-left: 10px">Empresa: @Html.DisplayFor(modelItem => item.CursoId)</p>
         }
         else{
-        <p class="text-base"  style="margin-left: 10px">Empresa: @Html.DisplayFor(modelItem => item.Empresa.Nome)</p>
+        <p class="text-base"  style="margin-left: 10px">Empresa: @Html.DisplayFor(modelItem => item.EmpresaId)</p>
         }
         <p class="text-base"  style="margin-left: 10px">Responsavel: @Html.DisplayFor(modelItem => item.Responsavel)</p>
         <p class="text-base"  style="margin-left: 10px">@Html.DisplayFor(modelItem => item.Descricao)</p>
@@ -98,12 +98,77 @@
     </div>
     }
 </div>
-
+@*<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descricao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantidade)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DataExpiracao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Responsavel)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Empresa)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Curso)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Descricao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Quantidade)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataExpiracao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Responsavel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Empresa.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Curso.Nome)
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.VagaID">Details</a> |
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+*@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script >
         $('#selectTipoVaga').on('change',function(){
             var valorSelect =$(this).val();
+            alert(valorSelect);
             $('#divVaga').children('div').hide();
             if(valorSelect==1){
                 $('#divEmpresa').show();
