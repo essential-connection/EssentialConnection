@@ -206,9 +206,9 @@ namespace EssentialConnection.Areas.Identity.Pages.Account
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
             }
-
+            returnUrl= Url.Content("~/PaginaInicial");
             // If we got this far, something failed, redisplay form
-            return Page();
+            return LocalRedirect(returnUrl);
         }
 
         private EssentialConnectionUser CreateUser()

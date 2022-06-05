@@ -134,8 +134,9 @@ namespace EssentialConnection.Areas.Identity.Pages.Account
                 }
             }
 
+            returnUrl = Url.Content("~/PaginaInicial");
             // If we got this far, something failed, redisplay form
-            return Page();
+            return LocalRedirect(returnUrl);
         }
     }
 }
