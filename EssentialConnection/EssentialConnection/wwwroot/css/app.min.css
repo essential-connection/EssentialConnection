@@ -468,6 +468,7 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-top: 1.5rem;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 .ml-1 {
   margin-left: 0.25rem;
 }
@@ -510,6 +511,8 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 =======
 >>>>>>> parent of d33eba6 (TInder 1.0)
+=======
+>>>>>>> parent of d33eba6 (TInder 1.0)
 .flex {
   display: flex;
 }
@@ -523,8 +526,11 @@ Ensure the default browser behavior of the `hidden` attribute.
   display: none;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> parent of d33eba6 (TInder 1.0)
 .h-auto {
   height: auto;
 }
@@ -541,6 +547,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .h-6 {
   height: 1.5rem;
+<<<<<<< HEAD
+>>>>>>> parent of d33eba6 (TInder 1.0)
+=======
 >>>>>>> parent of d33eba6 (TInder 1.0)
 }
 .w-1\/4 {
@@ -556,6 +565,7 @@ Ensure the default browser behavior of the `hidden` attribute.
 .w-full {
   width: 100%;
 }
+<<<<<<< HEAD
 .w-3\/5 {
   width: 60%;
 }
@@ -563,6 +573,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .flex-grow {
   flex-grow: 1;
 =======
+=======
+.w-2\/4 {
+  width: 50%;
+}
+>>>>>>> parent of d33eba6 (TInder 1.0)
 .w-10 {
   width: 2.5rem;
 }
@@ -583,6 +598,7 @@ Ensure the default browser behavior of the `hidden` attribute.
   flex-grow: 1;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 .scale-50 {
   --tw-scale-x: .5;
@@ -594,6 +610,8 @@ Ensure the default browser behavior of the `hidden` attribute.
      -moz-appearance: none;
           appearance: none;
 =======
+=======
+>>>>>>> parent of d33eba6 (TInder 1.0)
 .cursor-pointer {
   cursor: pointer;
 >>>>>>> parent of d33eba6 (TInder 1.0)
@@ -621,6 +639,7 @@ Ensure the default browser behavior of the `hidden` attribute.
   justify-content: space-evenly;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 .space-x-2 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
@@ -629,6 +648,8 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 
 =======
+=======
+>>>>>>> parent of d33eba6 (TInder 1.0)
 .gap-3 {
   gap: 0.75rem;
 }
@@ -640,6 +661,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .overflow-hidden {
   overflow: hidden;
 }
+<<<<<<< HEAD
+>>>>>>> parent of d33eba6 (TInder 1.0)
+=======
 >>>>>>> parent of d33eba6 (TInder 1.0)
 .rounded {
   border-radius: 0.25rem;
@@ -647,6 +671,7 @@ Ensure the default browser behavior of the `hidden` attribute.
 .border {
   border-width: 1px;
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 .border-gray-200 {
   --tw-border-opacity: 1;
@@ -708,6 +733,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-bottom: 0.75rem;
 }
 =======
+=======
+>>>>>>> parent of d33eba6 (TInder 1.0)
 .border-blue-700 {
   --tw-border-opacity: 1;
   border-color: rgb(29 78 216 / var(--tw-border-opacity));
@@ -728,11 +755,15 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
 }
+<<<<<<< HEAD
+>>>>>>> parent of d33eba6 (TInder 1.0)
+=======
 >>>>>>> parent of d33eba6 (TInder 1.0)
 .px-4 {
   padding-left: 1rem;
   padding-right: 1rem;
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 .px-6 {
   padding-left: 1.5rem;
@@ -749,6 +780,8 @@ Ensure the default browser behavior of the `hidden` attribute.
 .pr-8 {
   padding-right: 2rem;
 =======
+=======
+>>>>>>> parent of d33eba6 (TInder 1.0)
 .pb-3 {
   padding-bottom: 0.75rem;
 }
@@ -763,6 +796,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .pb-5 {
   padding-bottom: 1.25rem;
+<<<<<<< HEAD
+>>>>>>> parent of d33eba6 (TInder 1.0)
+=======
 >>>>>>> parent of d33eba6 (TInder 1.0)
 }
 .text-center {
@@ -773,13 +809,17 @@ Ensure the default browser behavior of the `hidden` attribute.
   line-height: 1.75rem;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of d33eba6 (TInder 1.0)
 =======
 >>>>>>> parent of d33eba6 (TInder 1.0)
 .text-3xl {
   font-size: 1.875rem;
   line-height: 2.25rem;
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 .text-xs {
@@ -790,12 +830,20 @@ Ensure the default browser behavior of the `hidden` attribute.
   font-size: 1rem;
   line-height: 1.5rem;
 >>>>>>> parent of d33eba6 (TInder 1.0)
+=======
+.text-base {
+  font-size: 1rem;
+  line-height: 1.5rem;
+>>>>>>> parent of d33eba6 (TInder 1.0)
 }
 .font-semibold {
   font-weight: 600;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of d33eba6 (TInder 1.0)
 =======
 >>>>>>> parent of d33eba6 (TInder 1.0)
 .font-bold {
@@ -808,6 +856,7 @@ Ensure the default browser behavior of the `hidden` attribute.
   text-transform: uppercase;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 .italic {
   font-style: italic;
 }
@@ -819,6 +868,8 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 =======
 >>>>>>> parent of d33eba6 (TInder 1.0)
+=======
+>>>>>>> parent of d33eba6 (TInder 1.0)
 .text-indigo-700 {
   --tw-text-opacity: 1;
   color: rgb(67 56 202 / var(--tw-text-opacity));
@@ -827,6 +878,7 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-text-opacity: 1;
   color: rgb(30 41 59 / var(--tw-text-opacity));
 }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 .text-gray-700 {
@@ -842,6 +894,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   color: rgb(75 85 99 / var(--tw-text-opacity));
 }
 =======
+=======
+>>>>>>> parent of d33eba6 (TInder 1.0)
 .text-green-500 {
   --tw-text-opacity: 1;
   color: rgb(34 197 94 / var(--tw-text-opacity));
@@ -1013,6 +1067,7 @@ Ensure the default browser behavior of the `hidden` attribute.
   background-color: rgb(29 78 216 / var(--tw-bg-opacity));
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 .focus\:border-indigo-300:focus {
   --tw-border-opacity: 1;
   border-color: rgb(165 180 252 / var(--tw-border-opacity));
@@ -1103,6 +1158,8 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 =======
 >>>>>>> parent of d33eba6 (TInder 1.0)
+=======
+>>>>>>> parent of d33eba6 (TInder 1.0)
 @media (min-width: 768px) {
 
   .md\:mb-0 {
@@ -1116,6 +1173,7 @@ Ensure the default browser behavior of the `hidden` attribute.
   .md\:hidden {
     display: none;
   }
+<<<<<<< HEAD
 <<<<<<< HEAD
 
 
@@ -1138,6 +1196,8 @@ Ensure the default browser behavior of the `hidden` attribute.
   .md\:justify-between {
     justify-content: space-between;
   }
+=======
+>>>>>>> parent of d33eba6 (TInder 1.0)
 =======
 >>>>>>> parent of d33eba6 (TInder 1.0)
 }
