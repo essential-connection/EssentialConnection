@@ -17,25 +17,25 @@
 <body class="bg-conic">
     @*<div class="flex items-baseline w-48 h-auto">
         <div class="todosbox w-auto h-auto flex-auto">
-         <a asp-action="ListarTodos">Listar todas vagas.</a>
-         </div>
-    </div>*@
-    
+        <a asp-action="ListarTodos">Listar todas vagas.</a>
+        </div>
+        </div>*@
 
-    <div class="grid overflow-hidden grid-cols-1 grid-rows-1 w-2/4 h-max mt-6  " style="margin-left: 400px" >
+
+    <div class="grid overflow-hidden grid-cols-1 grid-rows-1 w-2/4 h-max mt-6  " style="margin-left: 400px">
         <div class="box2 text-center shadow-2xl shadow-inner" style="width: 29rem">
             <a asp-action="ListarTodos" class="relative inline-flex items-center px-8 py-2 overflow-hidden text-white  rounded group hover:mx-20 hover:bg-gray-400 active:bg-gray-700 focus:outline-none focus:ring">
-            <span class="absolute transition-transform translate-x-full group-hover:translate-x-6 title" style="display:block ruby; margin-left:28px">
-                Todas as Vagas
-            </span>
+                <span class="absolute transition-transform translate-x-full group-hover:translate-x-6 title" style="display:block ruby; margin-left:28px">
+                    Todas as Vagas
+                </span>
 
-             <span class="text-sm font-medium transition-all group-hover:mx-20 group-hover:-translate-x-24" >
-                <svg class="h-8 w-8 text-black"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/>
-                </svg>
-            </span>
+                <span class="text-sm font-medium transition-all group-hover:mx-20 group-hover:-translate-x-24">
+                    <svg class="h-8 w-8 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                    </svg>
+                </span>
             </a>
-            @foreach (var item in Model) 
+            @foreach (var item in Model)
             {
                 <h1 class=" text-3xl font-semibold" style="margin-top:24px">
                     @Html.DisplayFor(modelItem => item.Aluno.NomeCompleto)
@@ -43,70 +43,74 @@
                 <h1 class="text-xl pt-20">
                     @Html.DisplayFor(modelItem => item.DescricaoPessoal)
                 </h1>
-                <h1 class="pt-6 text-xl">
-                     Quantidade de vagas: @Html.DisplayFor(modelItem => item.Quantidade)
-                </h1>
-                <h1 class="pt-6 text-xl">
-                    @{
-                        if(item.CursoId==null){
-                            <p>Vaga de Empresa: </p>
-                            @Html.DisplayFor(modelItem => item.Empresa.Nome)
-                        }
-                        else{
-                            <p>Vaga de Curso</p>
-                            @Html.DisplayFor(modelitem=>item.Curso.Nome)
-                        }
+                <div class="grid grid-lines grid-cols-3 auto-rows-auto gap-3 ">
+          @*Competencias*@          @foreach (var item2 in item.Compentencias)
+                    {
+                        <ul>
+                            <li class="mb-6 flex flex-wrap">
+                                <span class="mr-2 my-1 rounded-full border px-4 text-sm py-2 font-medium bg-gray-200">@Html.DisplayFor(mobelItem2  => item2.Descricao)</span>
+                            </li>
+                        </ul>
                     }
-                </h1>
-                    <form action="/Tinder/Index" method="post" class="pt-14">
-                    <label class="form-group pt-8 inline-flex bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer">
+                </div>
+                 @*ItensCurriculo*@  
+                @foreach (var item3 in item.ItensCurriculo)
+                {
+                    <h1 class="pt-6 text-xl">
                         
-                          
+                    </h1>
+                }
+
+                <form action="/Tinder/Index" method="post" class="pt-14">
+                    <label class="form-group pt-8 inline-flex bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer">
+
+
                         <input type="hidden" name="vagaId" value="@item.VagaID">
-                        <input type="hidden" name="nomeVaga"  value="@item.Nome">
+                        <input type="hidden" name="nomeVaga" value="@item.Nome">
                         <input type="submit" value="Tenho interesse" class="" />
-                        <svg class="h-10 w-10 text-green-500 hover:h-15"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <polyline points="20 6 9 17 4 12" />
+                        <svg class="h-10 w-10 text-green-500 hover:h-15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12" />
                         </svg>
                     </label>
-                    </form>
+                </form>
             }
             <div class="inline-flex items-center -space-x-px pt-9">
                 <br />
-                @Html.PagedListPager(Model,pagina=>Url.Action("Index", new{pagina}), 
+                @Html.PagedListPager(Model,pagina=>Url.Action("Index", new{pagina}),
                 new X.PagedList.Web.Common.PagedListRenderOptions{LiElementClasses = new string[]{"page-item"},
                 PageClasses = new string[]{"page-link"}})
             </div>
         </div>
     </div>
-    
+
 </body>
 <section>
     <script>
-        
+
     </script>
 </section>
 @*<h1>Index</h1>
 
-@foreach (var item in Model) {
+    @foreach (var item in Model) {
     <h1>Nome do aluno</h1>
     @Html.DisplayFor(modelItem=>item.Aluno.NomeCompleto)
     <h1>Descrição aluno</h1>
     <p> @Html.DisplayFor(modelItem=>item.DescricaoPessoal)</p>
     foreach (var itensInCompetencias in item.Compentencias)
     {
-        <p>@itensInCompetencias.Descricao</p>
+    <p>@itensInCompetencias.Descricao</p>
     }
 
     foreach (var itensCurriculo in item.ItensCurriculo)
     {
-        <p>@itensCurriculo.Nome</p>
-        <p>@itensCurriculo.DataInicio</p>
-        <p>@itensCurriculo.DataFim</p>
-        <p>@itensCurriculo.Descricao</p>
-        <p>@itensCurriculo.Instituicao</p>
+    <p>@itensCurriculo.Nome</p>
+    <p>@itensCurriculo.DataInicio</p>
+    <p>@itensCurriculo.DataFim</p>
+    <p>@itensCurriculo.Descricao</p>
+    <p>@itensCurriculo.Instituicao</p>
 
     }
-}
-<div class="row">
+    }
+    <div class="row">
     @Html.PagedListPager(Model,pagina=>Url.Action("Index", new{pagina}))
-</div>*@
+    </div>*@
