@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EssentialConnection.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20220601231506_Initial")]
+    [Migration("20220605124706_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -199,11 +199,13 @@ namespace EssentialConnection.Migrations
                     b.Property<int?>("CurriculoId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("DataFim")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("DataFim")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("DataInicio")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("DataInicio")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Descricao")
                         .IsRequired()
@@ -235,12 +237,28 @@ namespace EssentialConnection.Migrations
                     b.Property<int>("AlunoId")
                         .HasColumnType("int");
 
-                    b.Property<int>("VagaId")
+                    b.Property<int?>("CursoID")
                         .HasColumnType("int");
 
-                    b.Property<string>("nomeVaga")
+                    b.Property<int?>("EmpresaId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("NomeAluno")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NomeCurso")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NomeEmpresa")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NomeVaga")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("VagaId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -255,15 +273,22 @@ namespace EssentialConnection.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("CurriculoId")
+                    b.Property<int?>("CurriculoId")
                         .HasColumnType("int");
 
-                    b.Property<string>("EmpresaId")
-                        .IsRequired()
+                    b.Property<int?>("CursoId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("CursoNome")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("nomeAluno")
-                        .IsRequired()
+                    b.Property<int?>("EmpresaId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("NomeAluno")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NomeEmpresa")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

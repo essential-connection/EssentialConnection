@@ -1,0 +1,57 @@
+﻿@using static EssentialConnection.Areas.Identity.Data.EssentialConnectionUser
+@model IEnumerable<EssentialConnection.Areas.Identity.Data.EssentialConnectionUser>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>listar Usuarios</h1>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NomeCompleto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Tipo)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomeCompleto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tipo)
+            </td>
+            <td>
+                
+                    @{
+                        if (@item.Tipo == @TipoUsuario.Aluno)
+                        {
+                            <a asp-action="MostrarPerfilAluno" asp-route-id="@item.Id">Edit</a> 
+                        }
+                        else if(@item.Tipo==@TipoUsuario.Professor)
+                        {
+                            <a asp-action="MostrarPerfilCurso" asp-route-id="@item.Id">Visualizar Perfil</a> 
+                        }
+                        else 
+                        {
+                            <a asp-action="MostrarPerfilEmpresa" asp-route-id="@item.Id">Visualizar Perfil</a>
+                        }
+                    }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

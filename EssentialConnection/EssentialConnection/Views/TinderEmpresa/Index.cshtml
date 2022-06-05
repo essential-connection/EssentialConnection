@@ -6,7 +6,7 @@
 }
 
 <h1>Index</h1>
-
+<form action="/TinderEmpresa/Index" method="post">
 @foreach (var item in Model) {
     <h1>Nome do aluno</h1>
     @Html.DisplayFor(modelItem=>item.Aluno.NomeCompleto)
@@ -24,9 +24,12 @@
         <p>@itensCurriculo.DataFim</p>
         <p>@itensCurriculo.Descricao</p>
         <p>@itensCurriculo.Instituicao</p>
-
     }
+    <input type="hidden" name="nomeCompleto" value="@item.Aluno.NomeCompleto">
+    <input type="hidden" name="curriculoId" value="@item.Aluno.CurriculoId">
+    <input type="submit" value="Interesse" class="btn btn-primary" />
 }
+</form>
 <div class="row">
     @Html.PagedListPager(Model,pagina=>Url.Action("Index", new{pagina}))
 </div>

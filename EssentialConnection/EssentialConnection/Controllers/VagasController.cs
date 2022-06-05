@@ -26,8 +26,21 @@ namespace EssentialConnection.Controllers
         // GET: Vagas
         public async Task<IActionResult> Index()
         {
-            var context = _context.Vaga.Include(v => v.Curso).Include(v => v.Empresa);
-            return View(await context.ToListAsync());
+            var teste = 3;
+            var userLogado = _identityContext.Users.FirstOrDefault(x => x.Id == User.Identity.GetUserId());
+            if(userLogado.Tipo == EssentialConnectionUser.TipoUsuario.Professor)
+            {
+                var user = _context.Curso.FirstOrDefault(x=>x.UserId == User.Identity.GetUserId());
+                var contexto = _context.Vaga.Include(v => v.Curso).Include(v => v.Empresa).Where(x=>x.CursoId==user.CursoID);
+                return View(await contexto.ToListAsync());
+            }
+            else
+            {
+                var user = _context.Empresa.FirstOrDefault(x => x.UserId == User.Identity.GetUserId());
+                var contexto = _context.Vaga.Include(v => v.Curso).Include(v => v.Empresa).Where(x => x.EmpresaId == user.EmpresaID);
+                return View(await contexto.ToListAsync());
+            }
+            
         }
 
         // GET: Vagas/Details/5
