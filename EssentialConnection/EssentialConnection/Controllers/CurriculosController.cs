@@ -30,13 +30,16 @@ namespace EssentialConnection.Controllers
         // GET: Curriculos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            //ViewData["CursoId"] = new SelectList(_context.Curso.OrderBy(c => c.Nome), "CursoID", "Nome");
+            //ViewData["EmpresaId"] = new SelectList(_context.Empresa.OrderBy(e => e.Nome), "EmpresaID", "Nome");
+            ViewData["ItensCurriculo"] = new SelectList(_context.ItensCurriculo.OrderBy(i => i.ItensCurriculoID), "ItensCurriculoID", "Nome");
             if (id == null)
             {
                 return NotFound();
             }
 
             var curriculo = await _context.Curriculo
-                .Include(c => c.Aluno)
+                .Include(c => c.Aluno).Include(c => c.ItensCurriculo).Include(c => c.Compentencias)
                 .FirstOrDefaultAsync(m => m.CurriculoID == id);
             if (curriculo == null)
             {
