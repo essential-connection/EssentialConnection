@@ -12,10 +12,19 @@
     <link rel="stylesheet" href="~/css/app.min.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/EssentialConnection.styles.css" asp-append-version="true" />
 </head>
+<<<<<<< HEAD
+<<<<<<< HEAD
 
 <body class="flex flex-col h-screen">
     <header class="bg-gradient-to-r from-indigo-200 to-indigo-100 py-1">
         <nav class="flex items-center justify-between mx-8">
+=======
+=======
+>>>>>>> parent of d33eba6 (TInder 1.0)
+<body>
+    <header class="bg-slate-100 py-1">
+        <nav class="flex items-center justify-between mx-4">
+>>>>>>> parent of d33eba6 (TInder 1.0)
             <a class="text-indigo-700 uppercase text-xl font-semibold w-1/4" asp-area="" asp-controller="Home" asp-action="Index">Essential Connection</a>
             @if (true)
             {
@@ -26,12 +35,15 @@
                 </div>
 
                 <ul class="hidden md:flex grow justify-evenly w-1/2">
-                    <li class="nav-item justify-start">
+                    <li class="nav-item">
                         <a class="nav-link text-slate-800" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-slate-800" asp-area="" asp-controller="Competencias" asp-action="Index">Competencias</a>
                     </li>
                 </ul>
             }
-            <ul class="hidden md:contents w-1/4 justify-center">
+            <ul class="hidden md:flex w-1/4 justify-center">
                 <partial name="_LoginPartial" />
             </ul>
         </nav>
@@ -45,7 +57,18 @@
     &copy; 2022 - EssentialConnection - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
     </div>
 
+<<<<<<< HEAD
+<<<<<<< HEAD
     </footer>*@
+=======
+=======
+>>>>>>> parent of d33eba6 (TInder 1.0)
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2022 - EssentialConnection - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+>>>>>>> parent of d33eba6 (TInder 1.0)
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
