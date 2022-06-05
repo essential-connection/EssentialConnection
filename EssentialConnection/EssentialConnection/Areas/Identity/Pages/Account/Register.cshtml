@@ -4,69 +4,6 @@
 @{
     ViewData["Title"] = "Register";
 }
-
-@*<div class="row">*@
-@*<div class="col-md-4">
-    <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="">
-    <h2>Create a new account.</h2>
-    <hr />
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <div class="form-floating">
-    <input asp-for="Input.NomeCompleto" class="form-control" autocomplete="nome" aria-required="true" />
-    <label asp-for="Input.NomeCompleto"></label>
-    <span asp-validation-for="Input.NomeCompleto" class="text-danger"></span>
-    </div>
-
-    <div class="form-control">
-    <label asp-for="Input.Tipo" class="form-label"></label>
-    <select asp-for="Input.Tipo" class="form-control" asp-items="Html.GetEnumSelectList<TipoUsuario>()" id='selectTipo'>
-    <option value="">Selecione o tipo de usuário</option>
-    </select>
-    <span asp-validation-for="Input.Tipo" class="text-red"></span>
-    </div>
-
-    <div class="form-floating">
-    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
-    <label asp-for="Input.Email"></label>
-    <span asp-validation-for="Input.Email" class="text-danger"></span>
-    </div>
-    <div class="form-floating">
-    <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" />
-    <label asp-for="Input.Password"></label>
-    <span asp-validation-for="Input.Password" class="text-danger"></span>
-    </div>
-    <div class="form-floating">
-    <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" />
-    <label asp-for="Input.ConfirmPassword"></label>
-    <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-    </div
-    <div class="form-floating">
-    <input asp-for="Input.Telefone" class="form-control" autocomplete="new-password" aria-required="true" />
-    <label asp-for="Input.Telefone"></label>
-    <span asp-validation-for="Input.Telefone" class="text-danger"></span>
-    </div>
-    <div id='tipoPerfil'>
-    <div id='divAluno'>aluno
-    <div class="form-group" id='divCurso'>
-    <label asp-for="Input.CursoId" class="control-label"></label>
-    <select asp-for="Input.CursoId" class ="form-control" asp-items="ViewBag.CursoId"></select>
-    </div>
-    </div>
-    <div id='divEmpresa'>
-    <div class="form-floating">
-    <input asp-for="Input.Descricao" class="form-control" autocomplete="new-password" aria-required="true" />
-    <label asp-for="Input.Descricao"></label>
-    <span asp-validation-for="Input.Descricao" class="text-danger"></span>
-    </div>
-    <div class="form-floating">
-    <input asp-for="Input.CNPJ" class="form-control" autocomplete="new-password" aria-required="true" />
-    <label asp-for="Input.CNPJ"></label>
-    <span asp-validation-for="Input.CNPJ" class="text-danger"></span>
-    </div>
-    </div>
-    </div>
-    <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
-    </form>*@
 <div class="h-full w-full flex justify-center md:justify-between items-center">
     <div class="hidden h-full lg:flex lg:block w-3/5  bg-gradient-to-r from-indigo-800 to-indigo-400 px-10 justify-center">
         <img class="scale-50 object-contain" src="~/imagens/job-unifenas.png" />
