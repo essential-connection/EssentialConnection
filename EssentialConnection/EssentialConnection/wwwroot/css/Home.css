@@ -40,21 +40,14 @@ body {
     line-height: 80px;
     color: #FFFFFF;
     text-shadow: 4px 3px 3px rgba(0, 0, 0, 0.5);
-    
 }
 
 .bg-telainicial {
+    position: relative;
     /*width: 1440px;
     height: 1024px;
     overflow-x: scroll;*/
     background: linear-gradient(180deg, #0075FF 0%, rgba(4, 68, 143, 0.9575) 38.02%, rgba(7, 24, 45, 0.92) 100%);
-}
-.filtro{
-    padding-left: 4px;
-}
-
-.bg-conic {
-    background: conic-gradient(from 58.37deg at -48.02% 139.6%, #000000 -44.81deg, rgba(103, 128, 216, 0.2) 18.46deg, #000000 315.19deg, rgba(103, 128, 216, 0.2) 378.46deg), conic-gradient(from 206.7deg at 104.79% 9.28%, rgba(0, 0, 0, 0) -5.77deg, #000000 314.59deg, rgba(0, 0, 0, 0) 354.23deg, #000000 674.59deg), linear-gradient(180deg, #D1D5DB 0%, rgba(113, 113, 122, 0.92) 100%);
 }
 
 .btnfundo {
