@@ -4,74 +4,116 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+@*<h1>Index</h1>
 
-<p>
+    <p>
     <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+    </p>
+    <div class="flex">
+    <table class="table">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nome)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Descricao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Quantidade)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataExpiracao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Responsavel)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Empresa)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Curso)
-            </th>
-            <th></th>
-        </tr>
+    <tr>
+    <th>
+    @Html.DisplayNameFor(model => model.Nome)
+    </th>
+    <th>
+    @Html.DisplayNameFor(model => model.Descricao)
+    </th>
+    <th>
+    @Html.DisplayNameFor(model => model.Quantidade)
+    </th>
+    <th>
+    @Html.DisplayNameFor(model => model.DataExpiracao)
+    </th>
+    <th>
+    @Html.DisplayNameFor(model => model.Status)
+    </th>
+    <th>
+    @Html.DisplayNameFor(model => model.Responsavel)
+    </th>
+    <th>
+    @Html.DisplayNameFor(model => model.Empresa)
+    </th>
+    <th>
+    @Html.DisplayNameFor(model => model.Curso)
+    </th>
+    <th></th>
+    </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descricao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantidade)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataExpiracao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Responsavel)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Empresa.EmpresaID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Curso.CursoID)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.VagaID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.VagaID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.VagaID">Delete</a>
-            </td>
-        </tr>
-}
+    @foreach (var item in Model)
+    {
+    <tr>
+    <td>
+    @Html.DisplayFor(modelItem => item.Nome)
+    </td>
+    <td>
+    @Html.DisplayFor(modelItem => item.Descricao)
+    </td>
+    <td>
+    @Html.DisplayFor(modelItem => item.Quantidade)
+    </td>
+    <td>
+    @Html.DisplayFor(modelItem => item.DataExpiracao)
+    </td>
+    <td>
+    @Html.DisplayFor(modelItem => item.Status)
+    </td>
+    <td>
+    @Html.DisplayFor(modelItem => item.Responsavel)
+    </td>
+    <td>
+    @Html.DisplayFor(modelItem => item.Empresa.EmpresaID)
+    </td>
+    <td>
+    @Html.DisplayFor(modelItem => item.Curso.CursoID)
+    </td>
+    <td>
+    <a asp-action="Edit" asp-route-id="@item.VagaID">Edit</a> |
+    <a asp-action="Details" asp-route-id="@item.VagaID">Details</a> |
+    <a asp-action="Delete" asp-route-id="@item.VagaID">Delete</a>
+    </td>
+    </tr>
+    }
     </tbody>
-</table>
+    </table>
+    </div>*@
+
+<div class="h-full w-full flex justify-center items-center flex-wrap">
+    <div class="hidden h-full lg:flex lg:block w-1/5  bg-indigo-900 justify-center">
+    </div>
+    <div class="w-3/5 mb-4 flex flex-wrap justify-center">
+        @foreach (var item in Model)
+        {
+            @*<div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style="background-image: url('/img/card-left.jpg')" title="Woman holding a mug">
+        </div>*@
+            <div class="w-1/2 px-4 mb-4">
+                <div class="h-64 border border-gray-400 lg:border-gray-400 bg-white rounded p-4 flex flex-col justify-between leading-normal">
+                    <div class="">
+                        <p class="text-sm text-gray-600 flex items-center">
+                            <svg class="fill-current text-gray-500 w-3 h-3 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path d="M4 8V6a6 6 0 1 1 12 0v2h1a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-8c0-1.1.9-2 2-2h1zm5 6.73V17h2v-2.27a2 2 0 1 0-2 0zM7 6v2h6V6a3 3 0 0 0-6 0z" />
+                            </svg>
+                            Vagas: @Html.DisplayFor(modelItem => item.Quantidade)
+                            Data de encerramento: @Html.DisplayFor(modelItem => item.DataExpiracao)
+                        </p>
+                        <div class="text-gray-900 font-bold text-xl mb-2">@Html.DisplayFor(modelItem => item.Nome)</div>
+
+                    </div>
+                    <div class="overflow-y-auto mb-8">
+                        <p class="text-gray-700 text-base">@Html.DisplayFor(modelItem => item.Descricao)</p>
+                    </div>
+                    <div class="flex items-center">
+                        <img class="w-10 h-10 rounded-full mr-4" src="~/imagens/enterprise.png" alt="Enterprise icon">
+                        <div class="text-sm">
+                            <p class="text-gray-900 leading-none">@Html.DisplayFor(modelItem => item.Responsavel)</p>
+                            <p class="text-gray-600">Status da vaga: @Html.DisplayFor(modelItem => item.Status)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="hidden h-full lg:flex lg:block w-1/5  bg-indigo-900 justify-center">
+    </div>
+</div>

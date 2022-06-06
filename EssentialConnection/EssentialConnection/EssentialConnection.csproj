@@ -19,6 +19,7 @@
 
 	<ItemGroup>
 	  <None Include="wwwroot\css\Home.css" />
+	  <None Include="wwwroot\imagens\business-svgrepo-com.svg" />
 	</ItemGroup>
 
 	<ItemGroup>

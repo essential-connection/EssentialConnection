@@ -39,7 +39,9 @@
                             <div class="flex space-x-4">
                                 <a asp-controller="Tinder" asp-action="Index" class="bg-gray-900 text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Conecte-se</a>
 
-                                <a asp-controller="Vagas" asp-action="Index" class="bg-gray-900 text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Vagas</a>
+                                <a asp-controller="Tinder" asp-action="ListarTodos" class="bg-gray-900 text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Vagas</a>
+
+                                <a asp-controller="ListarUsuario" asp-action="Index" class="bg-gray-900 text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Pessoas</a>
                             </div>
                         </div>
                     </div>
@@ -69,7 +71,12 @@
                             <div id="perfil-menu" class="hidden origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
                                 <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Seu perfil</a>
                                 <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Configurações</a>
-                                <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Sair</a>
+                                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" method="post">
+                                    <button type="submit">
+                                        <a class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Sair</a>
+                                    </button>
+                                </form>
+                                <partial name="_LoginPartial" />    
                             </div>
                         </div>
                     </div>
