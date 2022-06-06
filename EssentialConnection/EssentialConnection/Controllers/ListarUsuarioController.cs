@@ -21,19 +21,21 @@ namespace EssentialConnection.Controllers
             var usuarios = _identityContext.Users.ToList();
             return View(usuarios);
         }
+        [HttpGet]
         public IActionResult MostrarPerfilAluno(string id)
         {
             var userProcurado = _identityContext.Users.FirstOrDefault(x => x.Id == id);
             var aluno = _context.Aluno.Include(a => a.Curso).FirstOrDefault(a => a.email == userProcurado.Email);
             return View(aluno);
         }
+        [HttpGet]
         public IActionResult MostrarPerfilCurso(string id)
         {
             var userProcurado = _identityContext.Users.FirstOrDefault(x => x.Id == id);
             var curso = _context.Curso.Include(c=>c.Vagas).Include(a=>a.Alunos).FirstOrDefault(a => a.Email == userProcurado.Email);
             return View(curso);
         }
-
+        [HttpGet]
         public IActionResult MostrarPerfilEmpresa(string id)
         {
             var userProcurado = _identityContext.Users.FirstOrDefault(x => x.Id == id);
@@ -73,16 +75,18 @@ namespace EssentialConnection.Controllers
             var userLogado = _identityContext.Users.FirstOrDefault(u => u.Id == User.Identity.GetUserId());
             if (userLogado.Tipo == EssentialConnectionUser.TipoUsuario.Professor)
             {
-
-                return RedirectToAction("MostrarPerfilCurso", "ListarUsuario", userLogado.Id);
+                var curso = _context.Curso.Include(z => z.Vagas).FirstOrDefault(r => r.Email == userLogado.Email);
+                return View("MostrarPerfilCurso",curso);
             }
             else if (userLogado.Tipo == EssentialConnectionUser.TipoUsuario.Empresa)
             {
-                return RedirectToAction("MostrarPerfilEmpresa", "ListarUsuario", userLogado.Id);
+                var empresa = _context.Empresa.Include(c => c.Vagas).FirstOrDefault(a => a.Email == userLogado.Email);
+                return View("MostrarPerfilEmpresa", empresa);
             }
             else
             {
-                return RedirectToAction("MostrarPerfilAluno", "ListarUsuario", userLogado.Id);
+                var aluno = _context.Aluno.Include(c => c.Curriculo).FirstOrDefault(a => a.email == userLogado.Email);
+                return View("MostrarPerfilAluno");
             }
         }
     }
