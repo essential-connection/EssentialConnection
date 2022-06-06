@@ -81,6 +81,12 @@
 
 <div class="h-full w-full flex justify-center items-center flex-wrap">
     <div class="hidden h-full lg:flex lg:block w-1/5  bg-indigo-900 justify-center">
+        <p>
+        <a asp-action="Create">
+        <svg class="h-10 w-10 text-green-500"  fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+        </svg></a>
+        </p>
     </div>
     <div class="w-3/5 mb-4 flex flex-wrap justify-center">
         @foreach (var item in Model)
@@ -115,5 +121,6 @@
         }
     </div>
     <div class="hidden h-full lg:flex lg:block w-1/5  bg-indigo-900 justify-center">
+        
     </div>
 </div>

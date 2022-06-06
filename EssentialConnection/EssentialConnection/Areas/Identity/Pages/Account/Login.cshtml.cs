@@ -103,7 +103,7 @@ namespace EssentialConnection.Areas.Identity.Pages.Account
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
-                {
+        {
             returnUrl ??= Url.Content("~/Homepage");
 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
@@ -116,6 +116,8 @@ namespace EssentialConnection.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+                    returnUrl = Url.Content("~/PaginaInicial");
+                    // If we got this far, something failed, redisplay form
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
@@ -130,12 +132,11 @@ namespace EssentialConnection.Areas.Identity.Pages.Account
                 else
                 {
                     ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                    return Page();
+                    returnUrl = Url.Content("~/Identity/Account/Login");
+                    return LocalRedirect(returnUrl);
                 }
             }
-
-            returnUrl = Url.Content("~/PaginaInicial");
-            // If we got this far, something failed, redisplay form
+            returnUrl = Url.Content("~/Identity/Account/Login");
             return LocalRedirect(returnUrl);
         }
     }
