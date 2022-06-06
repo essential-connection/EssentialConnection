@@ -4,53 +4,24 @@
     ViewData["Title"] = "MostrarConnectionsAlunos";
 }
 
-<h1>MostrarConnectionsAlunos</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.NomeVaga)
-
-            <th>
-                <h1>Nome Organização</h1>
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NomeAluno)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NomeVaga)
-            </td>
-            <td>
-                    @{
-                        if (item.EmpresaId != null)
-                        {
-                            @Html.DisplayFor(modelItem => item.NomeEmpresa)
-                        }
-                        else
-                        {
-                            @Html.DisplayFor(modelItem => item.NomeCurso)
-                        }
-                    }
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NomeAluno)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="h-full w-full flex justify-center items-center flex-wrap">
+    <div class="hidden h-full lg:flex lg:block w-1/5  bg-indigo-900 justify-center">
+        <p>
+    </div>
+    <div class="w-3/5 mb-4 flex flex-wrap justify-center">
+        <p class="text-3xl text-gray-700 uppercase">Alunos que tem interesse em você</p>
+        </p>
+        @foreach (var item in Model)
+        {
+           <div class="w-1/2 px-4 mb-4">
+                <div class="h-64 border border-gray-100 lg:border-gray-100 bg-white rounded p-4 flex flex-col justify-between leading-normal">
+                        <div style="text-align:center" class="text-gray-900 font-bold text-xl mb-2">@Html.DisplayFor(modelItem => item.NomeAluno)</div>
+                        
+                </div>
+            </div>
+        }
+    </div>
+    <div class="hidden h-full lg:flex lg:block w-1/5  bg-indigo-900 justify-center">
+        
+    </div>
+</div>

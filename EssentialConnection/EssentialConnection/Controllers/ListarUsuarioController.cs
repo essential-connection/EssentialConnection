@@ -25,7 +25,7 @@ namespace EssentialConnection.Controllers
         public IActionResult MostrarPerfilAluno(string id)
         {
             var userProcurado = _identityContext.Users.FirstOrDefault(x => x.Id == id);
-            var aluno = _context.Aluno.Include(a => a.Curso).FirstOrDefault(a => a.email == userProcurado.Email);
+            var aluno = _context.Aluno.Include(a => a.Curso).Include(w=>w.Curriculo).Include(Z=>Z.Curriculo.Compentencias).Include(A=>A.Curriculo.ItensCurriculo).FirstOrDefault(a => a.email == userProcurado.Email);
             return View(aluno);
         }
         [HttpGet]
@@ -45,13 +45,14 @@ namespace EssentialConnection.Controllers
 
         public IActionResult MostrarConnectionsAlunos(int id)
         {
-            var connections = _context.Tinders.Where(x=>x.AlunoId==id);
+            var connections = _context.Tinders.Where(x=>x.EmpresaId==id || x.CursoID==id);
             return View(connections.ToList());
         }
         
         public IActionResult MostrarConnectionsEmpresasCursos(int id)
         {
-            var connections = _context.TinderEmpresa.Where(x => x.EmpresaId == id || x.CursoId==id);
+            var context= _context.Aluno.FirstOrDefault(x=>x.AlunoID==id);
+            var connections = _context.TinderEmpresa.Where(x=>x.NomeAluno==context.NomeCompleto);
             return View(connections.ToList());
         }        
 
@@ -85,8 +86,8 @@ namespace EssentialConnection.Controllers
             }
             else
             {
-                var aluno = _context.Aluno.Include(c => c.Curriculo).FirstOrDefault(a => a.email == userLogado.Email);
-                return View("MostrarPerfilAluno");
+                var aluno = _context.Aluno.Include(a => a.Curso).Include(w => w.Curriculo).Include(Z => Z.Curriculo.Compentencias).Include(A => A.Curriculo.ItensCurriculo).FirstOrDefault(a => a.email == userLogado.Email);
+                return View("MostrarPerfilAluno",aluno);
             }
         }
     }
