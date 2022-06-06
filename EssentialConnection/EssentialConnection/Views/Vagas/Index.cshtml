@@ -4,74 +4,125 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+@*<h1>Index</h1>
 
-<p>
+    <p>
     <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+    </p>
+    <div class="flex">
+    <table class="table">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nome)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Descricao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Quantidade)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DataExpiracao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Status)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Responsavel)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Empresa)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Curso)
-            </th>
-            <th></th>
-        </tr>
+    <tr>
+    <th>
+    @Html.DisplayNameFor(model => model.Nome)
+    </th>
+    <th>
+    @Html.DisplayNameFor(model => model.Descricao)
+    </th>
+    <th>
+    @Html.DisplayNameFor(model => model.Quantidade)
+    </th>
+    <th>
+    @Html.DisplayNameFor(model => model.DataExpiracao)
+    </th>
+    <th>
+    @Html.DisplayNameFor(model => model.Status)
+    </th>
+    <th>
+    @Html.DisplayNameFor(model => model.Responsavel)
+    </th>
+    <th>
+    @Html.DisplayNameFor(model => model.Empresa)
+    </th>
+    <th>
+    @Html.DisplayNameFor(model => model.Curso)
+    </th>
+    <th></th>
+    </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nome)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descricao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantidade)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataExpiracao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Responsavel)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Empresa.EmpresaID)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Curso.CursoID)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.VagaID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.VagaID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.VagaID">Delete</a>
-            </td>
-        </tr>
-}
+    @foreach (var item in Model)
+    {
+    <tr>
+    <td>
+    @Html.DisplayFor(modelItem => item.Nome)
+    </td>
+    <td>
+    @Html.DisplayFor(modelItem => item.Descricao)
+    </td>
+    <td>
+    @Html.DisplayFor(modelItem => item.Quantidade)
+    </td>
+    <td>
+    @Html.DisplayFor(modelItem => item.DataExpiracao)
+    </td>
+    <td>
+    @Html.DisplayFor(modelItem => item.Status)
+    </td>
+    <td>
+    @Html.DisplayFor(modelItem => item.Responsavel)
+    </td>
+    <td>
+    @Html.DisplayFor(modelItem => item.Empresa.EmpresaID)
+    </td>
+    <td>
+    @Html.DisplayFor(modelItem => item.Curso.CursoID)
+    </td>
+    <td>
+    <a asp-action="Edit" asp-route-id="@item.VagaID">Edit</a> |
+    <a asp-action="Details" asp-route-id="@item.VagaID">Details</a> |
+    <a asp-action="Delete" asp-route-id="@item.VagaID">Delete</a>
+    </td>
+    </tr>
+    }
     </tbody>
-</table>
+    </table>
+    </div>*@
+<div class="h-full w-full flex justify-center md:justify-between items-center">
+    <div class="w-2/5 lg:flex">
+        <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style="background-image: url('/img/card-left.jpg')" title="Woman holding a mug">
+        </div>
+        <div class="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+            <div class="mb-8">
+                <p class="text-sm text-gray-600 flex items-center">
+                    <svg class="fill-current text-gray-500 w-3 h-3 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M4 8V6a6 6 0 1 1 12 0v2h1a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-8c0-1.1.9-2 2-2h1zm5 6.73V17h2v-2.27a2 2 0 1 0-2 0zM7 6v2h6V6a3 3 0 0 0-6 0z" />
+                    </svg>
+                    Members only
+                </p>
+                <div class="text-gray-900 font-bold text-xl mb-2">Can coffee make you a better developer?</div>
+                <p class="text-gray-700 text-base">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.</p>
+            </div>
+            <div class="flex items-center">
+                <img class="w-10 h-10 rounded-full mr-4" src="/img/jonathan.jpg" alt="Avatar of Jonathan Reinink">
+                <div class="text-sm">
+                    <p class="text-gray-900 leading-none">Jonathan Reinink</p>
+                    <p class="text-gray-600">Aug 18</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="w-2/5 lg:flex">
+        <div class="h-48 lg:h-auto lg:w-48 flex-none bg-cover rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden" style="background-image: url('/img/card-left.jpg')" title="Woman holding a mug">
+        </div>
+        <div class="border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+            <div class="mb-8">
+                <p class="text-sm text-gray-600 flex items-center">
+                    <svg class="fill-current text-gray-500 w-3 h-3 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                        <path d="M4 8V6a6 6 0 1 1 12 0v2h1a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-8c0-1.1.9-2 2-2h1zm5 6.73V17h2v-2.27a2 2 0 1 0-2 0zM7 6v2h6V6a3 3 0 0 0-6 0z" />
+                    </svg>
+                    Members only
+                </p>
+                <div class="text-gray-900 font-bold text-xl mb-2">Can coffee make you a better developer?</div>
+                <p class="text-gray-700 text-base">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis eaque, exercitationem praesentium nihil.</p>
+            </div>
+            <div class="flex items-center">
+                <img class="w-10 h-10 rounded-full mr-4" src="/img/jonathan.jpg" alt="Avatar of Jonathan Reinink">
+                <div class="text-sm">
+                    <p class="text-gray-900 leading-none">Jonathan Reinink</p>
+                    <p class="text-gray-600">Aug 18</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
