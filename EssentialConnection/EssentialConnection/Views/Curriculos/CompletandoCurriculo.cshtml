@@ -3,54 +3,131 @@
 @{
     ViewData["Title"] = "Create";
 }
-<h1>Parabens, voce cadastrou uma descrição no seu curriculo</h1>
-<form action="AdicionarCompentencia" method="post">
-<div class="row">
-    <div class="col-md-4">
-            <div class="form-group">
-                <select class="form-select" name="compentenciaNome">
-                <option selected>Open this select menu</option>
-                <option value="Lindo">Lindo</option>
-                <option value="Gostoso">Gostoso</option>
-                <option value="Perfito">Perfeito</option>
-</select>
-              <input type="submit" value="Interesse" class="btn btn-primary" />
-            </div>
-    </div>
-</div>
-</form>
 
-<form action="AdicionarItensCurriculo" method="post">
-<div class="row">
-    <div class="col-md-4">
-            <div class="form-group">
-                <div>
-                <label class="control-label">Nome</label>
-                <input class="form-control" name="nome"/>
+<div class="h-full w-full flex justify-center md:justify-between items-center">
+    <div class="hidden h-full lg:flex lg:block w-1/5  bg-indigo-900 px-10 justify-center">
+    </div>
+    <div class="w-full px-5 flex flex-col items-center">
+        <div class="mb-12">
+            <p class="text-3xl text-gray-700 uppercase" style="text-align:center">Parabens, voce cadastrou uma descrição no seu curriculo</p>
+        </div>
+        <div>
+            <div class="w-full px-3 md:mb-0 break-words">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Escolha o que você quer cadastrar primeiro</label>
+                    <select class="block w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-indigo-600" id="divCadastrar" style="text-align:center">
+                        <option selected></option>
+                        <option value="1">Compentencia</option>
+                        <option value="2">Formação</option>
+                    </select>
+                    
                 </div>
-               <div>
-                <label  class="control-label">Descrição</label>
-                <input  class="form-control" name="descricao"/>
+        </div>
+        <hr />
+        <div id="pai">
+        <div id="divCompentencia">
+        <form class="w-full min-w-lg max-w-lg" action="AdicionarCompentencia" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-red-500"></div>
+                        <div class="flex flex-wrap -mx-3">
+                <div class="w-full px-3 md:mb-0 break-words">
+                    <label style="text-align:center" class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Escolha sua compentencia</label>
+                    <select class="block w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-indigo-600" name="compentenciaNome">
+                        <option selected>Escolha sua compentencia </option>
+                        <option value="Atencioso">Atencioso</option>
+                        <option value="Estudioso">Estudioso</option>
+                        <option value="C#">C#</option>
+                    </select>
+                    
                 </div>
-                <div>
-                <label class="control-label">Instituição</label>
-                <input class="form-control" name="instituicao"/>
+            </div>
+            <div class="flex space-x-2 justify-center mt-12">
+                <button type="submit" value="Create" class="inline-block px-6 py-2.5 bg-indigo-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-indigo-700 hover:shadow-lg focus:bg-indigo-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-indigo-800 active:shadow-lg transition duration-150 ease-in-out">
+                    Salvar Compentencia
+                </button>
+            </div>
+        </form>
+        </div>
+        <div id="divItens">
+            <form class="w-full min-w-lg max-w-lg" action="AdicionarItensCurriculo" method="post">
+            <div class="flex flex-wrap -mx-3">
+                <div class="w-full px-3 md:mb-0">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Nome formação</label>
+                    <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-indigo-600" name="nome"/>
                 </div>
-                <div>
-                <select asp-items="Html.GetEnumSelectList<@EssentialConnection.Models.ItensCurriculo.Tipo>()" name="select">
-                        <option value="">Selecione o tipo de formação</option>
+            </div>
+            <div class="flex flex-wrap -mx-3">
+                <div class="w-full px-3 md:mb-0 break-words">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Descrição Formação</label>
+                    <textarea class="resize-none appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded h-32 py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-indigo-600" name="Descricao"></textarea>
+                </div>
+            </div>
+            <div class="flex flex-wrap -mx-3">
+                <div class="w-full md:w-1/2 px-3">
+                    <label  class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Instituição</label>
+                    <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-indigo-600" name="instituicao"/>
+                </div>
+                <div class="w-full md:w-1/2 px-3">
+                    <label  class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Escolha o tipo de formação</label>
+                    <select asp-items="Html.GetEnumSelectList<@EssentialConnection.Models.ItensCurriculo.Tipo>()" class="block w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-indigo-600" name="select">
                     </select>
                 </div>
-                <div>
-                <label  class="control-label">Data Inicio</label>
-                <input  class="form-control" name="dataInicio"/>
+            </div>
+            <div class="flex flex-wrap -mx-3">
+                <div class="w-full md:w-2/3 px-3">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Data Inicio</label>
+                    <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-indigo-600" name="dataInicio" />
                 </div>
-                <div>
-                <label  class="control-label">Data Fim</label>
-                <input  class="form-control" name="dataFim"/>
+                <div class="w-full md:w-1/3 px-3">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">Data fim</label>
+                    <input class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-indigo-600" name="dataFim" />
                 </div>
-                <input type="submit" value="Vamo" class="btn btn-primary" />
+            </div>
+            <div class="flex space-x-2 justify-center mt-12">
+                <button type="submit" value="Create" class="inline-block px-6 py-2.5 bg-indigo-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-indigo-700 hover:shadow-lg focus:bg-indigo-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-indigo-800 active:shadow-lg transition duration-150 ease-in-out">
+                    Salvar Formação.
+                </button>
+            </div>
+        </form>
+        </div>
+        </div>
+        <div id="buttonFinalizar">
+            <a href="~/PaginaInicial"><button  class="inline-block px-6 py-2.5 bg-indigo-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-indigo-700 hover:shadow-lg focus:bg-indigo-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-indigo-800 active:shadow-lg transition duration-150 ease-in-out">Finalizar Curriculo</button></a>
+        </div>
+        <div class="flex space-x-2 justify-center mt-12">
+                
             </div>
     </div>
+
+    <div class="hidden h-full lg:flex lg:block w-1/5 bg-indigo-900 px-10 justify-center">
+    </div>
+    @*<div>
+        <a asp-action="Index">Voltar</a>
+    </div>*@
 </div>
-</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        $('#divCadastrar').on('change', function() {
+            var valorSelect = $(this).val();
+            $('#pai').children('div').hide();
+            if (valorSelect == 1)
+            {
+                $('#divCompentencia').show();
+                $('#buttonFinalizar').hide();
+            }
+            if (valorSelect == 2)
+            {
+                $('#divItens').show();
+                $('#buttonFinalizar').hide();
+            }
+            if (valorSelect !=2 && valorSelect!=1)
+            {
+                $('#buttonFinalizar').show();
+            }
+        });
+        $(document).ready(function() {
+            $('#pai').children('div').hide();
+        });
+    </script>
+
+}
