@@ -86,7 +86,7 @@
                                     {
                                         <i class="bx bx-calendar text-sm" style="color: #666"></i>
                                         <small class="text-sm text-gray-600">
-                                            @Html.DisplayFor(modelItem => item.DataInicio) - Atualmente
+                                            @Html.DisplayFor(modelItem => item.DataInicio.ToString()) - Atualmente
                                         </small>
                                 
                                     }
@@ -94,7 +94,7 @@
                                     {
                                          <i class="bx bx-calendar text-sm" style="color: #666"></i>
                                         <small class="text-sm text-gray-600">
-                                            @Html.DisplayFor(modelItem => item.DataInicio.ToString("dd/MM/yyyy")) - @Html.DisplayFor(modelItem => item.DataFim)
+                                            @Html.DisplayFor(modelItem => item.DataInicio.ToString()) - @Html.DisplayFor(modelItem => item.DataFim.ToString())
                                         </small>
                                     }
                                 </div>
