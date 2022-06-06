@@ -39,7 +39,7 @@ namespace EssentialConnection.Controllers
             }
 
             var curriculo = await _context.Curriculo
-                .Include(c => c.Aluno).Include(c => c.ItensCurriculo).Include(c => c.Compentencias)
+                .Include(c => c.Aluno).Include(c => c.ItensCurriculo).Include(c => c.Compentencias).Include(u => u.Aluno.Curso)
                 .FirstOrDefaultAsync(m => m.CurriculoID == id);
             if (curriculo == null)
             {
