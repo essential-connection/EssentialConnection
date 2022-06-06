@@ -1,30 +1,39 @@
 ﻿@model EssentialConnection.Models.Curriculo
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Curriculo";
 }
 
-<h1>Create</h1>
-
-<h4>Curriculo</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="DescricaoPessoal" class="control-label"></label>
-                <input asp-for="DescricaoPessoal" class="form-control" />
-                <span asp-validation-for="DescricaoPessoal" class="text-danger"></span>
+<div class="h-full w-full flex justify-center md:justify-between items-center">
+    <div class="hidden h-full lg:flex lg:block w-1/5  bg-indigo-900 px-10 justify-center">
+    </div>
+    <div class="w-full px-5 flex flex-col items-center">
+        <div class="mb-12">
+            <p class="text-3xl text-gray-700 uppercase">Cadastre uma descrição ao seu currículo</p>
+        </div>
+        <form class="w-full min-w-lg max-w-lg" asp-action="Create" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-red-500"></div>
+                        <div class="flex flex-wrap -mx-3">
+                <div class="w-full px-3 md:mb-0 break-words">
+                    <label asp-for="DescricaoPessoal" class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"></label>
+                    <textarea asp-for="DescricaoPessoal" class="resize-none appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded h-32 py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-indigo-600" ></textarea>
+                    <span asp-validation-for="DescricaoPessoal" class="text-red-500 text-xs italic"></span>
+                </div>
             </div>
-             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="flex space-x-2 justify-center mt-12">
+                <button type="submit" value="Create" class="inline-block px-6 py-2.5 bg-indigo-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-indigo-700 hover:shadow-lg focus:bg-indigo-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-indigo-800 active:shadow-lg transition duration-150 ease-in-out">
+                    Salvar descrição
+                </button>
             </div>
         </form>
+        
     </div>
-</div>
-<div>
-    <a asp-action="Index">Back to List</a>
+
+    <div class="hidden h-full lg:flex lg:block w-1/5 bg-indigo-900 px-10 justify-center">
+    </div>
+    @*<div>
+        <a asp-action="Index">Voltar</a>
+    </div>*@
 </div>
 
 @section Scripts {
