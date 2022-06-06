@@ -4,19 +4,19 @@
     ViewData["Title"] = "MostrarConnectionsEmpresasCursos";
 }
 
-<h1>MostrarConnectionsEmpresasCursos</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+<div class="h-full w-full flex justify-center md:justify-between items-center">
+    <div class="hidden h-full lg:flex lg:block w-1/5  bg-indigo-900 px-10 justify-center">
+    </div>
+    <div class="w-full px-5 flex flex-col items-center">
+        <div class="mb-12">
+            <p class="text-3xl text-gray-700 uppercase">Cadastrar vaga</p>
+        </div>
+        <table class="table">
     <thead>
         <tr>
             <th>
-                <h1>Nome da organização</h1>
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NomeAluno)
+                <h1>Organizações que tem interesse em você</h1>
             </th>
             <th></th>
         </tr>
@@ -37,18 +37,14 @@
                     }
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.NomeAluno)
-            </td>
-            
-            <td>
                 @{
                     if(item.EmpresaId!=null)
                     {
-                            <a asp-action="MostrarPerfilEmpresa" asp-route-id="@item.EmpresaId">Edit</a>
+                            <a asp-action="MostrarPerfilEmpresa" asp-route-id="@item.EmpresaId">Ver Perfil</a>
                     }
                     else
                     {
-                             <a asp-action="MostrarPerfilCurso" asp-route-id="@item.CursoId">Edit</a>
+                             <a asp-action="MostrarPerfilCurso" asp-route-id="@item.CursoId">Ver Perfil</a>
                     }
                 }
             </td>
@@ -56,3 +52,12 @@
 }
     </tbody>
 </table>
+        
+    </div>
+    <div class="hidden h-full lg:flex lg:block w-1/5 bg-indigo-900 px-10 justify-center">
+    </div>
+    @*<div>
+        <a asp-action="Index">Voltar</a>
+    </div>*@
+</div>
+
