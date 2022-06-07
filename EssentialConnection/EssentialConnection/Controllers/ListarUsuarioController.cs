@@ -25,7 +25,8 @@ namespace EssentialConnection.Controllers
         public IActionResult MostrarPerfilAluno(string id)
         {
             var userProcurado = _identityContext.Users.FirstOrDefault(x => x.Id == id);
-            var aluno = _context.Aluno.Include(a => a.Curso).FirstOrDefault(a => a.email == userProcurado.Email);
+            var aluno = _context.Aluno.Include(a => a.Curso).Include(c => c.Curriculo).Include(o => o.Curriculo.Compentencias).Include(i => i.Curriculo.ItensCurriculo)
+                .FirstOrDefault(a => a.email == userProcurado.Email);
             return View(aluno);
         }
         [HttpGet]
