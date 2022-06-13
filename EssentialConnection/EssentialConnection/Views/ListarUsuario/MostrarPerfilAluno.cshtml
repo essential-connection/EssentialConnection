@@ -79,42 +79,45 @@
         <div class="mx-4">
             <h1 class="mb-4 text-4xl text-gray-700 font-bold">Experiencia</h1>
             <ul>
-                @foreach (var item in @Model.Curriculo.ItensCurriculo)
-                {
-                    <li class="mb-4">
-                        <h2 class="text-2xl font-medium text-gray-800">
-                            @Html.DisplayFor(modelItem => item.Nome)
-                        </h2>
-                        <div class="mt-1">
-                            <div>
-                                <i class="bx bx-buildings" style="color: #666"></i>
-                                <small class="text-base text-gray-800">
-                                    @Html.DisplayFor(modelItem => item.Descricao)
-                                </small>
-                            </div>
-                            <div>
-
-                                @if (item.DataFim == null)
+                            @if (Model.Curriculo.ItensCurriculo != null)
+                            {
+                                foreach (var item in @Model.Curriculo.ItensCurriculo)
                                 {
-                                    <i class="bx bx-calendar text-sm" style="color: #666"></i>
-                                    <small class="text-sm text-gray-600">
-                                        @Html.DisplayFor(modelItem => item.DataInicio)- Atualmente
-                                    </small>
+                                    <li class="mb-4">
+                                        <h2 class="text-2xl font-medium text-gray-800">
+                                            @Html.DisplayFor(modelItem => item.Nome)
+                                        </h2>
+                                        <div class="mt-1">
+                                            <div>
+                                                <i class="bx bx-buildings" style="color: #666"></i>
+                                                <small class="text-base text-gray-800">
+                                                    @Html.DisplayFor(modelItem => item.Descricao)
+                                                </small>
+                                            </div>
+                                            <div>
+
+                                                @if (item.DataFim == null)
+                                                {
+                                                    <i class="bx bx-calendar text-sm" style="color: #666"></i>
+                                                    <small class="text-sm text-gray-600">
+                                                        @Html.DisplayFor(modelItem => item.DataInicio)- Atualmente
+                                                    </small>
+
+                                                }
+                                                else
+                                                {
+                                                    <i class="bx bx-calendar text-sm" style="color: #666"></i>
+                                                    <small class="text-sm text-gray-600">
+                                                        @Html.DisplayFor(modelItem => item.DataInicio) - @Html.DisplayFor(modelItem => item.DataFim)
+                                                    </small>
+                                                }
+                                            </div>
+                                        </div>
+                                    </li>
 
                                 }
-                                else
-                                {
-                                    <i class="bx bx-calendar text-sm" style="color: #666"></i>
-                                    <small class="text-sm text-gray-600">
-                                        @Html.DisplayFor(modelItem => item.DataInicio) - @Html.DisplayFor(modelItem => item.DataFim)
-                                    </small>
-                                }
-                            </div>
-                        </div>
-                    </li>
-
-                }
-                @*<li class="mb-4">
+                            }
+                            @*<li class="mb-4">
                     <h2 class="text-2xl font-medium text-gray-800">
                     Cargo
                     </h2>

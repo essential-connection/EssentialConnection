@@ -8,16 +8,19 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EssentialConnection.Models;
 using Microsoft.AspNet.Identity;
+using EssentialConnection.Areas.Identity.Data;
 
 namespace EssentialConnection.Controllers
 {
     public class CurriculosController : Controller
     {
         private readonly Context _context;
+        private readonly IdentityContext _identityContext;
 
-        public CurriculosController(Context context)
+        public CurriculosController(Context context, IdentityContext identityContext)
         {
             _context = context;
+            _identityContext = identityContext;
         }
 
         // GET: Curriculos
@@ -52,6 +55,13 @@ namespace EssentialConnection.Controllers
         // GET: Curriculos/Create
         public IActionResult Create()
         {
+            var alunoLogado = _identityContext.Users.FirstOrDefault(x=>x.Id==User.Identity.GetUserId());
+            var aluno = _context.Aluno.FirstOrDefault(x=>x.email==alunoLogado.Email);
+            if (aluno.CurriculoId!=null)
+            {
+                return View("EditandoCurriculo");
+            }
+           
             return View();
         }
 
@@ -99,32 +109,15 @@ namespace EssentialConnection.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CurriculoID,DescricaoPessoal,AlunoId")] Curriculo curriculo)
+        public async Task<IActionResult> Edit(string descricao)
         {
-            if (id != curriculo.CurriculoID)
-            {
-                return NotFound();
-            }
-
-                try
-                {
-                    _context.Update(curriculo);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CurriculoExists(curriculo.CurriculoID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            ViewData["AlunoId"] = new SelectList(_context.Aluno, "AlunoID", "AlunoID", curriculo.AlunoId);
-            return View(curriculo);
+            var alunoLogado = _identityContext.Users.FirstOrDefault(x => x.Id == User.Identity.GetUserId());
+            var alunoCurriculo = _context.Aluno.FirstOrDefault(z => z.email == alunoLogado.Email);
+            var curriculo = _context.Curriculo.FirstOrDefault(a => a.CurriculoID == alunoCurriculo.CurriculoId);
+            curriculo.DescricaoPessoal = descricao;
+            _context.Update(curriculo);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("CompletandoCurriculo", "Curriculos");   
         }
 
         // GET: Curriculos/Delete/5
