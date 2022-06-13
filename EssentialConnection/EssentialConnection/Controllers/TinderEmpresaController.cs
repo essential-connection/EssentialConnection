@@ -25,7 +25,7 @@ namespace EssentialConnection.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Index(string nomeCompleto, int curriculoID)
+        public async Task<IActionResult> Index(string nomeCompleto, int curriculoID, int? alunoId)
         {
             TinderEmpresa tinderEmpresa = new TinderEmpresa();
             var userLogado = _identityContext.Users.FirstOrDefault(x => x.Id == User.Identity.GetUserId());
@@ -47,6 +47,7 @@ namespace EssentialConnection.Controllers
             }
             tinderEmpresa.CurriculoId = curriculoID;
             tinderEmpresa.NomeAluno = nomeCompleto;
+            tinderEmpresa.AlunoId = alunoId;
             _context.Add(tinderEmpresa);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

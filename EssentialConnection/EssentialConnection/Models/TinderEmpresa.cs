@@ -9,5 +9,6 @@
         public string? NomeAluno { get; set; }
         public int? CursoId { get; set; }
         public string? CursoNome { get; set; }
+        public int? AlunoId { get; set; }
     }
 }
