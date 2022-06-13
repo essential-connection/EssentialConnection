@@ -7,6 +7,5 @@
         public int? CurriculoId { get; set; }
         public Curriculo Curriculo { get; set; }
 
-
     }
 }

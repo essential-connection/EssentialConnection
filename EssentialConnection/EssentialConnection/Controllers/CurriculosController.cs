@@ -30,13 +30,16 @@ namespace EssentialConnection.Controllers
         // GET: Curriculos/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            //ViewData["CursoId"] = new SelectList(_context.Curso.OrderBy(c => c.Nome), "CursoID", "Nome");
+            //ViewData["EmpresaId"] = new SelectList(_context.Empresa.OrderBy(e => e.Nome), "EmpresaID", "Nome");
+            ViewData["ItensCurriculo"] = new SelectList(_context.ItensCurriculo.OrderBy(i => i.ItensCurriculoID), "ItensCurriculoID", "Nome");
             if (id == null)
             {
                 return NotFound();
             }
 
             var curriculo = await _context.Curriculo
-                .Include(c => c.Aluno)
+                .Include(c => c.Aluno).Include(c => c.ItensCurriculo).Include(c => c.Compentencias)
                 .FirstOrDefaultAsync(m => m.CurriculoID == id);
             if (curriculo == null)
             {
@@ -65,7 +68,13 @@ namespace EssentialConnection.Controllers
             AlunosController aluno = new AlunosController(_context);
             await _context.SaveChangesAsync();
             aluno.AdicionaCurriculo(curriculo.CurriculoID, alunoLogado.AlunoID);
-            return RedirectToAction("Create", "Compentencias");
+            return RedirectToAction("CompletandoCurriculo", "Curriculos");
+        }
+        
+        [HttpGet]
+        public IActionResult CompletandoCurriculo()
+        {
+            return View();
         }
 
         // GET: Curriculos/Edit/5
@@ -151,6 +160,22 @@ namespace EssentialConnection.Controllers
         private bool CurriculoExists(int id)
         {
             return _context.Curriculo.Any(e => e.CurriculoID == id);
+        }
+
+        public IActionResult AdicionarCompentencia(string compentenciaNome)
+        {
+            CompentenciasController comp = new CompentenciasController(_context);
+            var alunoLogado = _context.Aluno.FirstOrDefault(x => x.UserId == User.Identity.GetUserId());
+            comp.Create(compentenciaNome,alunoLogado.AlunoID);
+            return RedirectToAction("CompletandoCurriculo", "Curriculos");
+        }
+
+        public IActionResult AdicionarItensCurriculo(string nome,string descricao, string instituicao, string dataInicio, string dataFim)
+        {
+            ItensCurriculoController itens = new ItensCurriculoController(_context);
+            var alunoLogado = _context.Aluno.FirstOrDefault(x => x.UserId == User.Identity.GetUserId());
+            itens.Create(nome, descricao, instituicao, dataInicio, dataFim, alunoLogado.AlunoID);
+            return RedirectToAction("CompletandoCurriculo", "Curriculos");
         }
     }
 }

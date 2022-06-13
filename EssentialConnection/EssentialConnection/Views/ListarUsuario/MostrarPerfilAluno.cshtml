@@ -1,26 +1,35 @@
-﻿@model EssentialConnection.Models.Curriculo
+﻿@model EssentialConnection.Models.Aluno
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "MostrarPerfilAluno";
 }
 
 <div class="h-full w-full flex justify-center md:justify-between items-center">
     <div class="hidden h-full lg:flex lg:block w-1/5  bg-indigo-900 px-10 justify-center">
     </div>
+    <div class="w-full px-5 flex flex-col items-center">
+        <a asp-action="MostrarConnectionsEmpresasCursos" asp-route-id="@Model.AlunoID" class="inline-block mb-2 px-6 py-2.5 bg-indigo-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-indigo-700 hover:shadow-lg focus:bg-indigo-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-indigo-800 active:shadow-lg transition duration-150 ease-in-out">Mostrar Connections</a>
+        <div class="mb-12">
+            <p class="text-3xl text-gray-700 uppercase">@Html.DisplayFor(model=>model.NomeCompleto)</p>
+        </div>
+        <div class="h-full w-full flex justify-center md:justify-between items-center">
+    <div class="hidden h-full lg:flex lg:block w-1/5  bg-indigo-900 px-10 justify-center">
+    </div>
     <div class="contents divide-x-2 divide-zinc-300">
+        
     <div class="pb-96 pr-48 w-80">
         <div class="md:fixed pb-36 ">
             <div class="md:block md:ml-12">
 
                 <div class="mb-12 md:h-fit text-center mt-4  justify-center items-center">
                     <h1 class="text-2xl text-gray-800 font-bold">
-                        @Html.DisplayFor(@model => model.Aluno.NomeCompleto)
+                        @Html.DisplayFor(@model => model.NomeCompleto)
                     </h1>
                     <h1 class="text-lg text-gray-700 font-bold">
-                        @Html.DisplayFor(@model => model.Aluno.Curso.Nome)
+                        @Html.DisplayFor(@model => model.Curso.Nome)
                     </h1>
                     <div class="text-gray-600 md:hidden mt-1">
-                        @Html.DisplayFor(@model => model.Aluno.email)
+                        @Html.DisplayFor(@model => model.email)
                     </div>
                 </div>
             </div>
@@ -35,7 +44,7 @@
                             <path d="M2 12H9V14H2zM4 15H10V17H4zM7 18H11V20H7z" />
                         </svg>
                     </div>
-                    @Html.DisplayFor(@model => model.Aluno.email)
+                    @Html.DisplayFor(@model => model.email)
                 </div>
                 <div class="my-5 text-lg text-gray-600 flex">
                     <div class="mr-2 pt-1">
@@ -44,7 +53,7 @@
                         </svg>
 
                     </div>
-                    @Html.DisplayFor(@model => model.Aluno.Telefone)
+                    @Html.DisplayFor(@model => model.Telefone)
                 </div>
                 <a href=""
                    class="my-5 text-blue-500 text-lg text-gray-600 flex">
@@ -54,7 +63,7 @@
                         </svg>
 
                     </div>
-                    @Html.DisplayFor(@model => model.Aluno.Curso.Nome)
+                    @Html.DisplayFor(@model => model.Curso.Nome)
                 </a>
             </div>
             <hr class="">
@@ -64,13 +73,13 @@
         <div class="mx-4 mb-6">
             <h1 class="mb-4 text-4xl text-gray-700 font-bold">Descrição</h1>
             <p class="text-lg">
-                @Html.DisplayFor(@model => model.DescricaoPessoal)
+                @Html.DisplayFor(@model => model.Curriculo.DescricaoPessoal)
             </p>
         </div>
         <div class="mx-4">
             <h1 class="mb-4 text-4xl text-gray-700 font-bold">Experiencia</h1>
             <ul>
-                @foreach (var item in @Model.ItensCurriculo)
+                @foreach (var item in @Model.Curriculo.ItensCurriculo)
                 {
                     <li class="mb-4">
                         <h2 class="text-2xl font-medium text-gray-800">
@@ -127,7 +136,7 @@
         <div class="mx-4">
             <h1 class="mb-4 text-4xl text-gray-700 font-bold">Competencias</h1>
             <div class="grid grid-lines grid-cols-3 auto-rows-auto gap-3 ">
-                @foreach (var item in Model.Compentencias)
+                @foreach (var item in Model.Curriculo.Compentencias)
                 {
                     <ul>
                         <li class="mb-6 flex flex-wrap">
@@ -136,11 +145,18 @@
                     </ul>
                 }
             </div>
-
         </div>
     </div>
     </div>
     <div class="hidden h-full lg:flex lg:block w-1/5 bg-indigo-900 px-10 justify-center">
     </div>
-
+</div>
+        
+    </div>
+    <div class="hidden h-full lg:flex lg:block w-1/5 bg-indigo-900 px-10 justify-center">
+                                     
+    </div>
+    @*<div>
+        <a asp-action="Index">Voltar</a>
+    </div>*@
 </div>

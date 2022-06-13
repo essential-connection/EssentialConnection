@@ -49,9 +49,12 @@ namespace EssentialConnection.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CurriculoId = table.Column<int>(type: "int", nullable: false),
-                    EmpresaId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    nomeAluno = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    CurriculoId = table.Column<int>(type: "int", nullable: true),
+                    EmpresaId = table.Column<int>(type: "int", nullable: true),
+                    NomeEmpresa = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NomeAluno = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CursoId = table.Column<int>(type: "int", nullable: true),
+                    CursoNome = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -65,8 +68,13 @@ namespace EssentialConnection.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     AlunoId = table.Column<int>(type: "int", nullable: false),
+                    NomeVaga = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     VagaId = table.Column<int>(type: "int", nullable: false),
-                    nomeVaga = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    NomeEmpresa = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    EmpresaId = table.Column<int>(type: "int", nullable: true),
+                    NomeCurso = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CursoID = table.Column<int>(type: "int", nullable: true),
+                    NomeAluno = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -201,8 +209,8 @@ namespace EssentialConnection.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Descricao = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DataInicio = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    DataFim = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DataInicio = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DataFim = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Instituicao = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CurriculoId = table.Column<int>(type: "int", nullable: true)
                 },

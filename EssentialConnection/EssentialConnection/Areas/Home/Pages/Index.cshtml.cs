@@ -61,26 +61,31 @@ namespace EssentialConnection.Areas.Home.Pages
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    Response.Redirect("Success/");
-                    return null;
+                    var returnUrl = Url.Content("~/PaginaInicial");
+                    // If we got this far, something failed, redisplay form
+                    return LocalRedirect(returnUrl);
 
                 }
                 if (result.RequiresTwoFactor)
                 {
                     Response.Redirect("Error/");
-                    return null;
+                    var returnUrl = Url.Content("~/HomePage");
+                    // If we got this far, something failed, redisplay form
+                    return LocalRedirect(returnUrl);
                 }
                 if (result.IsLockedOut)
                 {
                     _logger.LogWarning("User account locked out.");
-                    Response.Redirect("Error/");
-                    return null;
+                    var returnUrl = Url.Content("~/HomePage");
+                    // If we got this far, something failed, redisplay form
+                    return LocalRedirect(returnUrl);
                 }
                 else
                 {
                     ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                    Response.Redirect("Error/");
-                    return null;
+                    var returnUrl = Url.Content("~/HomePage");
+                    // If we got this far, something failed, redisplay form
+                    return LocalRedirect(returnUrl);
                 }
             }
             Response.Redirect("Error/");

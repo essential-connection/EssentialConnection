@@ -1,0 +1,27 @@
+﻿@model IEnumerable<EssentialConnection.Models.Tinder>
+
+@{
+    ViewData["Title"] = "MostrarConnectionsAlunos";
+}
+
+<div class="h-full w-full flex justify-center items-center flex-wrap">
+    <div class="hidden h-full lg:flex lg:block w-1/5  bg-indigo-900 justify-center">
+        <p>
+    </div>
+    <div class="w-3/5 mb-4 flex flex-wrap justify-center">
+        <p class="text-3xl text-gray-700 uppercase">Alunos que tem interesse em você</p>
+        </p>
+        @foreach (var item in Model)
+        {
+           <div class="w-1/2 px-4 mb-4">
+                <div class="h-64 border border-gray-100 lg:border-gray-100 bg-white rounded p-4 flex flex-col justify-between leading-normal">
+                        <div style="text-align:center" class="text-gray-900 font-bold text-xl mb-2">@Html.DisplayFor(modelItem => item.NomeAluno)</div>
+                        
+                </div>
+            </div>
+        }
+    </div>
+    <div class="hidden h-full lg:flex lg:block w-1/5  bg-indigo-900 justify-center">
+        
+    </div>
+</div>

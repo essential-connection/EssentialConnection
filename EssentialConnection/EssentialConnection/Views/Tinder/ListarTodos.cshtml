@@ -3,60 +3,7 @@
 @{
     ViewData["Title"] = "ListarTodos";
 }
-<form asp-controller="Tinder" asp-action="ListarTodos" method="post" id='pesquisarVaga'>
-        <div class="row">
-            <div class="col-md-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading"><i class="fa fa-filter"></i>Filtros</div>
-                    <div class="panel-body">
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label>Nome</label>
-                                    <input type="text" class="form-control" id='nomeVaga'>
-                                </div>
-                            </div>
-                            @*<div class="col-sm-3">
-                                <label class="control-label">Tipo de Vaga </label>
-                                <select class="form-select" id='selectTipoVaga'>
-                                  <option selected>Escolha o tipo de vaga</option>
-                                  <option value="1">Empresa</option>
-                                  <option value="2">Curso</option>
-                                </select>
-                            </div>*@
-                           @* <div class="col-sm-3">
-                                <div id='divVaga'>
-                                    <div class="form-group" id='divEmpresa'>
-                                        <label class="control-label"></label>
-                                        <select class ="form-control" asp-items="ViewBag.EmpresaId" id='empresaId'></select>
-                                    </div>
-                                    <div class="form-group" id='divCurso'>
-                                        <label class="control-label">Curso</label>
-                                        <select class ="form-control" asp-items="ViewBag.CursoId" id='cursoId'></select>
-                                    </div>
-                                </div>
-                            </div>*@
-                            <div class="col-sm-2">
-                                <div class="form-group">
-                                    <label class="control-label" style="visibility: hidden">Botão pesquisar</label>
-                                    <div class="input-group">
-                                        <input type="hidden" name="nomeVaga"  value="" id='nomeVagaPesquisar'>
-                                        <button type="button" class="btn btn-primary form-control" id='buttonPesquisar'>Pesquisar</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </form>
-<h1>Vagas</h1>
-
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
+@*<table class="table">
     <thead>
         <tr>
             <th>
@@ -86,9 +33,110 @@
             <th></th>
         </tr>
     </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
+    <tbody>*@
+<div class="h-full w-full flex justify-center items-center flex-wrap">
+    <div class="hidden h-full lg:flex lg:block w-1/5  bg-indigo-900 justify-center">
+    </div>
+    <div class="w-3/5 mb-4 flex flex-wrap justify-center">
+        <div class="top-0 flex items-center border rounded w-full p-1 mx-4 my-2">
+            <form asp-controller="Tinder" asp-action="ListarTodos" class="w-full flex flex-wrap -mx-3 justify-between items-center" method="post" id='pesquisarVaga'>
+                <div class="px-3 md:mb-0 flex flex-column justify-center items-center">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mr-4">Nome</label>
+                    <input type="text" class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-indigo-600" id='nomeVaga'>
+                </div>
+                <div class="float-right">
+                    <div class="input-group">
+                        <input type="hidden" name="nomeVaga" value="" id='nomeVagaPesquisar'>
+                        <button type="button" class="inline-block px-6 py-2.5 bg-indigo-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-indigo-700 hover:shadow-lg focus:bg-indigo-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-indigo-800 active:shadow-lg transition duration-150 ease-in-out" id='buttonPesquisar'>Pesquisar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+        @*<form asp-controller="Tinder" asp-action="ListarTodos" method="post" id='pesquisarVaga'>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><i class="fa fa-filter"></i>Filtros</div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <div class="form-group">
+                                        <label>Nome</label>
+                                        <input type="text" class="form-control" id='nomeVaga'>
+                                    </div>
+                                </div>
+                                @*<div class="col-sm-3">
+                                <label class="control-label">Tipo de Vaga </label>
+                                <select class="form-select" id='selectTipoVaga'>
+                                <option selected>Escolha o tipo de vaga</option>
+                                <option value="1">Empresa</option>
+                                <option value="2">Curso</option>
+                                </select>
+                                </div>
+                                @* <div class="col-sm-3">
+                                <div id='divVaga'>
+                                <div class="form-group" id='divEmpresa'>
+                                <label class="control-label"></label>
+                                <select class ="form-control" asp-items="ViewBag.EmpresaId" id='empresaId'></select>
+                                </div>
+                                <div class="form-group" id='divCurso'>
+                                <label class="control-label">Curso</label>
+                                <select class ="form-control" asp-items="ViewBag.CursoId" id='cursoId'></select>
+                                </div>
+                                </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div class="form-group">
+                                        <label class="control-label" style="visibility: hidden">Botão pesquisar</label>
+                                        <div class="input-group">
+                                            <input type="hidden" name="nomeVaga" value="" id='nomeVagaPesquisar'>
+                                            <button type="button" class="btn btn-primary form-control" id='buttonPesquisar'>Pesquisar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>*@
+        @foreach (var item in Model)
+        {
+            <div class="w-1/2 px-4 mb-4">
+                <div class="h-64 border border-gray-400 lg:border-gray-400 bg-white rounded p-4 flex flex-col justify-between leading-normal">
+                    <div class="">
+                        <p class="text-sm text-gray-600 flex items-center">
+                            <svg class="fill-current text-gray-500 w-3 h-3 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                <path d="M4 8V6a6 6 0 1 1 12 0v2h1a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-8c0-1.1.9-2 2-2h1zm5 6.73V17h2v-2.27a2 2 0 1 0-2 0zM7 6v2h6V6a3 3 0 0 0-6 0z" />
+                            </svg>
+                            Vagas: @Html.DisplayFor(modelItem => item.Quantidade)
+                            Data de encerramento: @Html.DisplayFor(modelItem => item.DataExpiracao)
+                            Curso buscado: @Html.DisplayFor(modelItem => item.Curso.Nome)
+                        </p>
+                        <div class="text-gray-900 font-bold text-xl mb-2">@Html.DisplayFor(modelItem => item.Nome)</div>
+
+                    </div>
+                    <div class="overflow-y-auto mb-8">
+                        <p class="text-gray-700 text-base">@Html.DisplayFor(modelItem => item.Descricao)</p>
+                    </div>
+                    <div class="flex items-center">
+                        <img class="w-10 h-10 rounded-full mr-4" src="~/imagens/enterprise.png" alt="Enterprise icon">
+                        <div class="text-sm">
+                            <p class="text-gray-900 leading-none">@Html.DisplayFor(modelItem => item.Responsavel)</p>
+                            <p class="text-gray-900 leading-none">@Html.DisplayFor(modelItem => item.Empresa.Nome)</p>
+                            <p class="text-gray-600">Status da vaga: @Html.DisplayFor(modelItem => item.Status)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="hidden h-full lg:flex lg:block w-1/5  bg-indigo-900 justify-center">
+    </div>
+</div>
+@*<tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Nome)
             </td>
@@ -119,31 +167,33 @@
         </tr>
 }
     </tbody>
-</table>
+</table>*@
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    <script >
-        $('#selectTipoVaga').on('change',function(){
-            var valorSelect =$(this).val();
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        $('#selectTipoVaga').on('change', function() {
+            var valorSelect = $(this).val();
             alert(valorSelect);
             $('#divVaga').children('div').hide();
-            if(valorSelect==1){
+            if (valorSelect == 1) {
                 $('#divEmpresa').show();
-                document.getElementById('empresaId').value=null;
-                document.getElementById('cursoId').value=null;
+                document.getElementById('empresaId').value = null;
+                document.getElementById('cursoId').value = null;
             }
-            else{
+            else {
                 $('#divCurso').show();
-                document.getElementById('cursoId').value=null;
-                document.getElementById('empresaId').value=null;
+                document.getElementById('cursoId').value = null;
+                document.getElementById('empresaId').value = null;
             }
         });
-        $(document).ready(function(){
+        $(document).ready(function() {
             $('#divVaga').children('div').hide();
         });
 
-        $("#buttonPesquisar").click(function(){
+        $("#buttonPesquisar").click(function() {
             var nomeVaga = document.getElementById('nomeVaga').value;
             $('#nomeVagaPesquisar').val(nomeVaga);
             $('#pesquisarVaga').submit();

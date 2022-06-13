@@ -104,7 +104,7 @@ namespace EssentialConnection.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl ??= Url.Content("~/");
+            returnUrl ??= Url.Content("~/Homepage");
 
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
@@ -112,10 +112,12 @@ namespace EssentialConnection.Areas.Identity.Pages.Account
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
+                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, true, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
+                    returnUrl = Url.Content("~/PaginaInicial");
+                    // If we got this far, something failed, redisplay form
                     return LocalRedirect(returnUrl);
                 }
                 if (result.RequiresTwoFactor)
@@ -130,12 +132,12 @@ namespace EssentialConnection.Areas.Identity.Pages.Account
                 else
                 {
                     ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                    return Page();
+                    returnUrl = Url.Content("~/Identity/Account/Login");
+                    return LocalRedirect(returnUrl);
                 }
             }
-
-            // If we got this far, something failed, redisplay form
-            return Page();
+            returnUrl = Url.Content("~/Identity/Account/Login");
+            return LocalRedirect(returnUrl);
         }
     }
 }

@@ -13,29 +13,91 @@
     <link rel="stylesheet" href="~/EssentialConnection.styles.css" asp-append-version="true" />
 </head>
 <body class="flex flex-col h-screen">
-    <header class="bg-gradient-to-r from-indigo-200 to-indigo-100 py-1">
-        <nav class="flex items-center justify-between mx-8">
-            <a class="text-indigo-700 uppercase text-xl font-semibold w-1/4" asp-area="" asp-controller="Home" asp-action="Index">Essential Connection</a>
-            @if (true)
-            {
-                <div class="md:hidden">
-                    <button>
-                        Menu
-                    </button>
-                </div>
+    <header class="">
+        <nav class="bg-gray-800">
+            <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+                <div class="relative flex items-center justify-between h-16">
+                    <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+                        <button type="button" onclick="abreMenu()" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
+                            <span class="sr-only">Open main menu</span>
 
-                <ul class="hidden md:flex grow justify-evenly w-1/2">
-                    <li class="nav-item">
-                        <a class="nav-link text-slate-800" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-slate-800" asp-area="" asp-controller="Competencias" asp-action="Index">Competencias</a>
-                    </li>
-                </ul>
-            }
-            <ul class="hidden md:flex w-1/4 justify-center">
-                <partial name="_LoginPartial" />
-            </ul>
+                            <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+                            </svg>
+
+                            <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
+                        <div class="flex-shrink-0 flex items-center mr-4">
+                            <img class="block lg:hidden h-8 w-auto scale-125" src="~/imagens/LogoEC.png" alt="Workflow">
+                            <img class="hidden lg:block h-8 w-auto scale-125" src="~/imagens/LogoWithWhiteName.png" alt="Workflow">
+                        </div>
+                        <div class="hidden sm:block sm:ml-6">
+                            <div class="flex space-x-4">
+                                <a asp-controller="Tinder" asp-action="Index" class="bg-gray-900 text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Conecte-se (Aluno)</a>
+
+                                <a asp-controller="TinderEmpresa" asp-action="Index" class="bg-gray-900 text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Conecte-se (Emp)</a>
+
+                                <a asp-controller="Vagas" asp-action="Index" class="bg-gray-900 text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Vagas</a>
+
+                                <a asp-controller="ListarUsuario" asp-action="Index" class="bg-gray-900 text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Pessoas</a>
+
+                                <a asp-controller="Curriculos" asp-action="Create" class="bg-gray-900 text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Curriculo</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+                        <button type="button" class="hover:bg-gray-900 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                            <span class="sr-only">View notifications</span>
+                            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                            </svg>
+                        </button>
+
+                        <div class="ml-3 relative">
+                            <div>
+                                <button type="button" onclick="abrePerfil()" class="fill-gray-400 hover:fill-white hover:bg-gray-900 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+                                    <span class="sr-only">Open user menu</span>
+                                    <svg class="h-6 w-6" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                         viewBox="0 0 45.532 45.532" style="enable-background:new 0 0 45.532 45.532;"
+                                         xml:space="preserve">
+                                    <path d="M22.766,0.001C10.194,0.001,0,10.193,0,22.766s10.193,22.765,22.766,22.765c12.574,0,22.766-10.192,22.766-22.765
+		                                S35.34,0.001,22.766,0.001z M22.766,6.808c4.16,0,7.531,3.372,7.531,7.53c0,4.159-3.371,7.53-7.531,7.53
+		                                c-4.158,0-7.529-3.371-7.529-7.53C15.237,10.18,18.608,6.808,22.766,6.808z M22.761,39.579c-4.149,0-7.949-1.511-10.88-4.012
+		                                c-0.714-0.609-1.126-1.502-1.126-2.439c0-4.217,3.413-7.592,7.631-7.592h8.762c4.219,0,7.619,3.375,7.619,7.592
+		                                c0,0.938-0.41,1.829-1.125,2.438C30.712,38.068,26.911,39.579,22.761,39.579z" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <div id="perfil-menu" class="hidden origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
+                                <a href="/ListarUsuario/ListarMeuPerfil" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Seu perfil</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Configurações</a>
+                                <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" method="post">
+                                    <button type="submit">
+                                        <a class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Sair</a>
+                                    </button>
+                                </form>
+                                <p class="block px-4 py-2 text-sm text-gray-700 font-bold">@User.Identity.Name</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            </div>
+
+            <div class="hidden sm:hidden" id="mobile-menu">
+                <div class="px-2 pt-2 pb-3 space-y-1">
+                    <a asp-controller="Tinder" asp-action="Index" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Conecte-se (Aluno)</a>
+                    <a asp-controller="TinderEmpresa" asp-action="Index" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Conecte-se (Empresa/Professor)</a>
+                    <a asp-controller="Vagas" asp-action="Index" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Vagas</a>
+                    <a asp-controller="ListarUsuario" asp-action="Index" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Pessoas</a>
+                    <a asp-controller="Curriculos" asp-action="Create" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Curriculo</a>
+                </div>
+            </div>
         </nav>
     </header>
     <main role="main" class="flex flex-grow">
@@ -43,13 +105,26 @@
     </main>
 
     @*<footer class="border-top footer text-muted">
-    <div class="container">
-    &copy; 2022 - EssentialConnection - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-    </div>
-    </footer>*@
+        <div class="container">
+        &copy; 2022 - EssentialConnection - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+        </footer>*@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+
+    <script>
+        function abreMenu() {
+            document.querySelector('#mobile-menu').classList.toggle('hidden')
+        }
+        function abrePerfil() {
+            document.querySelector('#perfil-menu').classList.toggle('hidden')
+        }
+
+
+    </script>
+
+
 </body>
 </html>

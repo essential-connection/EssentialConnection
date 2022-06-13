@@ -3,43 +3,20 @@
 @{
     ViewData["Title"] = "Pagina Inicial";
 }
-<!DOCTYPE html>
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/EssentialConnection.styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/Home.css" asp-append-version="true" />
-
-</head>
-<body class = "bg-telainicial">
-    <h1 class ="textotitle">Essential Connection</h1>
-<div class = "logo">
-    <img src = "~/imagens/Logo.png" alt = "logo"/>
-</div>
-<div>
-    <div class = "container caixaLogin">
-        <br />
-        <p class = "ECSC">Entre com sua conta</p>
-        <form class="login" id="account" method="post">        
-            <span  class="e6_158">Email</span>
-            <div class = "col-md-11">
-                <input asp-for="Input.Email" autocomplete="username" aria-required="true" type="email" class="form-control" placeholder= "Digite seu email" />
-                <span asp-validation-for="Input.Email" class="text-danger"></span>
-            </div>
-            <br />
-            <span class = "e6_158">Senha</span>
-            <div class = "col-md-11">
-                <input asp-for="Input.Password" autocomplete="current-password" aria-required="true" type="password" class="form-control" placeholder= "Digite sua senha" />
-                <span asp-validation-for="Input.Password" class="text-danger"></span>
-            </div>
-            <button type="submit" class = "btn btn-primary btnEntrar">Log in</button>
-        </form>
+<div class="h-full w-full flex justify-center md:justify-between items-center bg-gradient-to-r from-indigo-800 to-indigo-400">
+    <div class="h-full flex justify-center w-3/5 px-10">
+        <img class="scale-50 object-contain" src="~/imagens/job-unifenas-white.png" />
     </div>
-    <div class = "fundo">
-        <img src = "/imagens/foto de fundo.png" class = "imgFundo" height = "400" width = "700" />
+    <div class="h-full flex flex-col justify-center items-center text-4xl text-white w-2/5 px-10" style="text-align:center">
+        Conectando pessoas, propósitos e sonhos!
+        <div class="flex flex-col items-center justify-center mt-12">
+            <a asp-area="Identity" asp-page="/Account/Login" class="inline-block px-6 py-2.5 bg-indigo-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-indigo-700 hover:shadow-lg focus:bg-indigo-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-indigo-800 active:shadow-lg transition duration-150 ease-in-out">
+                Entre
+            </a>
+            <p class="text-sm py-4">ou</p>
+            <a type="button"asp-area="Identity" asp-page="/Account/Register" class="inline-block px-6 py-2.5 bg-indigo-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-indigo-700 hover:shadow-lg focus:bg-indigo-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-indigo-800 active:shadow-lg transition duration-150 ease-in-out">
+                Crie a sua conta
+            </a>
+        </div>
     </div>
 </div>
-
-</body>

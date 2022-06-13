@@ -200,15 +200,19 @@ namespace EssentialConnection.Areas.Identity.Pages.Account
                             await empresa.Create(userId, user.Email, user.NomeCompleto, telefone, cnpj, descricaoEmpresa);
                         }
                     }
+                    returnUrl = Url.Content("~/PaginaInicial");
+                    // If we got this far, something failed, redisplay form
+                    return LocalRedirect(returnUrl);
                 }
+
                 foreach (var error in result.Errors)
                 {
                     ModelState.AddModelError(string.Empty, error.Description);
                 }
             }
-
+            returnUrl= Url.Content("~/Identity/Account/Register");
             // If we got this far, something failed, redisplay form
-            return Page();
+            return LocalRedirect(returnUrl);
         }
 
         private EssentialConnectionUser CreateUser()

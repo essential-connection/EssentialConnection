@@ -4,58 +4,108 @@
 @{
     ViewData["Title"] = "Aplique interesse em alguma vaga";
 }
-<h1>Index</h1>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/EssentialConnection.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/Home.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/app.min.css" asp-append-version="true" />
+</head>
+<div class="h-full w-full flex justify-center md:justify-between items-center">
+    <div class="hidden h-full lg:flex lg:block w-1/5  bg-indigo-900 px-10 justify-center">
+    </div>
+    <div class="w-full px-5 flex flex-col items-center">
+        <a asp-action="ListarTodos" class="relative inline-flex items-center px-8 py-2 overflow-hidden text-white  rounded group hover:mx-20 hover:bg-gray-400 active:bg-gray-700 focus:outline-none focus:ring">
+            <span class="absolute transition-transform translate-x-full group-hover:translate-x-6 title" style="display:block ruby; margin-left:28px">
+                Todas as Vagas
+            </span>
 
-@foreach (var item in Model) {
-    <h1>
-        NomeVaga
-    </h1>
-    <p>
-        @Html.DisplayFor(modelItem => item.Nome)
-    </p>
-    <h1>
-        Descricao
-    </h1>
-    <p>
-        @Html.DisplayFor(modelItem => item.Descricao)
-    </p>
-    <h1>
-        Quantidade
-    </h1>
-    <p>
-         @Html.DisplayFor(modelItem => item.Quantidade)
-    </p>
-    <h1>
-         Tipo de vaga
-    </h1>
-    <p>
-        @{
-            if(item.CursoId==null){
-                <p>Vaga de Empresa</p>
-                @Html.DisplayFor(modelItem => item.Empresa.Nome)
-            }
-            else{
-                <p>Vaga de Curso</p>
-                @Html.DisplayFor(modelitem=>item.Curso.Nome)
-            }
-            }
-        </p>
-        <form action="/Tinder/Index" method="post">
-        <div class="form-group">
-            <input type="hidden" name="vagaId" value="@item.VagaID">
-            <input type="hidden" name="nomeVaga"  value=@item.Nome>
-            <input type="submit" value="Interesse" class="btn btn-primary" />
+            <span class="text-sm font-medium transition-all group-hover:mx-20 group-hover:-translate-x-24">
+                <svg class="h-8 w-8 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                </svg>
+            </span>
+        </a>
+        <div class="mb-12">
+            <p class="text-3xl text-gray-700 uppercase">Marque interesse em alguma vaga</p>
         </div>
-        </form>
-    }
-    <p>
-    <a asp-action="ListarTodos">Listar todas vagas.</a>
-    </p>
-<div class="row">
-    @Html.PagedListPager(Model,pagina=>Url.Action("Index", new{pagina}))
+        <div class="bg-gradient-to-r from-gray-200 via-slate-100 to-gray-200 py-6 text-black h-auto min-h-full rounded shadow-lg shadow-gray-800 border-2 border-indigo-400 lg:border-l-0 lg:border-t lg:border-indigo-400 rounded-b lg:rounded-b-none lg:rounded-r" style="text-align:center">
+            @foreach (var item in Model)
+            {
+                <h1 class="text-3xl text-gray-700 uppercase">
+                </h1>
+                <p class="text-3xl text-gray-700 uppercase">
+                    @Html.DisplayFor(modelItem => item.Nome)
+                </p>
+                <hr>
+                <h1 class="text-3xl text-gray-700 uppercase">
+                    Descrição da vaga
+                </h1>
+                <div style="width:500px;word-wrap:break-word">
+                    <p style="font-size:17px">
+                        @Html.DisplayFor(modelItem => item.Descricao)
+                    </p>
+                </div>
+                <h1 class="text-3xl text-gray-700 uppercase">
+                    Quantidade de Vagas
+                </h1>
+                <p style="font-size:17px">
+                    @Html.DisplayFor(modelItem => item.Quantidade)
+                </p>
+                <h1 class="text-3xl text-gray-700 uppercase">
+                    Tipo de vaga
+                </h1>
+                <p>
+                    @{
+                        if (item.CursoId == null)
+                        {
+                        <p style="font-size:17px">Vaga de Empresa</p>
+                        <p style="font-size:17px">@Html.DisplayFor(modelItem => item.Empresa.Nome)</p>
+                        }
+                        else
+                        {
+                        <p style="font-size:17px">Vaga de Curso</p>
+                        <p style="font-size:17px">@Html.DisplayFor(modelitem=>item.Curso.Nome)</p>
+                        }
+                    }
+                </p>
+                <form action="/Tinder/Index" method="post">
+                    <label class="form-group pt-8 inline-flex bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded cursor-pointer">
+                        <div class="form-group">
+                            <input type="hidden" name="vagaId" value="@item.VagaID">
+                            <input type="hidden" name="nomeVaga" value="@item.Nome">
+                            <input type="hidden" name="empresaId" value="@item.EmpresaId">
+                            @if (item.EmpresaId != null)
+                            {
+                                <input type="hidden" name="nomeEmpresa" value="@item.Empresa.Nome">
+                            }
+                            <input type="hidden" name="cursoId" value=@item.CursoId>
+                            @if (item.CursoId != null)
+                            {
+                                <input type="hidden" name="nomeCurso" value=@item.Curso.Nome>
+                            }
+                            <input type="submit" value="Tenho Interesse" class="btn btn-primary" />
+                        </div>
+                        <svg class="h-10 w-10 text-green-500 hover:h-15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                    </label>
+                </form>
+            }
+
+            <div class="inline-flex items-center -space-x-px pt-9">
+                <br />
+                @Html.PagedListPager(Model,pagina=>Url.Action("Index", new{pagina}),
+                new X.PagedList.Web.Common.PagedListRenderOptions{LiElementClasses = new string[]{"page-item"},
+                PageClasses = new string[]{"page-link"}})
+            </div>
+        </div>
+    </div>
+    <div class="hidden h-full lg:flex lg:block w-1/5 bg-indigo-900 px-10 justify-center">
+    </div>
+    @*<div>
+        <a asp-action="Index">Voltar</a>
+        </div>*@
 </div>
-<section>
-    <script>
-        
-    </script>
-</section>
