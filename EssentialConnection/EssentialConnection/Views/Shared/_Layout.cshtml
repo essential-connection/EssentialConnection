@@ -1,4 +1,9 @@
-﻿<!DOCTYPE html>
+﻿@using EssentialConnection.Areas.Identity.Data
+@using Microsoft.AspNet.Identity
+@using static EssentialConnection.Areas.Identity.Data.EssentialConnectionUser
+@inject IdentityContext _identityContext;
+@inject Context _context;
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -37,9 +42,21 @@
                         </div>
                         <div class="hidden sm:block sm:ml-6">
                             <div class="flex space-x-4">
-                                <a asp-controller="Tinder" asp-action="Index" class="bg-gray-900 text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Conecte-se (Aluno)</a>
 
-                                <a asp-controller="TinderEmpresa" asp-action="Index" class="bg-gray-900 text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Conecte-se (Emp)</a>
+                                @{
+                                    if (User.Identity.IsAuthenticated)
+                                    {
+                                        var userLogado = _identityContext.Users.FirstOrDefault(u => u.Id == User.Identity.GetUserId());
+                                        if (userLogado.Tipo == TipoUsuario.Empresa || userLogado.Tipo == TipoUsuario.Curso)
+                                        {
+                                            <a asp-controller="TinderEmpresa" asp-action="Index" class="bg-gray-900 text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Conecte-se</a>
+                                        }
+                                        else if (userLogado.Tipo == TipoUsuario.Aluno)
+                                        {
+                                            <a asp-controller="Tinder" asp-action="Index" class="bg-gray-900 text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Conecte-se</a>
+                                        }
+                                    }
+                                }
 
                                 <a asp-controller="Vagas" asp-action="Index" class="bg-gray-900 text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Vagas</a>
 
@@ -50,12 +67,59 @@
                         </div>
                     </div>
                     <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                        <button type="button" class="hover:bg-gray-900 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
-                            <span class="sr-only">View notifications</span>
-                            <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-                            </svg>
-                        </button>
+
+                        <div class="ml-3 relative">
+                            <div>
+                                <button type="button" onclick="abreNotificacoes()" class="hover:bg-gray-900 p-1 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                                    <span class="sr-only">View notifications</span>
+                                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">
+                                        <path stroke-linecap="round" stroke-linejoin="round" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <div id="notificacoes-dropdown" class="hidden origin-top-right divide-y absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
+                                @{
+                                    if (User.Identity.IsAuthenticated)
+                                    {
+                                        var userLogado = _identityContext.Users.FirstOrDefault(u => u.Id == User.Identity.GetUserId());
+                                        
+
+
+                                        if (userLogado.Tipo == TipoUsuario.Empresa)
+                                        {
+                                            var empresaLogada = _context.Empresa.FirstOrDefault(x => x.UserId == User.Identity.GetUserId());
+                                            var tinderEmpresa = _context.Tinders.Where(x=>x.EmpresaId == empresaLogada.EmpresaID);
+                                            @foreach (var item in tinderEmpresa)
+                                            {
+                                                <div style="text-align:center" class="block px-4 py-2 text-sm text-gray-700"><span class="font-bold">@Html.DisplayFor(modelItem => item.NomeEmpresa)</span> tem interesse em você</div>
+                                                <div style="text-align:center" class="block px-4 py-2 text-sm text-gray-700"><span class="font-bold">@Html.DisplayFor(modelItem => item.NomeEmpresa)</span> tem interesse em você</div>
+                                                <div style="text-align:center" class="block px-4 py-2 text-sm text-gray-700"><span class="font-bold">@Html.DisplayFor(modelItem => item.NomeEmpresa)</span> tem interesse em você</div>
+                                                <div style="text-align:center" class="block px-4 py-2 text-sm text-gray-700"><span class="font-bold">@Html.DisplayFor(modelItem => item.NomeEmpresa)</span> tem interesse em você</div>
+                                            }
+                                        }else if(userLogado.Tipo == TipoUsuario.Curso)
+                                        {
+                                            var cursoLogado = _context.Curso.FirstOrDefault(x => x.UserId == User.Identity.GetUserId());
+                                            var tinderEmpresa = _context.Tinders.Where(x=>x.EmpresaId == cursoLogado.CursoID);
+                                            @foreach (var item in tinderEmpresa)
+                                            {
+                                                <div style="text-align:center" class="block px-4 py-2 text-sm text-gray-700">@Html.DisplayFor(modelItem => item.NomeCurso)</div>
+                                            }
+                                        }
+                                        else if (userLogado.Tipo == TipoUsuario.Aluno)
+                                        {
+                                            var alunoLogado = _context.Aluno.FirstOrDefault(x => x.UserId == User.Identity.GetUserId());
+
+                                            //@foreach (var item in tinderAluno)
+                                            //{
+                                            //    <div style="text-align:center" class="block px-4 py-2 text-sm text-gray-700">@Html.DisplayFor(modelItem => item.NomeAluno)</div>
+                                            //}
+                                        }
+                                    }
+                                }
+                                
+                                
+                            </div>
+                        </div>
 
                         <div class="ml-3 relative">
                             <div>
@@ -91,8 +155,21 @@
 
             <div class="hidden sm:hidden" id="mobile-menu">
                 <div class="px-2 pt-2 pb-3 space-y-1">
-                    <a asp-controller="Tinder" asp-action="Index" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Conecte-se (Aluno)</a>
-                    <a asp-controller="TinderEmpresa" asp-action="Index" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Conecte-se (Empresa/Professor)</a>
+                    @{
+                        if (User.Identity.IsAuthenticated)
+                        {
+                            var userLogado = _identityContext.Users.FirstOrDefault(u => u.Id == User.Identity.GetUserId());
+                            if (userLogado.Tipo == TipoUsuario.Empresa || userLogado.Tipo == TipoUsuario.Curso)
+                            {
+                                <a asp-controller="TinderEmpresa" asp-action="Index" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Conecte-se</a>
+                            }
+                            else if (userLogado.Tipo == TipoUsuario.Aluno)
+                            {
+                                <a asp-controller="Tinder" asp-action="Index" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Conecte-se</a>
+                            }
+                        }
+                    }
+                    
                     <a asp-controller="Vagas" asp-action="Index" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Vagas</a>
                     <a asp-controller="ListarUsuario" asp-action="Index" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Pessoas</a>
                     <a asp-controller="Curriculos" asp-action="Create" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Curriculo</a>
@@ -105,10 +182,10 @@
     </main>
 
     @*<footer class="border-top footer text-muted">
-        <div class="container">
-        &copy; 2022 - EssentialConnection - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-        </footer>*@
+    <div class="container">
+    &copy; 2022 - EssentialConnection - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    </div>
+    </footer>*@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
@@ -121,8 +198,9 @@
         function abrePerfil() {
             document.querySelector('#perfil-menu').classList.toggle('hidden')
         }
-
-
+        function abreNotificacoes() {
+            document.querySelector('#notificacoes-dropdown').classList.toggle('hidden')
+        }
     </script>
 
 
