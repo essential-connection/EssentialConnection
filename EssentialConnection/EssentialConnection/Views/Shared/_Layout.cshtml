@@ -49,20 +49,21 @@
                                         var userLogado = _identityContext.Users.FirstOrDefault(u => u.Id == User.Identity.GetUserId());
                                         if (userLogado.Tipo == TipoUsuario.Empresa || userLogado.Tipo == TipoUsuario.Curso)
                                         {
-                                            <a asp-controller="TinderEmpresa" asp-action="Index" class="bg-gray-900 text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Conecte-se</a>
+                                                <a asp-controller="TinderEmpresa" asp-action="Index" class="bg-gray-900 text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Conecte-se</a>
+                                                <a asp-controller="Vagas" asp-action="Index" class="bg-gray-900 text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Vagas</a>                                        
                                         }
                                         else if (userLogado.Tipo == TipoUsuario.Aluno)
                                         {
-                                            <a asp-controller="Tinder" asp-action="Index" class="bg-gray-900 text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Conecte-se</a>
+                                                <a asp-controller="Tinder" asp-action="Index" class="bg-gray-900 text-white hover:bg-gray-700 px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Conecte-se</a>
+                                                <a asp-controller="Curriculos" asp-action="Create" class="bg-gray-900 text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Curriculo</a>
+                                        
                                         }
                                     }
                                 }
 
-                                <a asp-controller="Vagas" asp-action="Index" class="bg-gray-900 text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Vagas</a>
 
                                 <a asp-controller="ListarUsuario" asp-action="Index" class="bg-gray-900 text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Pessoas</a>
 
-                                <a asp-controller="Curriculos" asp-action="Create" class="bg-gray-900 text-white hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md text-sm font-medium">Curriculo</a>
                             </div>
                         </div>
                     </div>
@@ -82,37 +83,36 @@
                                     if (User.Identity.IsAuthenticated)
                                     {
                                         var userLogado = _identityContext.Users.FirstOrDefault(u => u.Id == User.Identity.GetUserId());
-                                        
+
 
 
                                         if (userLogado.Tipo == TipoUsuario.Empresa)
                                         {
                                             var empresaLogada = _context.Empresa.FirstOrDefault(x => x.UserId == User.Identity.GetUserId());
-                                            var tinderEmpresa = _context.Tinders.Where(x=>x.EmpresaId == empresaLogada.EmpresaID);
-                                            @foreach (var item in tinderEmpresa)
+                                            var tinderEmpresa = _context.Tinders.Where(x => x.EmpresaId == empresaLogada.EmpresaID).Select(e => new {e.AlunoId, e.NomeAluno, e.NomeVaga}).Distinct().ToList();
+                                                @foreach (var item in tinderEmpresa)
                                             {
-                                                <div style="text-align:center" class="block px-4 py-2 text-sm text-gray-700"><span class="font-bold">@Html.DisplayFor(modelItem => item.NomeEmpresa)</span> tem interesse em você</div>
-                                                <div style="text-align:center" class="block px-4 py-2 text-sm text-gray-700"><span class="font-bold">@Html.DisplayFor(modelItem => item.NomeEmpresa)</span> tem interesse em você</div>
-                                                <div style="text-align:center" class="block px-4 py-2 text-sm text-gray-700"><span class="font-bold">@Html.DisplayFor(modelItem => item.NomeEmpresa)</span> tem interesse em você</div>
-                                                <div style="text-align:center" class="block px-4 py-2 text-sm text-gray-700"><span class="font-bold">@Html.DisplayFor(modelItem => item.NomeEmpresa)</span> tem interesse em você</div>
+                                                var aluno = _context.Aluno.FirstOrDefault(x => x.AlunoID == item.AlunoId);
+
+                                                    <a asp-action="MostrarPerfilAluno" asp-route-id="@aluno.UserId" style="text-align:center" class="block px-4 py-2 text-sm text-gray-700"><span class="font-bold">@Html.DisplayFor(modelItem => item.NomeAluno)</span> tem interesse na vaga <span class="font-bold">@Html.DisplayFor(modelItem => item.NomeVaga)</span></a>
                                             }
                                         }else if(userLogado.Tipo == TipoUsuario.Curso)
                                         {
                                             var cursoLogado = _context.Curso.FirstOrDefault(x => x.UserId == User.Identity.GetUserId());
-                                            var tinderEmpresa = _context.Tinders.Where(x=>x.EmpresaId == cursoLogado.CursoID);
-                                            @foreach (var item in tinderEmpresa)
+                                            var tinderEmpresa = _context.Tinders.Where(x => x.CursoID == cursoLogado.CursoID).Select(e => new {e.AlunoId, e.NomeAluno, e.NomeVaga}).Distinct().ToList();
+                                                @foreach (var item in tinderEmpresa)
                                             {
-                                                <div style="text-align:center" class="block px-4 py-2 text-sm text-gray-700">@Html.DisplayFor(modelItem => item.NomeCurso)</div>
+                                                    <div style="text-align:center" class="block px-4 py-2 text-sm text-gray-700"><span class="font-bold">@Html.DisplayFor(modelItem => item.NomeAluno)</span> tem interesse no curso <span class="font-bold">@Html.DisplayFor(modelItem => item.NomeVaga)</span></div>
                                             }
                                         }
                                         else if (userLogado.Tipo == TipoUsuario.Aluno)
                                         {
                                             var alunoLogado = _context.Aluno.FirstOrDefault(x => x.UserId == User.Identity.GetUserId());
-
-                                            //@foreach (var item in tinderAluno)
-                                            //{
-                                            //    <div style="text-align:center" class="block px-4 py-2 text-sm text-gray-700">@Html.DisplayFor(modelItem => item.NomeAluno)</div>
-                                            //}
+                                            var tinderAluno = _context.TinderEmpresa.Where(x=>x.CurriculoId == alunoLogado.AlunoID);
+                                                @foreach (var item in tinderAluno)
+                                            {
+                                                    <div style="text-align:center" class="block px-4 py-2 text-sm text-gray-700">@Html.DisplayFor(modelItem => item.NomeAluno)</div>
+                                            }
                                         }
                                     }
                                 }
@@ -161,18 +161,21 @@
                             var userLogado = _identityContext.Users.FirstOrDefault(u => u.Id == User.Identity.GetUserId());
                             if (userLogado.Tipo == TipoUsuario.Empresa || userLogado.Tipo == TipoUsuario.Curso)
                             {
-                                <a asp-controller="TinderEmpresa" asp-action="Index" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Conecte-se</a>
+                                    <a asp-controller="TinderEmpresa" asp-action="Index" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Conecte-se</a>
                             }
                             else if (userLogado.Tipo == TipoUsuario.Aluno)
                             {
-                                <a asp-controller="Tinder" asp-action="Index" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Conecte-se</a>
+
+                                    <a asp-controller="Tinder" asp-action="Index" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Conecte-se</a>
+                                    <a asp-controller="Curriculos" asp-action="Create" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Curriculo</a>
+
                             }
+
                         }
                     }
                     
                     <a asp-controller="Vagas" asp-action="Index" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium" aria-current="page">Vagas</a>
                     <a asp-controller="ListarUsuario" asp-action="Index" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Pessoas</a>
-                    <a asp-controller="Curriculos" asp-action="Create" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Curriculo</a>
                 </div>
             </div>
         </nav>
