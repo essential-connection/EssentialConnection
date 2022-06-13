@@ -54,7 +54,8 @@ namespace EssentialConnection.Migrations
                     NomeEmpresa = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NomeAluno = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     CursoId = table.Column<int>(type: "int", nullable: true),
-                    CursoNome = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    CursoNome = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    AlunoId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {

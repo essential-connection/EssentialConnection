@@ -94,7 +94,7 @@
                                             {
                                                 var aluno = _context.Aluno.FirstOrDefault(x => x.AlunoID == item.AlunoId);
 
-                                                    <a asp-action="MostrarPerfilAluno" asp-route-id="@aluno.UserId" style="text-align:center" class="block px-4 py-2 text-sm text-gray-700"><span class="font-bold">@Html.DisplayFor(modelItem => item.NomeAluno)</span> tem interesse na vaga <span class="font-bold">@Html.DisplayFor(modelItem => item.NomeVaga)</span></a>
+                                                    <a asp-controller="ListarUsuario" asp-action="MostrarPerfilAluno" asp-route-id="@aluno.UserId" style="text-align:center" class="block px-4 py-2 text-sm text-gray-700"><span class="font-bold">@Html.DisplayFor(modelItem => item.NomeAluno)</span> tem interesse na vaga <span class="font-bold">@Html.DisplayFor(modelItem => item.NomeVaga)</span></a>
                                             }
                                         }else if(userLogado.Tipo == TipoUsuario.Curso)
                                         {
@@ -102,16 +102,26 @@
                                             var tinderEmpresa = _context.Tinders.Where(x => x.CursoID == cursoLogado.CursoID).Select(e => new {e.AlunoId, e.NomeAluno, e.NomeVaga}).Distinct().ToList();
                                                 @foreach (var item in tinderEmpresa)
                                             {
-                                                    <div style="text-align:center" class="block px-4 py-2 text-sm text-gray-700"><span class="font-bold">@Html.DisplayFor(modelItem => item.NomeAluno)</span> tem interesse no curso <span class="font-bold">@Html.DisplayFor(modelItem => item.NomeVaga)</span></div>
+                                                var aluno = _context.Aluno.FirstOrDefault(x => x.AlunoID == item.AlunoId);
+                                                    <a asp-controller="ListarUsuario" asp-action="MostrarPerfilAluno" asp-route-id="@aluno.UserId" style="text-align:center" class="block px-4 py-2 text-sm text-gray-700"><span class="font-bold">@Html.DisplayFor(modelItem => item.NomeAluno)</span> tem interesse no curso <span class="font-bold">@Html.DisplayFor(modelItem => item.NomeVaga)</span></a>
                                             }
                                         }
                                         else if (userLogado.Tipo == TipoUsuario.Aluno)
                                         {
                                             var alunoLogado = _context.Aluno.FirstOrDefault(x => x.UserId == User.Identity.GetUserId());
-                                            var tinderAluno = _context.TinderEmpresa.Where(x=>x.CurriculoId == alunoLogado.AlunoID);
+                                            var tinderAluno = _context.TinderEmpresa.Where(x=>x.AlunoId == alunoLogado.AlunoID).ToList();
                                                 @foreach (var item in tinderAluno)
                                             {
-                                                    <div style="text-align:center" class="block px-4 py-2 text-sm text-gray-700">@Html.DisplayFor(modelItem => item.NomeAluno)</div>
+                                                if(item.EmpresaId!=null)
+                                                {
+                                                    var empresa = _context.Empresa.FirstOrDefault(x => x.EmpresaID == item.EmpresaId);
+                                                    <a asp-controller="ListarUsuario" asp-action="MostrarPerfilEmpresa" asp-route-id="@empresa.UserId" style="text-align:center" class="block px-4 py-2 text-sm text-gray-700">@Html.DisplayFor(modelItem => item.NomeEmpresa) tem interrese em você</a>
+                                                }
+                                                if(item.CursoId!=null)
+                                                {
+                                                    var curso = _context.Curso.FirstOrDefault(x => x.CursoID == item.CursoId);
+                                                    <a asp-controller="ListarUsuario" asp-action="MostrarPerfilCurso" asp-route-id="@curso.UserId" style="text-align:center" class="block px-4 py-2 text-sm text-gray-700">@Html.DisplayFor(modelItem => item.CursoNome) tem interrese em você</a>
+                                                }
                                             }
                                         }
                                     }

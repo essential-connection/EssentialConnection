@@ -27,7 +27,7 @@ namespace EssentialConnection.Controllers
             var userProcurado = _identityContext.Users.FirstOrDefault(x => x.Id == id);
             var aluno = _context.Aluno.Include(a => a.Curso).Include(w=>w.Curriculo).Include(Z=>Z.Curriculo.Compentencias).Include(A=>A.Curriculo.ItensCurriculo).FirstOrDefault(a => a.email == userProcurado.Email);
             if (aluno.Curriculo == null)
-                return View("Index");
+                return RedirectToAction("Index", "PaginaInicial");
             else if (aluno.Curriculo.ItensCurriculo == null && aluno.Curriculo.Compentencias == null)
             {
                 preencherItensCurriculo(aluno);
@@ -99,7 +99,7 @@ namespace EssentialConnection.Controllers
             {
                 var aluno = _context.Aluno.Include(a => a.Curso).Include(w => w.Curriculo).Include(Z => Z.Curriculo.Compentencias).Include(A => A.Curriculo.ItensCurriculo).FirstOrDefault(a => a.email == userLogado.Email);
                 if (aluno.Curriculo == null)
-                    return View("Index");
+                    return RedirectToAction("Index", "PaginaInicial");
                 else if (aluno.Curriculo.ItensCurriculo == null && aluno.Curriculo.Compentencias == null)
                 {
                     preencherItensCurriculo(aluno);
