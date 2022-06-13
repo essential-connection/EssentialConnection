@@ -85,7 +85,7 @@ namespace EssentialConnection.Controllers
         public IActionResult ListarMeuPerfil()
         {
             var userLogado = _identityContext.Users.FirstOrDefault(u => u.Id == User.Identity.GetUserId());
-            if (userLogado.Tipo == EssentialConnectionUser.TipoUsuario.Professor)
+            if (userLogado.Tipo == EssentialConnectionUser.TipoUsuario.Curso)
             {
                 var curso = _context.Curso.Include(z => z.Vagas).FirstOrDefault(r => r.Email == userLogado.Email);
                 return View("MostrarPerfilCurso",curso);

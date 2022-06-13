@@ -189,7 +189,7 @@ namespace EssentialConnection.Areas.Identity.Pages.Account
                             AlunosController aluno = new AlunosController(_context);
                             await aluno.Create(user.NomeCompleto, user.Email, telefone, cursoId, userId);
                         }
-                        else if (user.Tipo == TipoUsuario.Professor)
+                        else if (user.Tipo == TipoUsuario.Curso)
                         {
                             CursosController curso = new CursosController(_context);
                             await curso.Create(userId,user.Email,user.NomeCompleto, telefone);
