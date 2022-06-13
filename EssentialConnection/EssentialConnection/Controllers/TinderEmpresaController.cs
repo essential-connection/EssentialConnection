@@ -29,7 +29,7 @@ namespace EssentialConnection.Controllers
         {
             TinderEmpresa tinderEmpresa = new TinderEmpresa();
             var userLogado = _identityContext.Users.FirstOrDefault(x => x.Id == User.Identity.GetUserId());
-            if (userLogado.Tipo==EssentialConnectionUser.TipoUsuario.Professor)
+            if (userLogado.Tipo==EssentialConnectionUser.TipoUsuario.Curso)
             {
                 var userlog = _context.Curso.FirstAsync(x => x.Email == userLogado.Email);
                 tinderEmpresa.CursoNome = userlog.Result.Nome;

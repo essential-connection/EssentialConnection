@@ -26,6 +26,17 @@ namespace EssentialConnection.Controllers
         {
             var userProcurado = _identityContext.Users.FirstOrDefault(x => x.Id == id);
             var aluno = _context.Aluno.Include(a => a.Curso).Include(w=>w.Curriculo).Include(Z=>Z.Curriculo.Compentencias).Include(A=>A.Curriculo.ItensCurriculo).FirstOrDefault(a => a.email == userProcurado.Email);
+            if (aluno.Curriculo == null)
+                return View("Index");
+            else if (aluno.Curriculo.ItensCurriculo == null && aluno.Curriculo.Compentencias == null)
+            {
+                preencherItensCurriculo(aluno);
+                preencherCompentencias(aluno);
+            }
+            else if (aluno.Curriculo.ItensCurriculo == null)
+                preencherItensCurriculo(aluno);
+            else
+                preencherCompentencias(aluno);
             return View(aluno);
         }
         [HttpGet]
@@ -74,7 +85,7 @@ namespace EssentialConnection.Controllers
         public IActionResult ListarMeuPerfil()
         {
             var userLogado = _identityContext.Users.FirstOrDefault(u => u.Id == User.Identity.GetUserId());
-            if (userLogado.Tipo == EssentialConnectionUser.TipoUsuario.Professor)
+            if (userLogado.Tipo == EssentialConnectionUser.TipoUsuario.Curso)
             {
                 var curso = _context.Curso.Include(z => z.Vagas).FirstOrDefault(r => r.Email == userLogado.Email);
                 return View("MostrarPerfilCurso",curso);
@@ -87,8 +98,37 @@ namespace EssentialConnection.Controllers
             else
             {
                 var aluno = _context.Aluno.Include(a => a.Curso).Include(w => w.Curriculo).Include(Z => Z.Curriculo.Compentencias).Include(A => A.Curriculo.ItensCurriculo).FirstOrDefault(a => a.email == userLogado.Email);
+                if (aluno.Curriculo == null)
+                    return View("Index");
+                else if (aluno.Curriculo.ItensCurriculo == null && aluno.Curriculo.Compentencias == null)
+                {
+                    preencherItensCurriculo(aluno);
+                    preencherCompentencias(aluno);
+                }
+                else if (aluno.Curriculo.ItensCurriculo == null)
+                    preencherItensCurriculo(aluno);
+                else
+                    preencherCompentencias(aluno);
+                  
                 return View("MostrarPerfilAluno",aluno);
             }
+        }
+
+        private void preencherItensCurriculo(Aluno aluno)
+        {
+            ItensCurriculo tratamentoErro = new ItensCurriculo();
+            tratamentoErro.CurriculoId = aluno.CurriculoId;
+            tratamentoErro.Descricao = "";
+            tratamentoErro.DataFim = "";
+            tratamentoErro.DataInicio = "";
+            tratamentoErro.Instituicao = "";
+            aluno.Curriculo.ItensCurriculo.Add(tratamentoErro);
+        }
+        private void preencherCompentencias(Aluno aluno)
+        {
+            Compentencias tratamentoErro = new Compentencias();
+            tratamentoErro.Descricao = "";
+            tratamentoErro.CurriculoId=aluno.CurriculoId;
         }
     }
 }

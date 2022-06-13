@@ -28,7 +28,7 @@ namespace EssentialConnection.Controllers
         {
             var teste = 3;
             var userLogado = _identityContext.Users.FirstOrDefault(x => x.Id == User.Identity.GetUserId());
-            if(userLogado.Tipo == EssentialConnectionUser.TipoUsuario.Professor)    
+            if(userLogado.Tipo == EssentialConnectionUser.TipoUsuario.Curso)    
             {
                 var user = _context.Curso.FirstOrDefault(x=>x.UserId == User.Identity.GetUserId());
                 var contexto = _context.Vaga.Include(v => v.Curso).Include(v => v.Empresa).Where(x=>x.CursoId==user.CursoID);
@@ -79,7 +79,7 @@ namespace EssentialConnection.Controllers
             //PODIA TER FEITO ESSA LÓGICA MAIS SIMPLES, MAS PRO PROVO ENTENDER SE PRECISAR EXPLICAR
             //OBSERVAÇÃO
             var userLogado = _identityContext.Users.FirstOrDefault(u => u.Id == User.Identity.GetUserId());
-            if (userLogado.Tipo == EssentialConnectionUser.TipoUsuario.Professor)
+            if (userLogado.Tipo == EssentialConnectionUser.TipoUsuario.Curso)
             {
                 var CursoLogado=_context.Curso.FirstOrDefault(x=>x.UserId == User.Identity.GetUserId());
                 vaga.CursoId = CursoLogado.CursoID;

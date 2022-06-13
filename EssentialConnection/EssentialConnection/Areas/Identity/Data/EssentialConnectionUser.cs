@@ -17,7 +17,7 @@ public class EssentialConnectionUser : IdentityUser
     {
         Aluno,
         Empresa,
-        Professor
+        Curso
     }
 }
 
